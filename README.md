@@ -1,1 +1,2 @@
-# mybox-studios-site
+# My Box Studios — Netlify + Stripe
+
