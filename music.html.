@@ -1,15 +1,68 @@
-[
-  {
-    "id": "mu001",
-    "type": "music",
-    "title": "City Lights (Beat)",
-    "artist": "Jane Producer",
-    "role": "Producer",
-    "price": 0.99,
-    "currency": "USD",
-    "priceId": "price_live_replace_me_music",
-    "image": "assets/music/city-lights.jpg",
-    "preview": "assets/previews/city-lights.mp3",
-    "description": "90s boom-bap instrumental."
-  }
-]
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Music — My Box Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Use the global stylesheet (exact path + plural filename) -->
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-29">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand" aria-label="My Box Studios Home">
+        <span class="logo-dot"></span>
+        <span class="title">My Box Studios</span>
+        <span class="subtitle">Indie • Beats • Bundles</span>
+      </a>
+
+      <form class="searchbar" role="search" aria-label="Search beats">
+        <input type="search" placeholder="Search beats…">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="header-actions">
+        <span class="badge-live">LIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container section">
+    <!-- Filters -->
+    <nav class="filters" aria-label="Filters">
+      <a class="chip" href="/">All</a>
+      <a class="chip" href="/movies.html">Movies</a>
+      <a class="chip is-active" href="/music.html" aria-current="page">Music</a>
+      <a class="chip" href="/signup.html">Bundles</a>
+    </nav>
+
+    <!-- Music Grid -->
+    <section class="grid mt" aria-label="Beats">
+      <!-- Example card: City Lights Beats -->
+      <article class="card">
+        <div class="thumb skel">
+          <span class="duration">03:12</span>
+        </div>
+        <div class="card-body">
+          <h3 class="title">City Lights Beats</h3>
+          <div class="meta">
+            <span class="avatar"></span>
+            <span>My Box Studios</span>
+            <span class="dot"></span>
+            <span>New</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Duplicate the article block above for more beats -->
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <p class="muted">© My Box Studios — All rights reserved.</p>
+  </footer>
+</body>
+</html>
