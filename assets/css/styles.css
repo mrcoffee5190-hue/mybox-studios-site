@@ -355,4 +355,96 @@ Use these class names in your HTML where applicable:
 <footer class="site-footer container">
   <p>© My Box Studios — All rights reserved.</p>
 </footer>
----------------------------------------------------------------- */
+---------------------------------------------------------------- *//* === HOTFIX 2025-10-31 — header overlap & card visibility === */
+* { box-sizing: border-box; }
+
+:root { --header-h: 72px; }
+
+/* Keep header on top but not covering content */
+.hypersite-header, .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #000; /* solid so content under doesn’t show through */
+  border-bottom: 1px solid rgba(212,175,55,.25);
+}
+
+/* Ensure page content clears the header */
+main, .content, .page, .wrap, .container {
+  padding-top: var(--header-h);
+  overflow: visible !important;
+}
+
+/* Solid theme + legible text */
+html, body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Grid that won’t crop */
+.card-grid, .grid, .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Cards/tiles */
+.card, .tile {
+  background: #0b0b0b;
+  border: 1px solid rgba(212,175,55,.15);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Thumbs keep 16:9 and don’t clip strangely */
+.thumb, .poster {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+}
+.thumb img, .poster img, .card img, .tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Filters (All / Movies / Music / Bundles) */
+.filters, .chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 20px;
+}
+.filters .chip, .chips .chip {
+  border: 1px solid rgba(212,175,55,.5);
+  color: #D4AF37;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* Search & CTAs */
+.site-search input[type="search"], .search input[type="search"] {
+  background: #111;
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+.site-search button, .search button, .cta {
+  background: #D4AF37;
+  color: #000;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Safety: images never overflow */
+img { max-width: 100%; height: auto; }
+
