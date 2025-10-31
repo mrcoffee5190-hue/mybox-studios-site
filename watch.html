@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Box Studios — Watch</title>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-29">
+</head>
+<body>
+  <!-- Header (same across site) -->
+  <header class="hypersite-header site-header">
+    <a class="brand" href="/">● My Box Studios</a>
+    <form class="site-search" action="/search.html" method="GET">
+      <input type="search" name="q" placeholder="Search indie movies & beats">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="site-nav">
+      <a href="/movies.html">Movies</a>
+      <a href="/music.html">Music</a>
+      <a href="/signup.html" class="cta">Join</a>
+    </nav>
+  </header>
+
+  <main class="watch-layout">
+    <section class="player-col">
+      <div class="player-box">
+        <!-- Replace poster/src with your real media -->
+        <video id="player" controls preload="metadata" poster="/assets/posters/sample.jpg">
+          <source src="/assets/videos/sample.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <h1 id="watchTitle" class="watch-title">Sample Indie Title</h1>
+      <div class="watch-meta">
+        <span id="viewCount" class="muted">12,345 views • Oct 31, 2025</span>
+      </div>
+
+      <div class="watch-actions">
+        <button id="likeBtn" class="btn-pill">👍 Like <span id="likeCount">0</span></button>
+        <button id="shareBtn" class="btn-pill">↗ Share</button>
+        <button id="backBtn" class="btn-pill">← Back</button>
+      </div>
+
+      <article class="desc-card">
+        <h2>Description</h2>
+        <p id="watchDesc">Add your video description here. Credits, links, timestamps, etc.</p>
+        <ul class="tags">
+          <li>#indie</li><li>#beats</li><li>#shortfilm</li>
+        </ul>
+      </article>
+
+      <section class="comments-card">
+        <h2>Comments</h2>
+        <ul id="commentsList" class="comment-list"></ul>
+        <form id="commentForm" class="comment-form" autocomplete="on">
+          <textarea id="commentText" placeholder="Add a public comment..." required></textarea>
+          <div class="row">
+            <input id="commentName" type="text" placeholder="Name (optional)">
+            <button type="submit" class="btn-pill">Comment</button>
+          </div>
+        </form>
+        <p class="muted" style="margin-top:.5rem">Comments save locally in your browser for now. We can wire server comments later.</p>
+      </section>
+    </section>
+
+    <aside class="sidebar-col">
+      <h3>Up next</h3>
+      <ul class="upnext-list">
+        <li><a href="/watch.html?id=city-lights-beats">City Lights Beats — preview</a></li>
+        <li><a href="/watch.html?id=short-film-01">Short Film 01 — trailer</a></li>
+        <li><a href="/watch.html?id=lofi-pack">Lo-Fi Pack — sampler</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <script>
+  // --- Simple page model (swap with real data later)
+  const catalog = {
+    "city-lights-beats": {
+      title: "City Lights — Beats Pack",
+      desc: "A neon-noir beat pack. 10 tracks, stems included.",
+      poster: "/assets/posters/city-lights.jpg",
+      src: "/assets/videos/city-lights-preview.mp4"
+    },
+    "short-film-01": {
+      title: "Short Film 01 — Trailer",
+      desc: "A moody short about choices and chances.",
+      poster: "/assets/posters/short-film-01.jpg",
+      src: "/assets/videos/short-film-01-trailer.mp4"
+    },
+    "lofi-pack": {
+      title: "Lo-Fi Pack — Sampler",
+      desc: "Dusty loops & mellow textures. Royalty-free.",
+      poster: "/assets/posters/lofi.jpg",
+      src: "/assets/videos/lofi-sampler.mp4"
+    }
+  };
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id") || "city-lights-beats";
+  const item = catalog[id] || Object.values(catalog)[0];
+
+  // hydrate UI
+  const titleEl = document.getElementById("watchTitle");
+  const descEl = document.getElementById("watchDesc");
+  const player = document.getElementById("player");
+
+  titleEl.textContent = item.title;
+  descEl.textContent = item.desc;
+  player.poster = item.poster;
+  player.querySelector("source").src = item.src;
+  player.load();
+
+  // Like count (localStorage)
+  const likeKey = "likes:" + id;
+  const likedKey = "liked:" + id;
+  const likeBtn = document.getElementById("likeBtn");
+  const likeCountEl = document.getElementById("likeCount");
+  const startLikes = Number(localStorage.getItem(likeKey) || 0);
+  const isLiked = localStorage.getItem(likedKey) === "1";
+  likeCountEl.textContent = startLikes;
+  if (isLiked) likeBtn.classList.add("active");
+  likeBtn.addEventListener("click", () => {
+    let likes = Number(localStorage.getItem(likeKey) || 0);
+    const liked = localStorage.getItem(likedKey) === "1";
+    if (liked) {
+      likes = Math.max(0, likes - 1);
+      localStorage.setItem(likedKey, "0");
+      likeBtn.classList.remove("active");
+    } else {
+      likes = likes + 1;
+      localStorage.setItem(likedKey, "1");
+      likeBtn.classList.add("active");
+    }
+    localStorage.setItem(likeKey, String(likes));
+    likeCountEl.textContent = likes;
+  });
+
+  // Share
+  document.getElementById("shareBtn").addEventListener("click", async () => {
+    const shareUrl = location.origin + location.pathname + "?id=" + encodeURIComponent(id);
+    const shareData = { title: item.title, text: "Check this out on My Box Studios", url: shareUrl };
+    try {
+      if (navigator.share) { await navigator.share(shareData); }
+      else {
+        await navigator.clipboard.writeText(shareUrl);
+        alert("Link copied to clipboard:\n" + shareUrl);
+      }
+    } catch {}
+  });
+
+  // Back
+  document.getElementById("backBtn").addEventListener("click", () => {
+    if (history.length > 1) history.back();
+    else location.href = "/";
+  });
+
+  // Comments (local only)
+  const commentsKey = "comments:" + id;
+  const listEl = document.getElementById("commentsList");
+  const formEl = document.getElementById("commentForm");
+  const textEl = document.getElementById("commentText");
+  const nameEl = document.getElementById("commentName");
+
+  function renderComments() {
+    const items = JSON.parse(localStorage.getItem(commentsKey) || "[]");
+    listEl.innerHTML = items.map(c =>
+      `<li><b>${c.name || "Guest"}</b><span class="muted"> • ${new Date(c.ts).toLocaleString()}</span><p>${c.text}</p></li>`
+    ).join("");
+  }
+  renderComments();
+
+  formEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = textEl.value.trim();
+    if (!text) return;
+    const name = nameEl.value.trim();
+    const items = JSON.parse(localStorage.getItem(commentsKey) || "[]");
+    items.unshift({ name, text, ts: Date.now() });
+    localStorage.setItem(commentsKey, JSON.stringify(items));
+    textEl.value = ""; nameEl.value = "";
+    renderComments();
+  });
+  </script>
+</body>
+</html>
