@@ -1,0 +1,30 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json; charset=utf-8"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+
+# Allow well-known files (for TWA later)
+[[redirects]]
+  from = "/.well-known/*"
+  to = "/.well-known/:splat"
+  status = 200
