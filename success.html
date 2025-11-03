@@ -1,29 +1,30 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Success — My Box Studios</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.webmanifest">
+  <title>Thanks — My Box Studios</title>
   <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head><header class="hypersite-header site-header">
-  <a class="brand" href="/">● My Box Studios</a>
-  <form class="site-search" action="/search.html" method="GET">
-    <input type="search" name="q" placeholder="Search indie movies & beats">
-    <button type="submit">Search</button>
-  </form>
-  <nav class="site-nav">
-    <a href="/movies.html">Movies</a>
-    <a href="/music.html">Music</a>
-    <a href="/signup.html" class="cta">Join</a>
-  </nav>
-</header>
+</head><body>
+  <header class="site-header">
+    <div class="container" style="display:flex;gap:16px;align-items:center">
+      <a class="brand" href="/">● My Box Studios</a>
+      <nav class="site-nav">
+        <a href="/movies.html">Movies</a>
+        <a href="/music.html">Music</a>
+        <a href="/signup.html" class="cta">Join</a>
+      </nav>
+    </div>
+  </header>
 
-<body>
-  <main class="container section hero">
-    <h1>You're in! 🎉</h1>
-    <p class="muted">Check your inbox for bundle updates and download links.</p>
-    <p class="mt"><a class="btn btn-primary" href="/">Back to Home</a></p>
+  <main class="content">
+    <section class="hero"><h1>You're on the list!</h1><p class="muted">Check your inbox for updates and download links.</p></section>
+    <section class="section container" style="max-width:680px">
+      <p><a class="cta" href="/">Back to Home</a></p>
+    </section>
   </main>
-<script src="/assets/js/app.js" defer></script>
-</body>
-</html>
+
+  <footer class="site-footer"><div class="container">© <span id="year"></span> My Box Studios • <a href="/dmca.html">DMCA</a></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script src="/assets/js/app.js" defer></script>
+</body></html>
+
