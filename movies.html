@@ -1,66 +1,38 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.webmanifest">
   <title>Movies — My Box Studios</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <!-- Global stylesheet (exact path + plural filename) -->
   <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head>
-<body>
-  <!-- Header -->
+</head><body>
   <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="brand" aria-label="My Box Studios Home">
-        <span class="logo-dot"></span>
-        <span class="title">My Box Studios</span>
-        <span class="subtitle">Indie • Beats • Bundles</span>
-      </a>
-
-      <form class="searchbar" role="search" aria-label="Search films">
-        <input type="search" placeholder="Search films…">
+    <div class="container" style="display:flex;gap:16px;align-items:center">
+      <a class="brand" href="/">● My Box Studios</a>
+      <form class="site-search" action="/search.html" method="GET">
+        <input type="search" name="q" placeholder="Search movies">
         <button type="submit">Search</button>
       </form>
-
-      <div class="header-actions">
-        <span class="badge-live">LIVE</span>
-      </div>
+      <nav class="site-nav">
+        <a href="/movies.html">Movies</a>
+        <a href="/music.html">Music</a>
+        <a href="/signup.html" class="cta">Join</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Main -->
-  <main class="container section">
-    <!-- Filters -->
-    <nav class="filters" aria-label="Filters">
-      <a class="chip" href="/">All</a>
-      <a class="chip is-active" href="/movies.html" aria-current="page">Movies</a>
-      <a class="chip" href="/music.html">Music</a>
-      <a class="chip" href="/signup.html">Bundles</a>
-    </nav>
-
-    <!-- Movies Grid -->
-    <section class="grid mt" aria-label="Movies">
-      <article class="card">
-        <div class="thumb skel"><span class="duration">08:21</span></div>
-        <div class="card-body">
-          <h3 class="title">Indie Short — Sample</h3>
-          <div class="meta">
-            <span class="avatar"></span>
-            <span>My Box Studios</span>
-            <span class="dot"></span>
-            <span>New</span>
-          </div>
-        </div>
-      </article>
-      <!-- Duplicate the article block above for more films -->
+  <main class="content">
+    <section class="hero"><h1>Movies</h1><p class="muted">Licensed indie films.</p></section>
+    <section class="section container" style="max-width:680px">
+      <div class="card" style="padding:16px">
+        <h2 style="margin:0 0 8px">No movies published yet</h2>
+        <p class="muted" style="margin:0 0 12px">We’re clearing rights and publishing the first titles.</p>
+        <p><a class="cta" href="/signup.html">Notify me</a></p>
+      </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer container">
-    <p class="muted">© My Box Studios — All rights reserved.</p>
-  </footer>
-<script src="/assets/js/app.js" defer></script>
- </body>                                        
+  <footer class="site-footer"><div class="container">© <span id="year"></span> My Box Studios • <a href="/dmca.html">DMCA</a></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script src="/assets/js/app.js" defer></script>
+</body></html>
 
-</html>
