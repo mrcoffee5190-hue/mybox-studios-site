@@ -1,189 +1,160 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
-  <title>My Box Studios — Watch</title>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <title>Watch — My Box Studios</title>
   <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head>
-<body>
-  <!-- Header (same across site) -->
-  <header class="hypersite-header site-header">
-    <a class="brand" href="/">● My Box Studios</a>
-    <form class="site-search" action="/search.html" method="GET">
-      <input type="search" name="q" placeholder="Search indie movies & beats">
-      <button type="submit">Search</button>
-    </form>
-    <nav class="site-nav">
-      <a href="/movies.html">Movies</a>
-      <a href="/music.html">Music</a>
-      <a href="/signup.html" class="cta">Join</a>
-    </nav>
+</head><body>
+  <header class="site-header">
+    <div class="container" style="display:flex;gap:16px;align-items:center">
+      <a class="brand" href="/">● My Box Studios</a>
+      <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
+        <input type="search" name="q" placeholder="Search movies & beats" style="flex:1">
+        <button type="submit">Search</button>
+      </form>
+      <nav class="site-nav">
+        <a href="/movies.html">Movies</a>
+        <a href="/music.html">Music</a>
+        <a href="/signup.html" class="cta">Join</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="watch-layout">
-    <section class="player-col">
-      <div class="player-box">
-        <!-- Replace poster/src with your real media -->
-        <video id="player" controls preload="metadata" poster="/assets/posters/sample.jpg">
-          <source src="/assets/videos/sample.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      <h1 id="watchTitle" class="watch-title">Sample Indie Title</h1>
-      <div class="watch-meta">
-        <span id="viewCount" class="muted">12,345 views • Oct 31, 2025</span>
-      </div>
-
-      <div class="watch-actions">
-        <button id="likeBtn" class="btn-pill">👍 Like <span id="likeCount">0</span></button>
-        <button id="shareBtn" class="btn-pill">↗ Share</button>
-        <button id="backBtn" class="btn-pill">← Back</button>
-      </div>
-
-      <article class="desc-card">
-        <h2>Description</h2>
-        <p id="watchDesc">Add your video description here. Credits, links, timestamps, etc.</p>
-        <ul class="tags">
-          <li>#indie</li><li>#beats</li><li>#shortfilm</li>
-        </ul>
-      </article>
-
-      <section class="comments-card">
-        <h2>Comments</h2>
-        <ul id="commentsList" class="comment-list"></ul>
-        <form id="commentForm" class="comment-form" autocomplete="on">
-          <textarea id="commentText" placeholder="Add a public comment..." required></textarea>
-          <div class="row">
-            <input id="commentName" type="text" placeholder="Name (optional)">
-            <button type="submit" class="btn-pill">Comment</button>
+  <main class="content">
+    <!-- Two-column watch layout -->
+    <div class="container" style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start">
+      <!-- Left: player + details -->
+      <section class="player-col" style="min-width:0">
+        <!-- Player frame (use aspect-ratio so it centers on every device) -->
+        <div class="player-box" style="background:#000;border-radius:16px;overflow:hidden">
+          <div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#888">
+            Select a title (catalog coming online)
           </div>
-        </form>
-        <p class="muted" style="margin-top:.5rem">Comments save locally in your browser for now. We can wire server comments later.</p>
-      </section>
-    </section>
+        </div>
 
-    <aside class="sidebar-col">
-      <h3>Up next</h3>
-      <ul class="upnext-list">
-        <li><a href="/watch.html?id=city-lights-beats">City Lights Beats — preview</a></li>
-        <li><a href="/watch.html?id=short-film-01">Short Film 01 — trailer</a></li>
-        <li><a href="/watch.html?id=lofi-pack">Lo-Fi Pack — sampler</a></li>
-      </ul>
-    </aside>
+        <!-- Title & meta -->
+        <h1 class="watch-title" style="margin:16px 0 8px">Nothing to play yet</h1>
+        <div class="watch-meta muted" style="display:flex;gap:12px;flex-wrap:wrap">
+          <span id="views">0 views</span>
+          <span>•</span>
+          <span id="pubdate">—</span>
+          <span>•</span>
+          <span id="duration">—</span>
+        </div>
+
+        <!-- Actions -->
+        <div class="watch-actions" style="margin:12px 0 20px;display:flex;gap:8px;flex-wrap:wrap">
+          <button id="likeBtn">👍 Like</button>
+          <button id="shareBtn">↗ Share</button>
+          <a id="buyBtn" class="cta" href="/signup.html" data-price-id="">Buy / Download</a>
+        </div>
+
+        <!-- Description (collapsible) -->
+        <article class="desc-card card" style="padding:16px">
+          <h2 style="margin:0 0 8px">Description</h2>
+          <p id="desc" class="long-text muted" style="margin:0 0 8px;max-height:4.5em;overflow:hidden">
+            Publishing soon. When catalog items go live, this area will show the item description, credits, and license notes.
+          </p>
+          <button id="toggleDesc" class="linkish" style="padding:0;background:none;border:none">Show more</button>
+        </article>
+
+        <!-- (Optional) Comments placeholder -->
+        <section class="section" style="margin-top:24px">
+          <h2 style="margin:0 0 8px">Comments</h2>
+          <p class="muted">Comments will appear here after launch.</p>
+        </section>
+      </section>
+
+      <!-- Right: up next -->
+      <aside class="sidebar-col" aria-label="Up next" style="min-width:0">
+        <h3 style="margin:0 0 12px">Up next</h3>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px">
+          <li>
+            <a class="card" href="/watch.html?vid=sample-1" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
+              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
+              <div>
+                <div class="title">Sample Title 1</div>
+                <div class="muted" style="font-size:.9em">Artist • 3:12</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="/watch.html?vid=sample-2" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
+              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
+              <div>
+                <div class="title">Sample Title 2</div>
+                <div class="muted" style="font-size:.9em">Creator • 2:45</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="/watch.html?vid=sample-3" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
+              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
+              <div>
+                <div class="title">Sample Title 3</div>
+                <div class="muted" style="font-size:.9em">Channel • 4:01</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
   </main>
 
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> My Box Studios • <a href="/dmca.html">DMCA</a></div>
+  </footer>
+
+  <!-- Tiny page logic (share, like, desc toggle); real catalog wiring can come next -->
   <script>
-  // --- Simple page model (swap with real data later)
-  const catalog = {
-    "city-lights-beats": {
-      title: "City Lights — Beats Pack",
-      desc: "A neon-noir beat pack. 10 tracks, stems included.",
-      poster: "/assets/posters/city-lights.jpg",
-      src: "/assets/videos/city-lights-preview.mp4"
-    },
-    "short-film-01": {
-      title: "Short Film 01 — Trailer",
-      desc: "A moody short about choices and chances.",
-      poster: "/assets/posters/short-film-01.jpg",
-      src: "/assets/videos/short-film-01-trailer.mp4"
-    },
-    "lofi-pack": {
-      title: "Lo-Fi Pack — Sampler",
-      desc: "Dusty loops & mellow textures. Royalty-free.",
-      poster: "/assets/posters/lofi.jpg",
-      src: "/assets/videos/lofi-sampler.mp4"
-    }
-  };
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id") || "city-lights-beats";
-  const item = catalog[id] || Object.values(catalog)[0];
+    // Simple “Show more” toggler for description
+    (function(){
+      const btn = document.getElementById('toggleDesc');
+      const desc = document.getElementById('desc');
+      if (!btn || !desc) return;
+      let expanded = false;
+      btn.addEventListener('click', () => {
+        expanded = !expanded;
+        desc.style.maxHeight = expanded ? 'none' : '4.5em';
+        btn.textContent = expanded ? 'Show less' : 'Show more';
+      });
+    })();
 
-  // hydrate UI
-  const titleEl = document.getElementById("watchTitle");
-  const descEl = document.getElementById("watchDesc");
-  const player = document.getElementById("player");
+    // Share button (Web Share API fallback to copy)
+    (function(){
+      const shareBtn = document.getElementById('shareBtn');
+      if (!shareBtn) return;
+      shareBtn.addEventListener('click', async () => {
+        const shareData = { title: document.title, url: location.href };
+        if (navigator.share) {
+          try { await navigator.share(shareData); } catch(e) {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(location.href);
+            shareBtn.textContent = 'Link copied';
+            setTimeout(()=>shareBtn.textContent='↗ Share', 1500);
+          } catch(e) {}
+        }
+      });
+    })();
 
-  titleEl.textContent = item.title;
-  descEl.textContent = item.desc;
-  player.poster = item.poster;
-  player.querySelector("source").src = item.src;
-  player.load();
-
-  // Like count (localStorage)
-  const likeKey = "likes:" + id;
-  const likedKey = "liked:" + id;
-  const likeBtn = document.getElementById("likeBtn");
-  const likeCountEl = document.getElementById("likeCount");
-  const startLikes = Number(localStorage.getItem(likeKey) || 0);
-  const isLiked = localStorage.getItem(likedKey) === "1";
-  likeCountEl.textContent = startLikes;
-  if (isLiked) likeBtn.classList.add("active");
-  likeBtn.addEventListener("click", () => {
-    let likes = Number(localStorage.getItem(likeKey) || 0);
-    const liked = localStorage.getItem(likedKey) === "1";
-    if (liked) {
-      likes = Math.max(0, likes - 1);
-      localStorage.setItem(likedKey, "0");
-      likeBtn.classList.remove("active");
-    } else {
-      likes = likes + 1;
-      localStorage.setItem(likedKey, "1");
-      likeBtn.classList.add("active");
-    }
-    localStorage.setItem(likeKey, String(likes));
-    likeCountEl.textContent = likes;
-  });
-
-  // Share
-  document.getElementById("shareBtn").addEventListener("click", async () => {
-    const shareUrl = location.origin + location.pathname + "?id=" + encodeURIComponent(id);
-    const shareData = { title: item.title, text: "Check this out on My Box Studios", url: shareUrl };
-    try {
-      if (navigator.share) { await navigator.share(shareData); }
-      else {
-        await navigator.clipboard.writeText(shareUrl);
-        alert("Link copied to clipboard:\n" + shareUrl);
-      }
-    } catch {}
-  });
-
-  // Back
-  document.getElementById("backBtn").addEventListener("click", () => {
-    if (history.length > 1) history.back();
-    else location.href = "/";
-  });
-
-  // Comments (local only)
-  const commentsKey = "comments:" + id;
-  const listEl = document.getElementById("commentsList");
-  const formEl = document.getElementById("commentForm");
-  const textEl = document.getElementById("commentText");
-  const nameEl = document.getElementById("commentName");
-
-  function renderComments() {
-    const items = JSON.parse(localStorage.getItem(commentsKey) || "[]");
-    listEl.innerHTML = items.map(c =>
-      `<li><b>${c.name || "Guest"}</b><span class="muted"> • ${new Date(c.ts).toLocaleString()}</span><p>${c.text}</p></li>`
-    ).join("");
-  }
-  renderComments();
-
-  formEl.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const text = textEl.value.trim();
-    if (!text) return;
-    const name = nameEl.value.trim();
-    const items = JSON.parse(localStorage.getItem(commentsKey) || "[]");
-    items.unshift({ name, text, ts: Date.now() });
-    localStorage.setItem(commentsKey, JSON.stringify(items));
-    textEl.value = ""; nameEl.value = "";
-    renderComments();
-  });
+    // Like button (local visual feedback only)
+    (function(){
+      const likeBtn = document.getElementById('likeBtn');
+      if (!likeBtn) return;
+      likeBtn.addEventListener('click', () => {
+        likeBtn.textContent = likeBtn.textContent.includes('✓') ? '👍 Like' : '✓ Liked';
+      });
+    })();
   </script>
-<script src="/assets/js/app.js" defer></script>
-</body>
-</html>
+
+  <!-- Global app JS (nav highlight + PWA SW register) -->
+  <script src="/assets/js/app.js" defer></script>
+</body></html>
+
+
 
