@@ -10,8 +10,8 @@
   <header class="site-header">
     <div class="container" style="display:flex;gap:16px;align-items:center">
       <a class="brand" href="/">● My Box Studios</a>
-      <form class="site-search" action="/search.html" method="GET">
-        <input type="search" name="q" placeholder="Search indie movies & beats">
+      <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
+        <input type="search" name="q" placeholder="Search movies & beats" style="flex:1">
         <button type="submit">Search</button>
       </form>
       <nav class="site-nav">
@@ -23,13 +23,48 @@
   </header>
 
   <main class="content">
-    <section class="hero"><h1>Indie Movies & Beats</h1><p class="muted">Real catalog. No fillers.</p></section>
-    <section class="section container" style="max-width:680px">
-      <div class="card" style="padding:16px">
-        <h2 style="margin:0 0 8px">Catalog coming online</h2>
-        <p class="muted" style="margin:0 0 12px">We’re importing licensed items now. Join to get notified when drops go live.</p>
-        <p><a class="cta" href="/signup.html">Join the list</a></p>
-      </div>
+    <!-- Filter chips (optional) -->
+    <div class="container" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <a class="chip active" href="/" style="padding:8px 12px;border-radius:999px;border:1px solid #333">All</a>
+      <a class="chip" href="/movies.html" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Movies</a>
+      <a class="chip" href="/music.html" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Beats</a>
+      <a class="chip" href="/signup.html" style="padding:8px 12px;border-radius:999px;border:1px solid #333">New drops</a>
+    </div>
+
+    <!-- Feed grid -->
+    <section class="container" aria-label="Feed" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;align-items:start">
+      <!-- Card -->
+      <a class="card" href="/watch.html?vid=sample-1" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Sample Title 1</div>
+          <div class="muted" style="font-size:.9em">Channel • 3:12</div>
+        </div>
+      </a>
+
+      <a class="card" href="/watch.html?vid=sample-2" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Sample Title 2</div>
+          <div class="muted" style="font-size:.9em">Creator • 2:45</div>
+        </div>
+      </a>
+
+      <a class="card" href="/watch.html?vid=sample-3" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Sample Title 3</div>
+          <div class="muted" style="font-size:.9em">Artist • 4:01</div>
+        </div>
+      </a>
+
+      <a class="card" href="/watch.html?vid=sample-4" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Sample Title 4</div>
+          <div class="muted" style="font-size:.9em">Studio • 5:02</div>
+        </div>
+      </a>
     </section>
   </main>
 
@@ -39,3 +74,4 @@
   <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
   <script src="/assets/js/app.js" defer></script>
 </body></html>
+
