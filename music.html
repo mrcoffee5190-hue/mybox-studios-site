@@ -1,15 +1,17 @@
 <!doctype html>
 <html lang="en"><head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.webmanifest">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="/manifest.webmanifest">
   <title>Beats — My Box Studios</title>
   <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
 </head><body>
   <header class="site-header">
     <div class="container" style="display:flex;gap:16px;align-items:center">
       <a class="brand" href="/">● My Box Studios</a>
-      <form class="site-search" action="/search.html" method="GET">
-        <input type="search" name="q" placeholder="Search beats">
+      <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
+        <input type="search" name="q" placeholder="Search beats" style="flex:1">
         <button type="submit">Search</button>
       </form>
       <nav class="site-nav">
@@ -21,13 +23,48 @@
   </header>
 
   <main class="content">
-    <section class="hero"><h1>Beats</h1><p class="muted">Royalty-cleared packs & loops.</p></section>
-    <section class="section container" style="max-width:680px">
-      <div class="card" style="padding:16px">
-        <h2 style="margin:0 0 8px">No beats published yet</h2>
-        <p class="muted" style="margin:0 0 12px">Catalog goes live after licensing is finalized.</p>
-        <p><a class="cta" href="/signup.html">Notify me</a></p>
-      </div>
+    <!-- Filters/Sort -->
+    <div class="container" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+      <strong class="muted" style="margin-right:8px">Filter:</strong>
+      <a class="chip active" href="/music.html" style="padding:8px 12px;border-radius:999px;border:1px solid #333">All</a>
+      <a class="chip" href="/music.html?tag=trap" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Trap</a>
+      <a class="chip" href="/music.html?tag=boom-bap" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Boom-Bap</a>
+      <a class="chip" href="/music.html?tag=lofi" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Lo-Fi</a>
+
+      <span style="flex:1"></span>
+      <label class="muted" for="sort">Sort:</label>
+      <select id="sort" style="background:#000;border:1px solid #333;color:#fff;border-radius:8px;padding:6px 10px">
+        <option>Most recent</option>
+        <option>Most popular</option>
+        <option>A → Z</option>
+      </select>
+    </div>
+
+    <!-- Grid -->
+    <section class="container" aria-label="Beats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;align-items:start">
+      <a class="card" href="/watch.html?vid=bt-001" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:1;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Beat Pack 1</div>
+          <div class="muted" style="font-size:.9em">Loops • 12 tracks</div>
+        </div>
+      </a>
+
+      <a class="card" href="/watch.html?vid=bt-002" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:1;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Beat Pack 2</div>
+          <div class="muted" style="font-size:.9em">Kits • 8 tracks</div>
+        </div>
+      </a>
+
+      <a class="card" href="/watch.html?vid=bt-003" style="display:block;border-radius:16px;overflow:hidden">
+        <div class="thumb" style="aspect-ratio:1;background:#111"></div>
+        <div style="padding:10px">
+          <div class="title" style="font-weight:600">Beat Pack 3</div>
+          <div class="muted" style="font-size:.9em">Royalty-cleared • 10 tracks</div>
+        </div>
+      </a>
     </section>
   </main>
 
@@ -35,5 +72,6 @@
   <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
   <script src="/assets/js/app.js" defer></script>
 </body></html>
+
 
 
