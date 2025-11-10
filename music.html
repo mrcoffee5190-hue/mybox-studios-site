@@ -1,23 +1,43 @@
-<!doctype html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <link rel="manifest" href="/manifest.webmanifest">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="/manifest.webmanifest" />
   <title>Beats — My Box Studios</title>
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head><body>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31" />
+  <style>
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #D4AF37;
+      color: #D4AF37;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .chip.active {
+      background-color: #D4AF37;
+      color: #000;
+    }
+    .chip:hover {
+      background-color: #c6a15b;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
   <header class="site-header">
     <div class="container" style="display:flex;gap:16px;align-items:center">
-      <a class="brand" href="/">● My Box Studios</a>
+      <a class="brand" href="/" style="color:#D4AF37">● My Box Studios</a>
       <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
-        <input type="search" name="q" placeholder="Search beats" style="flex:1">
+        <input type="search" name="q" placeholder="Search beats" style="flex:1" />
         <button type="submit">Search</button>
       </form>
       <nav class="site-nav">
         <a href="/movies.html">Movies</a>
-        <a href="/music.html">Music</a>
-        <a href="/signup.html" class="cta">Join</a>
+        <a href="/music.html" style="color:#D4AF37">Music</a>
+        <a href="/signup.html" class="cta" style="color:#D4AF37">Join</a>
       </nav>
     </div>
   </header>
@@ -26,14 +46,17 @@
     <!-- Filters/Sort -->
     <div class="container" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
       <strong class="muted" style="margin-right:8px">Filter:</strong>
-      <a class="chip active" href="/music.html" style="padding:8px 12px;border-radius:999px;border:1px solid #333">All</a>
-      <a class="chip" href="/music.html?tag=trap" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Trap</a>
-      <a class="chip" href="/music.html?tag=boom-bap" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Boom-Bap</a>
-      <a class="chip" href="/music.html?tag=lofi" style="padding:8px 12px;border-radius:999px;border:1px solid #333">Lo-Fi</a>
+      <a class="chip active" href="/music.html">All</a>
+      <a class="chip" href="/music.html?tag=rap">Rap</a>
+      <a class="chip" href="/music.html?tag=rock">Rock & Roll</a>
+      <a class="chip" href="/music.html?tag=pop">Pop</a>
+      <a class="chip" href="/music.html?tag=soul">Soul</a>
+      <a class="chip" href="/music.html?tag=country">Country</a>
+      <a class="chip" href="/music.html?tag=jazz">Jazz</a>
 
       <span style="flex:1"></span>
       <label class="muted" for="sort">Sort:</label>
-      <select id="sort" style="background:#000;border:1px solid #333;color:#fff;border-radius:8px;padding:6px 10px">
+      <select id="sort" style="background:#000;border:1px solid #D4AF37;color:#fff;border-radius:8px;padding:6px 10px">
         <option>Most recent</option>
         <option>Most popular</option>
         <option>A → Z</option>
@@ -68,10 +91,20 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container">© <span id="year"></span> My Box Studios • <a href="/dmca.html">DMCA</a></div></footer>
+  <!-- Footer w/ navigation -->
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="year"></span> My Box Studios • 
+      <a href="/dmca.html" style="color:#D4AF37">DMCA</a> • 
+      <a href="/index.html" style="color:#D4AF37">← Back to Home</a>
+    </div>
+  </footer>
+
   <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
   <script src="/assets/js/app.js" defer></script>
-</body></html>
+</body>
+</html>
+
 
 
 
