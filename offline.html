@@ -1,19 +1,65 @@
 <!doctype html>
-<html lang="en"><head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <link rel="manifest" href="/manifest.webmanifest">
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="/manifest.webmanifest" />
   <title>Offline — My Box Studios</title>
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head><body>
-  <main class="content">
-    <section class="hero"><h1>Offline</h1><p class="muted">You’re offline. Try again when you’re connected.</p></section>
-    <section class="section container" style="max-width:680px">
-      <div class="card" style="padding:16px">
-        <p><a class="cta" href="/">Back to Home</a></p>
-      </div>
-    </section>
-  </main>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      padding: 2rem;
+    }
+    .icon {
+      font-size: 64px;
+      color: #D4AF37;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #D4AF37;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #cccccc;
+      margin-bottom: 2rem;
+    }
+    a.cta {
+      display: inline-block;
+      background-color: #D4AF37;
+      color: #000000;
+      text-decoration: none;
+      padding: 12px 28px;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    a.cta:hover {
+      background-color: #c6a15b;
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">📴</div>
+  <h1>You’re Offline</h1>
+  <p>It looks like your internet connection was lost.</p>
+  <a class="cta" href="/">Back to Homepage</a>
+
   <script src="/assets/js/app.js" defer></script>
-</body></html>
+</body>
+</html>
+
 
