@@ -4,42 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Success - MyBox Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       background-color: #000000;
       color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
       flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
+
+    nav {
+      width: 100%;
+      padding: 1rem 2rem;
+      background-color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    nav a {
+      color: #D4AF37;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #c6a15b;
+    }
+
     .container {
       padding: 40px;
       border: 2px solid #D4AF37;
       border-radius: 16px;
       max-width: 600px;
       width: 90%;
+      margin-top: 60px;
+      text-align: center;
+      box-shadow: 0 0 12px #D4AF37;
     }
+
     .success-icon {
       font-size: 80px;
       color: #D4AF37;
       margin-bottom: 20px;
     }
+
     h1 {
       font-size: 2em;
       margin-bottom: 10px;
-      color: #ffffff;
     }
+
     p {
       font-size: 1.1em;
       color: #cccccc;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
+
     a.button {
       display: inline-block;
       padding: 12px 30px;
@@ -48,14 +76,34 @@
       color: #000000;
       text-decoration: none;
       border-radius: 8px;
+      font-weight: bold;
       transition: background-color 0.3s ease;
     }
+
     a.button:hover {
       background-color: #c6a15b;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 30px 20px;
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- ✅ Navigation -->
+  <nav>
+    <a href="index.html">← Home</a>
+    <div>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+    </div>
+  </nav>
+
+  <!-- ✅ Confirmation Box -->
   <div class="container">
     <div class="success-icon">✅</div>
     <h1>Payment Confirmed</h1>
@@ -63,8 +111,10 @@
     <p>Your payment has been successfully processed.</p>
     <a class="button" href="index.html">Return to Homepage</a>
   </div>
+
 </body>
 </html>
+
 
 
 
