@@ -2,133 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to MyBox Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Success - MyBox Studios</title>
   <style>
-    /* === MyBox Studios Black & Gold Theme === */
     body {
       margin: 0;
       padding: 0;
       background-color: #000000;
-      color: #D4AF37;
-      font-family: "Poppins", Arial, sans-serif;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
-      flex-direction: column;
-      min-height: 100vh;
       justify-content: center;
       align-items: center;
+      height: 100vh;
       text-align: center;
+      flex-direction: column;
     }
-
-    header {
-      width: 100%;
-      background-color: #111;
-      padding: 15px 0;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
+    .container {
+      padding: 40px;
+      border: 2px solid #D4AF37;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 90%;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
+    .success-icon {
+      font-size: 80px;
       color: #D4AF37;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    main {
-      margin-top: 120px;
-      padding: 20px;
-      max-width: 700px;
-    }
-
-    .card {
-      background-color: #111;
-      border: 1px solid #D4AF37;
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-    }
-
-    .card h2 {
-      font-size: 2rem;
-      color: #ffffff;
-      margin-bottom: 15px;
-    }
-
-    .card p {
-      font-size: 1rem;
-      color: #ffffff;
-      line-height: 1.6;
       margin-bottom: 20px;
     }
-
-    .btn {
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    p {
+      font-size: 1.1em;
+      color: #cccccc;
+      margin-bottom: 30px;
+    }
+    a.button {
       display: inline-block;
+      padding: 12px 30px;
+      font-size: 1em;
       background-color: #D4AF37;
-      color: #000;
-      padding: 12px 25px;
+      color: #000000;
       text-decoration: none;
       border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease;
     }
-
-    .btn:hover {
+    a.button:hover {
       background-color: #c6a15b;
     }
-
-    footer {
-      margin-top: auto;
-      padding: 15px;
-      color: #999;
-      font-size: 0.9rem;
-    }
-
-    @media screen and (max-width: 600px) {
-      .card {
-        margin: 10px;
-        padding: 20px;
-      }
-      .card h2 {
-        font-size: 1.6rem;
-      }
-    }
   </style>
-
-  <script>
-    // Optional: Redirect back to home after 10 seconds
-    setTimeout(() => {
-      window.location.href = "/index.html";
-    }, 10000);
-  </script>
 </head>
 <body>
-
-  <header>
-    <h1>MyBox Studios</h1>
-  </header>
-
-  <main>
-    <div class="card">
-      <h2>Welcome to the Studio!</h2>
-      <p>🎬 Your signup was successful. You're officially part of the MyBox Studios creator network — where independent talent and big ideas meet.</p>
-      <p>You’ll receive an email soon with next steps and login details.</p>
-      <a href="/index.html" class="btn">Back to Home</a>
-    </div>
-  </main>
-
-  <footer>
-    © <span id="year"></span> MyBox Studios — All Rights Reserved
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <div class="container">
+    <div class="success-icon">✅</div>
+    <h1>Payment Confirmed</h1>
+    <p>Thank you for joining <strong>MyBox Studios</strong>.</p>
+    <p>Your payment has been successfully processed.</p>
+    <a class="button" href="index.html">Return to Homepage</a>
+  </div>
 </body>
 </html>
+
 
 
