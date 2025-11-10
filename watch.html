@@ -1,12 +1,33 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.webmanifest">
   <title>Watch — My Box Studios</title>
   <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
-</head><body>
+  <style>
+    a, .cta, .brand, .site-nav a {
+      color: #D4AF37;
+    }
+    a:hover {
+      color: #c6a15b;
+    }
+    .cta {
+      background-color: #D4AF37;
+      color: #000;
+      border-radius: 6px;
+      padding: 6px 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cta:hover {
+      background-color: #c6a15b;
+    }
+  </style>
+</head>
+<body>
   <header class="site-header">
     <div class="container" style="display:flex;gap:16px;align-items:center">
       <a class="brand" href="/">● My Box Studios</a>
@@ -27,7 +48,7 @@
     <div class="container" style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start">
       <!-- Left: player + details -->
       <section class="player-col" style="min-width:0">
-        <!-- Player frame (use aspect-ratio so it centers on every device) -->
+        <!-- Player frame -->
         <div class="player-box" style="background:#000;border-radius:16px;overflow:hidden">
           <div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#888">
             Select a title (catalog coming online)
@@ -51,7 +72,7 @@
           <a id="buyBtn" class="cta" href="/signup.html" data-price-id="">Buy / Download</a>
         </div>
 
-        <!-- Description (collapsible) -->
+        <!-- Description -->
         <article class="desc-card card" style="padding:16px">
           <h2 style="margin:0 0 8px">Description</h2>
           <p id="desc" class="long-text muted" style="margin:0 0 8px;max-height:4.5em;overflow:hidden">
@@ -60,7 +81,7 @@
           <button id="toggleDesc" class="linkish" style="padding:0;background:none;border:none">Show more</button>
         </article>
 
-        <!-- (Optional) Comments placeholder -->
+        <!-- Comments placeholder -->
         <section class="section" style="margin-top:24px">
           <h2 style="margin:0 0 8px">Comments</h2>
           <p class="muted">Comments will appear here after launch.</p>
@@ -104,15 +125,18 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">© <span id="year"></span> My Box Studios • <a href="/dmca.html">DMCA</a></div>
+    <div class="container">
+      © <span id="year"></span> My Box Studios • 
+      <a href="/dmca.html" style="color:#D4AF37">DMCA</a> • 
+      <a href="/index.html" style="color:#D4AF37">← Back to Home</a>
+    </div>
   </footer>
 
-  <!-- Tiny page logic (share, like, desc toggle); real catalog wiring can come next -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Simple “Show more” toggler for description
-    (function(){
+    // Toggle Description
+    (() => {
       const btn = document.getElementById('toggleDesc');
       const desc = document.getElementById('desc');
       if (!btn || !desc) return;
@@ -124,8 +148,8 @@
       });
     })();
 
-    // Share button (Web Share API fallback to copy)
-    (function(){
+    // Share Button
+    (() => {
       const shareBtn = document.getElementById('shareBtn');
       if (!shareBtn) return;
       shareBtn.addEventListener('click', async () => {
@@ -136,14 +160,14 @@
           try {
             await navigator.clipboard.writeText(location.href);
             shareBtn.textContent = 'Link copied';
-            setTimeout(()=>shareBtn.textContent='↗ Share', 1500);
+            setTimeout(() => shareBtn.textContent = '↗ Share', 1500);
           } catch(e) {}
         }
       });
     })();
 
-    // Like button (local visual feedback only)
-    (function(){
+    // Like Button
+    (() => {
       const likeBtn = document.getElementById('likeBtn');
       if (!likeBtn) return;
       likeBtn.addEventListener('click', () => {
@@ -152,9 +176,10 @@
     })();
   </script>
 
-  <!-- Global app JS (nav highlight + PWA SW register) -->
   <script src="/assets/js/app.js" defer></script>
-</body></html>
+</body>
+</html>
+
 
 
 
