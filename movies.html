@@ -1,107 +1,189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <title>Movies — My Box Studios</title>
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
+  <meta charset="UTF-8" />
+  <!-- ✅ Ensures perfect fit on mobile, tablet, laptop, and TV -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies | MyBox Studios App</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
-    .chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid #D4AF37;
-      color: #D4AF37;
-      text-decoration: none;
-      font-weight: bold;
+    :root {
+      --gold: #D4AF37;
+      --black: #000;
+      --white: #fff;
     }
-    .chip.active {
-      background-color: #D4AF37;
-      color: #000;
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      transition: all 0.4s ease;
     }
-    .chip:hover {
-      background-color: #c6a15b;
-      color: #000;
+
+    header {
+      background: var(--black);
+      border-bottom: 2px solid var(--gold);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--gold);
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      justify-items: center;
+    }
+
+    .movie {
+      background: #111;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      text-align: center;
+      padding: 1rem;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--gold);
+      padding: 1rem;
+    }
+
+    /* 🟢 Smart-TV / Large-Screen scaling */
+    @media (min-width: 1600px) {
+      body {
+        font-size: 1.4rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      button {
+        font-size: 1.2rem;
+        padding: 14px 22px;
+      }
+      .movie {
+        max-width: 420px;
+      }
+      video {
+        transform: scale(1.05);
+      }
+    }
+
+    /* 🟢 Extra-large 4K display support */
+    @media (min-width: 2400px) {
+      h1 { font-size: 3rem; }
+      button { font-size: 1.5rem; }
+      footer { font-size: 1rem; }
+    }
+
+    /* Optional animation for fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.6s forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container" style="display:flex;gap:16px;align-items:center">
-      <a class="brand" href="/" style="color:#D4AF37">● My Box Studios</a>
-      <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
-        <input type="search" name="q" placeholder="Search movies" style="flex:1">
-        <button type="submit">Search</button>
-      </form>
-      <nav class="site-nav">
-        <a href="/movies.html" style="color:#D4AF37">Movies</a>
-        <a href="/music.html">Music</a>
-        <a href="/signup.html" class="cta" style="color:#D4AF37">Join</a>
-      </nav>
-    </div>
+  <header>
+    <h1>MyBox Studios — Movies</h1>
   </header>
 
-  <main class="content">
-    <!-- Filters/Sort -->
-    <div class="container" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
-      <strong class="muted" style="margin-right:8px">Filter:</strong>
-      <a class="chip active" href="/movies.html">All</a>
-      <a class="chip" href="/movies.html?genre=drama">Drama</a>
-      <a class="chip" href="/movies.html?genre=action">Action</a>
-      <a class="chip" href="/movies.html?genre=comedy">Comedy</a>
-      <a class="chip" href="/movies.html?genre=documentary">Documentary</a>
+  <main class="grid" id="movieGrid"></main>
 
-      <span style="flex:1"></span>
-      <label class="muted" for="sort">Sort:</label>
-      <select id="sort" style="background:#000;border:1px solid #D4AF37;color:#fff;border-radius:8px;padding:6px 10px">
-        <option>Most recent</option>
-        <option>Most popular</option>
-        <option>A → Z</option>
-      </select>
-    </div>
+  <footer>© 2025 MyBox Studios — Watch, Support & Stream</footer>
 
-    <!-- Grid -->
-    <section class="container" aria-label="Movies" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;align-items:start">
-      <a class="card" href="/watch.html?vid=mv-001" style="display:block;border-radius:16px;overflow:hidden">
-        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
-        <div style="padding:10px">
-          <div class="title" style="font-weight:600">Indie Film 1</div>
-          <div class="muted" style="font-size:.9em">Drama • 1h 42m</div>
-        </div>
-      </a>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // ✅ Paste your real Stripe Publishable Key here
+    const stripe = Stripe("pk_live_PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE");
 
-      <a class="card" href="/watch.html?vid=mv-002" style="display:block;border-radius:16px;overflow:hidden">
-        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
-        <div style="padding:10px">
-          <div class="title" style="font-weight:600">Indie Film 2</div>
-          <div class="muted" style="font-size:.9em">Action • 1h 28m</div>
-        </div>
-      </a>
+    // 🟢 Smart-TV Detection — automatically enlarges for big screens
+    (function detectSmartTV() {
+      const screenWidth = window.innerWidth;
+      const dpi = window.devicePixelRatio;
+      const isTV = screenWidth > 1400 && dpi <= 1.5;
+      if (isTV) {
+        document.body.classList.add("tv-mode");
+        console.log("Smart-TV Mode activated for MyBox Studios Movies");
+      }
+    })();
 
-      <a class="card" href="/watch.html?vid=mv-003" style="display:block;border-radius:16px;overflow:hidden">
-        <div class="thumb" style="aspect-ratio:16/9;background:#111"></div>
-        <div style="padding:10px">
-          <div class="title" style="font-weight:600">Indie Film 3</div>
-          <div class="muted" style="font-size:.9em">Documentary • 54m</div>
-        </div>
-      </a>
-    </section>
-  </main>
+    // 🟢 Load Movies from JSON
+    async function loadMovies() {
+      const grid = document.getElementById('movieGrid');
+      const res = await fetch('data/movies.json');
+      const movies = await res.json();
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      © <span id="year"></span> My Box Studios • 
-      <a href="/dmca.html" style="color:#D4AF37">DMCA</a> • 
-      <a href="/index.html" style="color:#D4AF37">← Back to Home</a>
-    </div>
-  </footer>
+      movies.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'movie fade-in';
+        div.innerHTML = `
+          <video controls poster="${m.thumbnail}">
+            <source src="${m.preview}" type="video/mp4">
+          </video>
+          <h3>${m.title}</h3>
+          <button onclick="buy('${m.price}')">Buy Movie – $4.99</button>`;
+        grid.appendChild(div);
+      });
+    }
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-  <script src="/assets/js/app.js" defer></script>
+    // 🟢 Stripe Checkout
+    function buy(priceId) {
+      stripe.redirectToCheckout({
+        lineItems: [{ price: priceId, quantity: 1 }],
+        mode: "payment",
+        successUrl: "https://phenomenal-muffin-960018.netlify.app/success.html",
+        cancelUrl: "https://phenomenal-muffin-960018.netlify.app/movies.html"
+      });
+    }
+
+    // Auto-load movies on page open
+    loadMovies();
+  </script>
 </body>
 </html>
+
 
 
 
