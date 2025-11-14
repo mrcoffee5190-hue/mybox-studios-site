@@ -2,14 +2,37 @@
   {
     "id": "mu001",
     "type": "music",
-    "title": "City Lights (Beat)",
-    "artist": "Jane Producer",
+    "title": "The Beginning (Instrumental)",
+    "artist": "Ava Keys",
     "role": "Producer",
     "price": 0.99,
     "currency": "USD",
-    "priceId": "price_live_replace_me_music",
-    "image": "assets/music/city-lights.jpg",
-    "preview": "assets/previews/city-lights.mp3",
-    "description": "90s boom-bap instrumental."
+    "priceId": "price_live_replace_me_music_001",
+    "image": "assets/images/the-beginning.jpg",
+    "preview": "assets/music/the-beginning.mp3",
+    "description": "Smooth lo-fi instrumental that sets the mood for success."
+  },
+  {
+    "id": "mo001",
+    "type": "movie",
+    "title": "Rise of the Visionary",
+    "price": 4.99,
+    "currency": "USD",
+    "priceId": "price_live_replace_me_movie_001",
+    "image": "assets/images/rise-of-the-visionary.jpg",
+    "preview": "assets/movies/rise-of-the-visionary.mp4",
+    "description": "An inspiring short film about turning dreams into reality."
+  },
+  {
+    "id": "mo002",
+    "type": "movie",
+    "title": "Empire Dreams (Feature Film)",
+    "price": 7.99,
+    "currency": "USD",
+    "priceId": "price_live_replace_me_movie_002",
+    "image": "assets/images/empire-dreams.jpg",
+    "preview": "assets/movies/empire-dreams.mp4",
+    "description": "A cinematic journey following creators who build their empires from nothing."
   }
 ]
+
