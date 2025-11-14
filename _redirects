@@ -1,0 +1,35 @@
+# ============================================
+# MyBox Studios Official Redirect Configuration
+# ============================================
+
+# ✅ Main App Routing
+# This makes the site behave like a real app (mobile, desktop, tablet, TV)
+/*    /index.html   200
+
+# ✅ Stripe Checkout Redirects
+# Handles live payment success and cancel routes
+/success    /success.html    200
+/cancel     /cancel.html     200
+
+# ✅ Join Studio Routing
+# Ensures legacy or alternate links still work
+/join        /join.html        200
+/join-studio /join.html        301
+/join-us     /join.html        301
+
+# ✅ Content Pages
+# Guarantees all content pages load properly
+/music      /music.html      200
+/movies     /movies.html     200
+/browse     /browse.html     200
+/watch      /watch.html      200
+
+# ✅ Legal & System Pages
+# For DMCA, 404, and offline support
+/dmca       /dmca.html       200
+/404        /404.html        404
+/offline    /offline.html    200
+
+# ✅ Future Creator Studio Routing
+# Keeps app future-ready when dynamic creator pages launch
+/studios/*   /index.html     200
