@@ -1,65 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Page Not Found — My Box Studios</title>
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31" />
+  <meta charset="UTF-8" />
+  <!-- ✅ Ensures perfect fit across mobile, tablet, laptop, and TV -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | MyBox Studios</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000;
+      --white: #fff;
+    }
+
     body {
       margin: 0;
-      background-color: #000000;
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
+      justify-content: center;
       height: 100vh;
-      padding: 2rem;
+      text-align: center;
+      padding: 1rem;
+      transition: all 0.3s ease;
     }
-    .icon {
-      font-size: 64px;
-      color: #D4AF37;
-      margin-bottom: 1rem;
-    }
+
     h1 {
-      font-size: 2rem;
-      color: #D4AF37;
+      color: var(--gold);
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
+
     p {
-      font-size: 1.1rem;
-      color: #cccccc;
-      margin-bottom: 2rem;
-    }
-    a.cta {
-      display: inline-block;
-      background-color: #D4AF37;
-      color: #000000;
-      text-decoration: none;
-      padding: 12px 28px;
-      font-weight: bold;
-      border-radius: 8px;
+      color: var(--white);
       font-size: 1rem;
-      transition: background-color 0.3s ease;
+      margin: 0.5rem 0 1.5rem;
+      max-width: 600px;
     }
-    a.cta:hover {
-      background-color: #c6a15b;
+
+    button {
+      background-color: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--white);
+      color: var(--black);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      color: var(--gold);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--gold);
+      padding-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* 🟢 Smart-TV and large screens */
+    @media (min-width: 1600px) {
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+      button {
+        font-size: 1.4rem;
+        padding: 18px 36px;
+      }
+    }
+
+    @media (min-width: 2400px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+      p {
+        font-size: 1.8rem;
+      }
+      footer {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="icon">🚫</div>
-  <h1>Page Not Found</h1>
-  <p>The page you’re looking for doesn’t exist or was moved.</p>
-  <a class="cta" href="/">Back to Homepage</a>
 
-  <script src="/assets/js/app.js" defer></script>
+<body>
+  <h1>404 — Page Not Found</h1>
+  <p>It looks like you followed a link to a page that doesn’t exist or has been moved.</p>
+  <p>Return to the main MyBox Studios app to explore music, movies, and more.</p>
+
+  <button onclick="window.location.href='browse.html'">Return to Browse</button>
+
+  <footer>© 2025 MyBox Studios — Explore, Support, and Stream Creators Worldwide</footer>
+
+  <script>
+    // 🟢 Smart-TV detection for adaptive scaling
+    (function detectSmartTV() {
+      const screenWidth = window.innerWidth;
+      const dpi = window.devicePixelRatio;
+      const isTV = screenWidth > 1400 && dpi <= 1.5;
+      if (isTV) {
+        document.body.classList.add("tv-mode");
+        console.log("Smart-TV Mode activated for 404 Page");
+      }
+    })();
+  </script>
 </body>
 </html>
+
 
 
