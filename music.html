@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ Ensures perfect fit on mobile, tablet, laptop, and TV -->
+  <!-- ✅ Ensures perfect fit across all screens (phones, tablets, laptops, TVs) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movies | MyBox Studios App</title>
+  <title>Music | MyBox Studios App</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
@@ -45,7 +45,7 @@
       justify-items: center;
     }
 
-    .movie {
+    .track {
       background: #111;
       border: 1px solid var(--gold);
       border-radius: 12px;
@@ -55,9 +55,14 @@
       max-width: 320px;
     }
 
-    video {
+    .track img {
       width: 100%;
       border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
       margin-bottom: 10px;
     }
 
@@ -97,10 +102,10 @@
         font-size: 1.2rem;
         padding: 14px 22px;
       }
-      .movie {
+      .track {
         max-width: 420px;
       }
-      video {
+      audio {
         transform: scale(1.05);
       }
     }
@@ -126,12 +131,12 @@
 
 <body>
   <header>
-    <h1>MyBox Studios — Movies</h1>
+    <h1>MyBox Studios — Music</h1>
   </header>
 
-  <main class="grid" id="movieGrid"></main>
+  <main class="grid" id="musicGrid"></main>
 
-  <footer>© 2025 MyBox Studios — Watch, Support & Stream</footer>
+  <footer>© 2025 MyBox Studios — Listen, Support & Stream</footer>
 
   <script src="https://js.stripe.com/v3/"></script>
   <script>
@@ -145,25 +150,25 @@
       const isTV = screenWidth > 1400 && dpi <= 1.5;
       if (isTV) {
         document.body.classList.add("tv-mode");
-        console.log("Smart-TV Mode activated for MyBox Studios Movies");
+        console.log("Smart-TV Mode activated for MyBox Studios Music");
       }
     })();
 
-    // 🟢 Load Movies from JSON
-    async function loadMovies() {
-      const grid = document.getElementById('movieGrid');
-      const res = await fetch('data/movies.json');
-      const movies = await res.json();
+    // 🟢 Load Music Tracks from JSON
+    async function loadMusic() {
+      const grid = document.getElementById('musicGrid');
+      const res = await fetch('data/music.json');
+      const tracks = await res.json();
 
-      movies.forEach(m => {
+      tracks.forEach(t => {
         const div = document.createElement('div');
-        div.className = 'movie fade-in';
+        div.className = 'track fade-in';
         div.innerHTML = `
-          <video controls poster="${m.thumbnail}">
-            <source src="${m.preview}" type="video/mp4">
-          </video>
-          <h3>${m.title}</h3>
-          <button onclick="buy('${m.price}')">Buy Movie – $4.99</button>`;
+          <img src="${t.thumbnail}" alt="${t.title}">
+          <h3>${t.title}</h3>
+          <p><em>${t.artist}</em></p>
+          <audio controls src="${t.preview}"></audio>
+          <button onclick="buy('${t.price}')">Buy Track – $1.99</button>`;
         grid.appendChild(div);
       });
     }
@@ -174,15 +179,16 @@
         lineItems: [{ price: priceId, quantity: 1 }],
         mode: "payment",
         successUrl: "https://phenomenal-muffin-960018.netlify.app/success.html",
-        cancelUrl: "https://phenomenal-muffin-960018.netlify.app/movies.html"
+        cancelUrl: "https://phenomenal-muffin-960018.netlify.app/music.html"
       });
     }
 
-    // Auto-load movies on page open
-    loadMovies();
+    // Auto-load tracks on page open
+    loadMusic();
   </script>
 </body>
 </html>
+
 
 
 
