@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ Ensures perfect fit across all devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Success | MyBox Studios App</title>
 
@@ -13,6 +12,7 @@
       --gold: #D4AF37;
       --black: #000;
       --white: #fff;
+      --gray: #bbb;
     }
 
     body {
@@ -24,7 +24,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       padding: 1rem;
       transition: all 0.3s ease;
@@ -40,9 +40,10 @@
       color: var(--white);
       font-size: 1rem;
       margin: 0.5rem 0 1.5rem;
+      max-width: 650px;
     }
 
-    button {
+    .btn {
       background-color: var(--gold);
       color: var(--black);
       border: none;
@@ -52,9 +53,11 @@
       font-size: 1.1rem;
       font-weight: 700;
       transition: 0.3s ease;
+      margin: 8px;
+      display: inline-block;
+      text-decoration: none;
     }
-
-    button:hover {
+    .btn:hover {
       background-color: var(--white);
       color: var(--black);
     }
@@ -70,50 +73,37 @@
       text-align: center;
     }
 
-    /* 🟢 Smart-TV and large screens */
     @media (min-width: 1600px) {
-      h1 {
-        font-size: 2.8rem;
-      }
-      p {
-        font-size: 1.5rem;
-      }
-      button {
-        font-size: 1.4rem;
-        padding: 18px 36px;
-      }
+      h1 { font-size: 2.8rem; }
+      p  { font-size: 1.5rem; }
+      .btn { font-size: 1.4rem; padding: 18px 36px; }
     }
-
     @media (min-width: 2400px) {
-      h1 {
-        font-size: 3.2rem;
-      }
-      p {
-        font-size: 1.8rem;
-      }
-      footer {
-        font-size: 1rem;
-      }
+      h1 { font-size: 3.2rem; }
+      p  { font-size: 1.8rem; }
+      footer { font-size: 1rem; }
     }
   </style>
 </head>
 
 <body>
   <h1>Payment Successful 🎉</h1>
-  <p>Thank you for supporting independent creators on MyBox Studios.</p>
-  <p>Your purchase has been processed securely via Stripe.</p>
+  <p>Thank you for supporting independent creators on <strong>MyBox Studios</strong>.</p>
+  <p>Your one-time $100 membership payment has been processed securely via Stripe.</p>
 
-  <button onclick="window.location.href='browse.html'">Return to Browse</button>
+  <!-- ✅ Onboarding Buttons -->
+  <a href="browse.html" class="btn">Return to Browse</a>
+  <a href="/studios/create.html" class="btn" style="background-color:#D4AF37;color:#000;">Open Your Studio</a>
 
-  <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
+  <footer>© 2025 MyBox Studios — 80 % to Creators, 20 % to MyBox Studios</footer>
 
   <script>
-    // 🟢 Smart-TV detection for adaptive scaling
-    (function detectSmartTV() {
+    // Smart-TV detection for adaptive scaling
+    (function detectSmartTV(){
       const screenWidth = window.innerWidth;
       const dpi = window.devicePixelRatio;
       const isTV = screenWidth > 1400 && dpi <= 1.5;
-      if (isTV) {
+      if(isTV){
         document.body.classList.add("tv-mode");
         console.log("Smart-TV Mode activated for Success Page");
       }
@@ -121,6 +111,7 @@
   </script>
 </body>
 </html>
+
 
   
 
