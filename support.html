@@ -3,23 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customer Support - MyBox Studios</title>
-  <link href="assets/css/styles.css" rel="stylesheet" />
+  <title>Support | MyBox Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--black);
+      color: var(--gold);
+      font-family: "Montserrat", sans-serif;
+      text-align: center;
+      scroll-behavior: smooth;
+    }
+
+    /* 🟩 Sticky Navigation */
+    header {
+      background-color: var(--black);
+      border-bottom: 1px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--white);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-top: 2rem;
+      color: var(--gold);
+    }
+
+    h2 {
+      color: var(--white);
+      margin-top: 2rem;
+    }
+
+    p, ul, li {
+      color: var(--white);
+      line-height: 1.6;
+      font-size: 1rem;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    a {
+      color: var(--gold);
+    }
+
+    footer {
+      border-top: 1px solid var(--gold);
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 3rem;
+    }
+  </style>
 </head>
-<body style="background-color:#000; color:#D4AF37; font-family:Montserrat, sans-serif; padding:40px;">
-  <h1 style="text-align:center;">MyBox Studios Support</h1>
-  <p>If you need help with payments, uploading content, or account access, we’re here to help.</p>
 
-  <h2>Contact Us</h2>
-  <ul style="list-style:none; padding:0; max-width:700px; margin:0 auto; text-align:left;">
-    <li>📧 Email: <a href="mailto:support@myboxstudios.com" style="color:#D4AF37;">support@myboxstudios.com</a></li>
-    <li>💬 Response Time: Within 24–48 hours</li>
-    <li>📅 Business Hours: Monday–Friday, 9 AM – 5 PM CST</li>
-  </ul>
+<body>
+  <!-- 🟩 Universal Navigation -->
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="join.html">Join</a>
+      <a href="support.html" style="color: var(--white);">Support</a>
+    </nav>
+  </header>
 
-  <h2>Refunds & Assistance</h2>
-  <p>All refunds and support inquiries are handled through our email listed above. Please include your transaction ID for faster service.</p>
+  <!-- 🟨 Support Content -->
+  <main>
+    <h1>MyBox Studios Support</h1>
+    <p>If you need help with payments, uploading content, or accessing your account, we’re here to help.</p>
 
-  <p style="text-align:center;">© 2025 MyBox Studios. All rights reserved.</p>
+    <h2>Contact Us</h2>
+    <ul>
+      <li>📧 Email: <a href="mailto:support@myboxstudios.com">support@myboxstudios.com</a></li>
+      <li>💬 Response Time: Within 24–48 hours</li>
+      <li>📅 Business Hours: Monday–Friday, 9 AM – 5 PM CST</li>
+    </ul>
+
+    <h2>Refunds & Assistance</h2>
+    <p>All refunds and support inquiries are handled through our email above. Please include your transaction ID for faster service.</p>
+  </main>
+
+  <footer>© 2025 MyBox Studios. All Rights Reserved.</footer>
 </body>
 </html>
+
