@@ -2,41 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ Ensures perfect fit across all screens (phones, tablets, laptops, TVs) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Music | MyBox Studios App</title>
-
-  <!-- Google Fonts -->
+  <title>Music | MyBox Studios</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --gold: #D4AF37;
-      --black: #000;
-      --white: #fff;
+      --black: #000000;
+      --white: #ffffff;
     }
 
     body {
       margin: 0;
-      background: var(--black);
+      background-color: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
-      transition: all 0.4s ease;
+      scroll-behavior: smooth;
     }
 
+    /* 🟩 Sticky Navigation */
     header {
-      background: var(--black);
-      border-bottom: 2px solid var(--gold);
-      padding: 1rem;
-      text-align: center;
+      width: 100%;
+      background-color: #000;
+      border-bottom: 1px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--white);
     }
 
     h1 {
       color: var(--gold);
-      margin: 0;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      margin: 1rem 0 0.5rem;
+      text-align: center;
     }
 
+    /* 🟦 Music Grid Layout */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -53,6 +77,12 @@
       padding: 1rem;
       width: 100%;
       max-width: 320px;
+      transition: transform 0.3s ease;
+    }
+
+    .track:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 10px var(--gold);
     }
 
     .track img {
@@ -85,44 +115,32 @@
     footer {
       text-align: center;
       color: var(--gold);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       border-top: 1px solid var(--gold);
       padding: 1rem;
+      margin-top: 2rem;
     }
 
-    /* 🟢 Smart-TV / Large-Screen scaling */
+    /* 🟢 Responsive Scaling */
     @media (min-width: 1600px) {
-      body {
-        font-size: 1.4rem;
-      }
-      h1 {
-        font-size: 2.5rem;
-      }
-      button {
-        font-size: 1.2rem;
-        padding: 14px 22px;
-      }
-      .track {
-        max-width: 420px;
-      }
-      audio {
-        transform: scale(1.05);
-      }
+      h1 { font-size: 2.6rem; }
+      button { font-size: 1.2rem; padding: 14px 24px; }
+      .track { max-width: 400px; }
     }
 
-    /* 🟢 Extra-large 4K display support */
     @media (min-width: 2400px) {
       h1 { font-size: 3rem; }
       button { font-size: 1.5rem; }
       footer { font-size: 1rem; }
     }
 
-    /* Optional animation for fade-in */
+    /* Fade Animation */
     .fade-in {
       opacity: 0;
       transform: translateY(10px);
       animation: fadeUp 0.6s forwards;
     }
+
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -130,31 +148,41 @@
 </head>
 
 <body>
+  <!-- 🟩 Global Navigation -->
   <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="music.html" style="color: var(--white);">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="join.html">Join</a>
+      <a href="support.html">Support</a>
+    </nav>
     <h1>MyBox Studios — Music</h1>
   </header>
 
+  <!-- 🟦 Music Grid -->
   <main class="grid" id="musicGrid"></main>
 
-  <footer>© 2025 MyBox Studios — Listen, Support & Stream</footer>
+  <!-- 🟨 Footer -->
+  <footer>© 2025 MyBox Studios — Listen, Support & Stream Worldwide</footer>
 
+  <!-- 🟣 Stripe Script -->
   <script src="https://js.stripe.com/v3/"></script>
   <script>
-    // ✅ Paste your real Stripe Publishable Key here
+    // ✅ Real publishable key
     const stripe = Stripe("pk_live_PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE");
 
-    // 🟢 Smart-TV Detection — automatically enlarges for big screens
+    // 🟢 Smart-TV Detection
     (function detectSmartTV() {
       const screenWidth = window.innerWidth;
       const dpi = window.devicePixelRatio;
-      const isTV = screenWidth > 1400 && dpi <= 1.5;
-      if (isTV) {
+      if (screenWidth > 1400 && dpi <= 1.5) {
         document.body.classList.add("tv-mode");
         console.log("Smart-TV Mode activated for MyBox Studios Music");
       }
     })();
 
-    // 🟢 Load Music Tracks from JSON
+    // 🟢 Load Music Tracks
     async function loadMusic() {
       const grid = document.getElementById('musicGrid');
       const res = await fetch('data/music.json');
@@ -168,7 +196,8 @@
           <h3>${t.title}</h3>
           <p><em>${t.artist}</em></p>
           <audio controls src="${t.preview}"></audio>
-          <button onclick="buy('${t.price}')">Buy Track – $1.99</button>`;
+          <button onclick="buy('${t.price}')">Buy Track – $1.99</button>
+        `;
         grid.appendChild(div);
       });
     }
@@ -183,11 +212,11 @@
       });
     }
 
-    // Auto-load tracks on page open
     loadMusic();
   </script>
 </body>
 </html>
+
 
 
 
