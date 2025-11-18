@@ -77,6 +77,21 @@
       margin-bottom: 2rem;
     }
 
+    /* 🟨 “What You Get” Section */
+    .benefits {
+      text-align: left;
+      max-width: 400px;
+      margin: 2rem auto;
+      color: var(--gold);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .benefits li {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+
     button {
       background-color: var(--gold);
       color: var(--black);
@@ -99,6 +114,17 @@
       cursor: not-allowed;
     }
 
+    .help-link {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-top: 20px;
+      text-decoration: underline;
+    }
+
+    .help-link:hover {
+      color: var(--white);
+    }
+
     footer {
       border-top: 1px solid var(--gold);
       color: var(--gold);
@@ -107,7 +133,6 @@
       font-size: 0.85rem;
     }
 
-    /* 🟦 Scroll & Adaptive Design */
     html, body {
       scroll-behavior: smooth;
     }
@@ -138,6 +163,14 @@
     <p>Pay a one-time $100 membership fee to open your studio and start selling your music and movies worldwide.</p>
 
     <button id="joinButton">Join MyBox Studios — $100</button>
+
+    <ul class="benefits">
+      <li>🎬 Sell your music and films instantly worldwide</li>
+      <li>💸 Keep 80% of every sale automatically</li>
+      <li>🚀 Access your own personalized studio page</li>
+    </ul>
+
+    <a href="support.html" class="help-link">Need help? Contact support.</a>
   </main>
 
   <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
@@ -175,6 +208,7 @@
   </script>
 </body>
 </html>
+
 
 
 
