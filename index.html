@@ -4,109 +4,193 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MyBox Studios</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
     body {
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #000;
-      color: #fff;
+      background-color: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-height: 100vh;
-      padding: 2rem;
-      box-sizing: border-box;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* 🟩 NAVIGATION BAR */
+    header {
+      width: 100%;
+      background-color: #111;
+      border-bottom: 1px solid var(--gold);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     nav {
-      width: 100%;
-      padding: 1rem 2rem;
-      background-color: #000;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav a {
-      color: #D4AF37;
+      color: var(--gold);
       text-decoration: none;
-      margin: 0 1rem;
-      font-weight: bold;
-      transition: color 0.3s;
+      font-weight: 700;
+      transition: 0.3s;
+      font-size: 1rem;
     }
 
     nav a:hover {
-      color: #c6a15b;
+      color: var(--white);
     }
 
-    .logo {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #D4AF37;
-      margin-top: 3rem;
-      margin-bottom: 2rem;
+    /* 🟨 HERO SECTION */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
       text-align: center;
+    }
+
+    h1 {
+      color: var(--gold);
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 500px;
+      line-height: 1.6;
+      margin: 1rem auto 2rem;
     }
 
     .cta-button {
-      background-color: #D4AF37;
-      color: #000;
+      background-color: var(--gold);
+      color: var(--black);
       border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.2rem;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s ease;
       text-decoration: none;
-      font-weight: bold;
-      margin-top: 1rem;
+      display: inline-block;
     }
 
     .cta-button:hover {
-      background-color: #c6a15b;
+      background-color: var(--white);
+      color: var(--black);
     }
 
-    .tagline {
-      font-size: 1.1rem;
-      color: #fff;
-      margin-top: 1.5rem;
+    /* 🟦 FEATURED SECTION */
+    section {
+      width: 100%;
+      padding: 2rem 1rem;
       text-align: center;
-      max-width: 400px;
     }
 
-    @media (min-width: 768px) {
-      .logo {
-        font-size: 3rem;
-      }
-      .cta-button {
-        font-size: 1.3rem;
-        padding: 1.2rem 3rem;
-      }
+    section h2 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .content-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .content-item {
+      background-color: #111;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      width: 240px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--gold);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .content-item:hover {
+      transform: scale(1.05);
+      background-color: var(--gold);
+      color: var(--black);
+    }
+
+    footer {
+      border-top: 1px solid var(--gold);
+      color: var(--gold);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 1600px) {
+      h1 { font-size: 3rem; }
+      p { font-size: 1.3rem; }
+      .cta-button { font-size: 1.3rem; padding: 18px 40px; }
     }
   </style>
 </head>
-<body>
 
-  <!-- ✅ Universal Navigation -->
-  <nav>
-    <a href="index.html">← Home</a>
-    <div>
+<body>
+  <!-- 🟩 NAVIGATION -->
+  <header>
+    <nav>
+      <a href="index.html" style="color: var(--white);">Home</a>
       <a href="music.html">Music</a>
       <a href="movies.html">Movies</a>
       <a href="join.html">Join</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </header>
+
+  <!-- 🟨 MAIN HERO -->
+  <main>
+    <h1>Welcome to MyBox Studios</h1>
+    <p>Open your studio, upload your content, and earn 80% of every sale. Music, movies, and creativity all in one place.</p>
+    <a href="join.html" class="cta-button">Join Now for $100</a>
+  </main>
+
+  <!-- 🟦 FEATURED CONTENT -->
+  <section id="featured">
+    <h2>Featured Studios</h2>
+    <div class="content-grid">
+      <div class="content-item">🎵 Studio One</div>
+      <div class="content-item">🎬 Studio Two</div>
+      <div class="content-item">🎧 Studio Three</div>
+      <div class="content-item">🎞️ Studio Four</div>
     </div>
-  </nav>
+  </section>
 
-  <!-- ✅ Page Content -->
-  <div class="logo">MyBox Studios</div>
-  <a href="join.html" class="cta-button">Join Now</a>
-  <div class="tagline">Launch your movie or music studio. Sell your content. Keep 80% of every sale.</div>
-
+  <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
 </body>
 </html>
+
 
 
 
