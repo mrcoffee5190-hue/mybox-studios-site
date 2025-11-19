@@ -2,243 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ Ensures perfect fit on mobile, tablet, laptop, and TV -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browse | MyBox Studios App</title>
+  <title>Browse – MyBox Studio</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-  <style>
-    :root {
-      --gold: #D4AF37;
-      --black: #000;
-      --white: #fff;
-    }
-
-    body {
-      margin: 0;
-      background: var(--black);
-      color: var(--white);
-      font-family: "Montserrat", sans-serif;
-      transition: all 0.4s ease;
-    }
-
-    header {
-      background: var(--black);
-      border-bottom: 2px solid var(--gold);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    h1 {
-      color: var(--gold);
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    .filters {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .filter {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      border-radius: 25px;
-      padding: 8px 16px;
-      margin: 5px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s ease;
-    }
-
-    .filter.active,
-    .filter:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      justify-items: center;
-    }
-
-    .item {
-      background: #111;
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      text-align: center;
-      padding: 1rem;
-      width: 100%;
-      max-width: 320px;
-    }
-
-    .item img, video {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background: var(--white);
-      color: var(--black);
-    }
-
-    footer {
-      text-align: center;
-      color: var(--gold);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--gold);
-      padding: 1rem;
-    }
-
-    /* 🟢 Smart-TV / Large-Screen scaling */
-    @media (min-width: 1600px) {
-      body {
-        font-size: 1.4rem;
-      }
-      h1 {
-        font-size: 2.5rem;
-      }
-      button {
-        font-size: 1.2rem;
-        padding: 14px 22px;
-      }
-      .filter {
-        font-size: 1.1rem;
-        padding: 12px 22px;
-      }
-      .item {
-        max-width: 420px;
-      }
-      audio, video {
-        transform: scale(1.05);
-      }
-    }
-
-    /* 🟢 Extra-large 4K display support */
-    @media (min-width: 2400px) {
-      h1 { font-size: 3rem; }
-      button { font-size: 1.5rem; }
-      .filter { font-size: 1.3rem; }
-      footer { font-size: 1rem; }
-    }
-
-    /* Optional animation for fade-in */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.6s forwards;
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-
 <body>
-  <header>
-    <h1>Browse MyBox Studios</h1>
-    <div class="filters">
-      <button class="filter active" onclick="loadCategory('all', event)">All</button>
-      <button class="filter" onclick="loadCategory('music', event)">Music</button>
-      <button class="filter" onclick="loadCategory('movies', event)">Movies</button>
-    </div>
-  </header>
 
-  <main class="grid" id="contentGrid"></main>
+<!-- ========================================================= -->
+<!-- Simple Global Spinner -->
+<!-- ========================================================= -->
+<div id="spinner" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+">
+  <div style="
+    width: 48px;
+    height: 48px;
+    border: 4px solid #D4AF37;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  "></div>
+</div>
 
-  <footer>© 2025 MyBox Studios — Explore, Support & Stream</footer>
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
 
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    // ✅ Paste your real Stripe Publishable Key here
-    const stripe = Stripe("pk_live_PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE");
+<!-- ========================================================= -->
+<!-- Top Navigation (matches your existing app) -->
+<!-- ========================================================= -->
+<header class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="brand">
+      <span class="brand-main">MyBox Studio</span>
+      <span class="brand-sub">Indie Music & Movies</span>
+    </a>
+  </div>
 
-    // 🟢 Smart-TV Detection — enlarges interface automatically
-    (function detectSmartTV() {
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-      const dpi = window.devicePixelRatio;
+  <nav class="nav-right">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="music.html" class="nav-link">Music</a>
+    <a href="movies.html" class="nav-link">Movies</a>
+    <a href="browse.html" class="nav-link active">Browse</a>
+    <a href="join.html" class="nav-link nav-cta">Join</a>
+  </nav>
+</header>
 
-      // Heuristic: large width + high resolution + low DPI → TV mode
-      const isTV = screenWidth > 1400 && dpi <= 1.5;
+<!-- ========================================================= -->
+<!-- Main Content -->
+<!-- ========================================================= -->
+<main style="max-width: 900px; margin: 0 auto; padding: 30px 20px; color: #fff;">
 
-      if (isTV) {
-        document.body.classList.add("tv-mode");
-        console.log("Smart-TV Mode activated for MyBox Studios");
-      }
-    })();
+  <h1 style="font-size: 1.7rem; margin-bottom: 10px;">Browse</h1>
 
-    async function loadCategory(type, event) {
-      document.querySelectorAll('.filter').forEach(btn => btn.classList.remove('active'));
-      if (event) event.target.classList.add('active');
+  <p style="font-size: 0.9rem; color: #bbb; margin-bottom: 20px;">
+    Browse all categories available on MyBox Studio.
+  </p>
 
-      const grid = document.getElementById('contentGrid');
-      grid.innerHTML = '';
+  <!-- REAL navigation links only -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
 
-      // Load Music
-      if (type === 'music' || type === 'all') {
-        const res = await fetch('data/music.json');
-        const tracks = await res.json();
-        tracks.forEach(t => {
-          const div = document.createElement('div');
-          div.className = 'item fade-in';
-          div.innerHTML = `
-            <img src="${t.thumbnail}" alt="${t.title}">
-            <h3>${t.title}</h3>
-            <audio controls src="${t.preview}"></audio>
-            <button onclick="buy('${t.price}')">Buy Track – $1.99</button>`;
-          grid.appendChild(div);
-        });
-      }
+    <a href="music.html" style="
+      display: block;
+      padding: 14px 18px;
+      border: 1px solid #222;
+      border-radius: 12px;
+      background: #0d0d0d;
+      color: #D4AF37;
+      font-size: 1rem;
+      text-decoration: none;
+    ">
+      🎵 Music
+    </a>
 
-      // Load Movies
-      if (type === 'movies' || type === 'all') {
-        const res = await fetch('data/movies.json');
-        const movies = await res.json();
-        movies.forEach(m => {
-          const div = document.createElement('div');
-          div.className = 'item fade-in';
-          div.innerHTML = `
-            <video controls poster="${m.thumbnail}">
-              <source src="${m.preview}" type="video/mp4">
-            </video>
-            <h3>${m.title}</h3>
-            <button onclick="buy('${m.price}')">Buy Movie – $4.99</button>`;
-          grid.appendChild(div);
-        });
-      }
-    }
+    <a href="movies.html" style="
+      display: block;
+      padding: 14px 18px;
+      border: 1px solid #222;
+      border-radius: 12px;
+      background: #0d0d0d;
+      color: #D4AF37;
+      font-size: 1rem;
+      text-decoration: none;
+    ">
+      🎬 Movies
+    </a>
 
-    function buy(priceId) {
-      stripe.redirectToCheckout({
-        lineItems: [{ price: priceId, quantity: 1 }],
-        mode: "payment",
-        successUrl: "https://phenomenal-muffin-960018.netlify.app/success.html",
-        cancelUrl: "https://phenomenal-muffin-960018.netlify.app/browse.html"
-      });
-    }
+    <a href="join.html" style="
+      display: block;
+      padding: 14px 18px;
+      border: 1px solid #222;
+      border-radius: 12px;
+      background: #0d0d0d;
+      color: #D4AF37;
+      font-size: 1rem;
+      text-decoration: none;
+    ">
+      🏆 Open a Studio (Join)
+    </a>
 
-    // Load everything by default
-    loadCategory('all');
-  </script>
+  </div>
+
+</main>
+
+<!-- ========================================================= -->
+<!-- Spinner Script -->
+<!-- ========================================================= -->
+<script>
+  window.addEventListener("load", function () {
+    const spinner = document.getElementById("spinner");
+    if (spinner) spinner.style.display = "none";
+  });
+</script>
+
 </body>
 </html>
+
