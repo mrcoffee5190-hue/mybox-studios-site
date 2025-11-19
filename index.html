@@ -25,6 +25,30 @@
       scroll-behavior: smooth;
     }
 
+    /* GLOBAL SPINNER OVERLAY */
+    #spinner {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #spinner .ring {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--gold);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     /* 🟩 NAVIGATION BAR */
     header {
       width: 100%;
@@ -36,7 +60,7 @@
       padding: 1rem 0;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 500;
     }
 
     nav {
@@ -55,6 +79,11 @@
     }
 
     nav a:hover {
+      color: var(--white);
+    }
+
+    /* Highlight active page (Home) */
+    nav a.active {
       color: var(--white);
     }
 
@@ -157,15 +186,21 @@
   </style>
 </head>
 
-<body>
+<!-- 🔑 IMPORTANT: data-mbs-page tells app.js this is the HOME page -->
+<body data-mbs-page="home">
+  <!-- GLOBAL SPINNER (controlled by app.js) -->
+  <div id="spinner">
+    <div class="ring"></div>
+  </div>
+
   <!-- 🟩 NAVIGATION -->
   <header>
     <nav>
-      <a href="index.html" style="color: var(--white);">Home</a>
-      <a href="music.html">Music</a>
-      <a href="movies.html">Movies</a>
-      <a href="join.html">Join</a>
-      <a href="support.html">Support</a>
+      <a href="index.html" class="nav-link active" style="color: var(--white);">Home</a>
+      <a href="music.html" class="nav-link">Music</a>
+      <a href="movies.html" class="nav-link">Movies</a>
+      <a href="join.html" class="nav-link nav-cta">Join</a>
+      <a href="support.html" class="nav-link">Support</a>
     </nav>
   </header>
 
@@ -173,7 +208,7 @@
   <main>
     <h1>Welcome to MyBox Studios</h1>
     <p>Open your studio, upload your content, and earn 80% of every sale. Music, movies, and creativity all in one place.</p>
-    <a href="join.html" class="cta-button">Join Now for $100</a>
+    <a href="join.html" class="cta-button nav-cta">Join Now for $100</a>
   </main>
 
   <!-- 🟦 FEATURED CONTENT -->
@@ -188,8 +223,12 @@
   </section>
 
   <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
+
+  <!-- CONNECT TO GLOBAL APP BRAIN -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 
