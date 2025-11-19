@@ -1,184 +1,200 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <title>Watch — My Box Studios</title>
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2025-10-31">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Now Playing | MyBox Studios</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
-    a, .cta, .brand, .site-nav a {
-      color: #D4AF37;
+    :root {
+      --gold: #D4AF37;
+      --black: #000000;
+      --white: #ffffff;
     }
-    a:hover {
-      color: #c6a15b;
+
+    body {
+      margin: 0;
+      background-color: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      scroll-behavior: smooth;
     }
-    .cta {
-      background-color: #D4AF37;
-      color: #000;
-      border-radius: 6px;
-      padding: 6px 12px;
+
+    /* GLOBAL SPINNER */
+    #spinner {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #spinner .ring {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--gold);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* NAVIGATION */
+    header {
+      width: 100%;
+      background-color: #111;
+      border-bottom: 1px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--gold);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
     }
-    .cta:hover {
-      background-color: #c6a15b;
+
+    nav a:hover {
+      color: var(--white);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+
+    h1 {
+      color: var(--gold);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .meta {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #bbbbbb;
+      margin-bottom: 1.5rem;
+    }
+
+    .player-shell {
+      background: #111;
+      border-radius: 16px;
+      border: 1px solid var(--gold);
+      padding: 1rem;
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+    }
+
+    #watch-player {
+      width: 100%;
+      min-height: 200px;
+    }
+
+    #watch-player video,
+    #watch-player iframe {
+      width: 100%;
+      border-radius: 12px;
+      border: none;
+      display: block;
+    }
+
+    .back-links {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .back-links a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 0.75rem;
+      font-weight: 600;
+    }
+
+    .back-links a:hover {
+      color: var(--white);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 1600px) {
+      h1 { font-size: 2.4rem; }
+      .player-shell { padding: 1.5rem; }
     }
   </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container" style="display:flex;gap:16px;align-items:center">
-      <a class="brand" href="/">● My Box Studios</a>
-      <form class="site-search" action="/search.html" method="GET" style="flex:1;display:flex;gap:8px;max-width:640px">
-        <input type="search" name="q" placeholder="Search movies & beats" style="flex:1">
-        <button type="submit">Search</button>
-      </form>
-      <nav class="site-nav">
-        <a href="/movies.html">Movies</a>
-        <a href="/music.html">Music</a>
-        <a href="/signup.html" class="cta">Join</a>
-      </nav>
-    </div>
+
+<!-- tells app.js this is the WATCH page -->
+<body data-mbs-page="watch">
+  <!-- GLOBAL SPINNER -->
+  <div id="spinner">
+    <div class="ring"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="music.html" class="nav-link">Music</a>
+      <a href="movies.html" class="nav-link">Movies</a>
+      <a href="join.html" class="nav-link">Join</a>
+      <a href="support.html" class="nav-link">Support</a>
+    </nav>
   </header>
 
-  <main class="content">
-    <!-- Two-column watch layout -->
-    <div class="container" style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start">
-      <!-- Left: player + details -->
-      <section class="player-col" style="min-width:0">
-        <!-- Player frame -->
-        <div class="player-box" style="background:#000;border-radius:16px;overflow:hidden">
-          <div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#888">
-            Select a title (catalog coming online)
-          </div>
-        </div>
+  <main>
+    <!-- Title is filled by app.js based on ?type=&id= -->
+    <h1 id="watch-title">Loading...</h1>
 
-        <!-- Title & meta -->
-        <h1 class="watch-title" style="margin:16px 0 8px">Nothing to play yet</h1>
-        <div class="watch-meta muted" style="display:flex;gap:12px;flex-wrap:wrap">
-          <span id="views">0 views</span>
-          <span>•</span>
-          <span id="pubdate">—</span>
-          <span>•</span>
-          <span id="duration">—</span>
-        </div>
+    <p class="meta">
+      Your selected track or film is loading from MyBox Studios.
+    </p>
 
-        <!-- Actions -->
-        <div class="watch-actions" style="margin:12px 0 20px;display:flex;gap:8px;flex-wrap:wrap">
-          <button id="likeBtn">👍 Like</button>
-          <button id="shareBtn">↗ Share</button>
-          <a id="buyBtn" class="cta" href="/signup.html" data-price-id="">Buy / Download</a>
-        </div>
+    <section class="player-shell">
+      <!-- Player container – app.js injects video/embed here -->
+      <div id="watch-player"></div>
+    </section>
 
-        <!-- Description -->
-        <article class="desc-card card" style="padding:16px">
-          <h2 style="margin:0 0 8px">Description</h2>
-          <p id="desc" class="long-text muted" style="margin:0 0 8px;max-height:4.5em;overflow:hidden">
-            Publishing soon. When catalog items go live, this area will show the item description, credits, and license notes.
-          </p>
-          <button id="toggleDesc" class="linkish" style="padding:0;background:none;border:none">Show more</button>
-        </article>
-
-        <!-- Comments placeholder -->
-        <section class="section" style="margin-top:24px">
-          <h2 style="margin:0 0 8px">Comments</h2>
-          <p class="muted">Comments will appear here after launch.</p>
-        </section>
-      </section>
-
-      <!-- Right: up next -->
-      <aside class="sidebar-col" aria-label="Up next" style="min-width:0">
-        <h3 style="margin:0 0 12px">Up next</h3>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px">
-          <li>
-            <a class="card" href="/watch.html?vid=sample-1" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
-              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
-              <div>
-                <div class="title">Sample Title 1</div>
-                <div class="muted" style="font-size:.9em">Artist • 3:12</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="card" href="/watch.html?vid=sample-2" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
-              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
-              <div>
-                <div class="title">Sample Title 2</div>
-                <div class="muted" style="font-size:.9em">Creator • 2:45</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="card" href="/watch.html?vid=sample-3" style="display:grid;grid-template-columns:168px 1fr;gap:12px;padding:8px;align-items:center">
-              <div class="thumb" style="aspect-ratio:16/9;background:#222;border-radius:12px"></div>
-              <div>
-                <div class="title">Sample Title 3</div>
-                <div class="muted" style="font-size:.9em">Channel • 4:01</div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </aside>
+    <div class="back-links">
+      <a href="music.html">Back to Music</a>
+      <a href="movies.html">Back to Movies</a>
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      © <span id="year"></span> My Box Studios • 
-      <a href="/dmca.html" style="color:#D4AF37">DMCA</a> • 
-      <a href="/index.html" style="color:#D4AF37">← Back to Home</a>
-    </div>
+  <footer>
+    © 2025 MyBox Studios — Indie Music & Movies Worldwide
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Toggle Description
-    (() => {
-      const btn = document.getElementById('toggleDesc');
-      const desc = document.getElementById('desc');
-      if (!btn || !desc) return;
-      let expanded = false;
-      btn.addEventListener('click', () => {
-        expanded = !expanded;
-        desc.style.maxHeight = expanded ? 'none' : '4.5em';
-        btn.textContent = expanded ? 'Show less' : 'Show more';
-      });
-    })();
-
-    // Share Button
-    (() => {
-      const shareBtn = document.getElementById('shareBtn');
-      if (!shareBtn) return;
-      shareBtn.addEventListener('click', async () => {
-        const shareData = { title: document.title, url: location.href };
-        if (navigator.share) {
-          try { await navigator.share(shareData); } catch(e) {}
-        } else {
-          try {
-            await navigator.clipboard.writeText(location.href);
-            shareBtn.textContent = 'Link copied';
-            setTimeout(() => shareBtn.textContent = '↗ Share', 1500);
-          } catch(e) {}
-        }
-      });
-    })();
-
-    // Like Button
-    (() => {
-      const likeBtn = document.getElementById('likeBtn');
-      if (!likeBtn) return;
-      likeBtn.addEventListener('click', () => {
-        likeBtn.textContent = likeBtn.textContent.includes('✓') ? '👍 Like' : '✓ Liked';
-      });
-    })();
-  </script>
-
-  <script src="/assets/js/app.js" defer></script>
+  <!-- GLOBAL APP LOGIC -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 
