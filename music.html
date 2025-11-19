@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music | MyBox Studios</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GLOBAL STYLE (Gold/Black) -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -20,53 +24,72 @@
       scroll-behavior: smooth;
     }
 
-    /* 🟩 Sticky Navigation */
+    /* GLOBAL SPINNER */
+    #spinner {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #spinner .ring {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--gold);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* NAVIGATION */
     header {
       width: 100%;
-      background-color: #000;
+      background-color: #111;
       border-bottom: 1px solid var(--gold);
       position: sticky;
       top: 0;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      z-index: 900;
       padding: 1rem 0;
+      display: flex;
+      justify-content: center;
     }
 
     nav {
       display: flex;
+      gap: 2rem;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
     }
 
     nav a {
       color: var(--gold);
       text-decoration: none;
       font-weight: 700;
-      font-size: 1rem;
-      transition: 0.3s ease;
     }
 
-    nav a:hover {
+    nav a.active {
       color: var(--white);
     }
 
     h1 {
-      color: var(--gold);
-      font-size: 2rem;
-      margin: 1rem 0 0.5rem;
       text-align: center;
+      color: var(--gold);
+      margin-top: 1rem;
+      font-size: 2rem;
     }
 
-    /* 🟦 Music Grid Layout */
+    /* MUSIC GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
       padding: 2rem;
-      justify-items: center;
     }
 
     .track {
@@ -75,13 +98,11 @@
       border-radius: 12px;
       text-align: center;
       padding: 1rem;
-      width: 100%;
-      max-width: 320px;
-      transition: transform 0.3s ease;
+      transition: 0.3s ease;
     }
 
     .track:hover {
-      transform: scale(1.04);
+      transform: scale(1.03);
       box-shadow: 0 0 10px var(--gold);
     }
 
@@ -91,131 +112,48 @@
       margin-bottom: 10px;
     }
 
-    audio {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background: var(--white);
-      color: var(--black);
-    }
-
     footer {
       text-align: center;
-      color: var(--gold);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--gold);
       padding: 1rem;
       margin-top: 2rem;
-    }
-
-    /* 🟢 Responsive Scaling */
-    @media (min-width: 1600px) {
-      h1 { font-size: 2.6rem; }
-      button { font-size: 1.2rem; padding: 14px 24px; }
-      .track { max-width: 400px; }
-    }
-
-    @media (min-width: 2400px) {
-      h1 { font-size: 3rem; }
-      button { font-size: 1.5rem; }
-      footer { font-size: 1rem; }
-    }
-
-    /* Fade Animation */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.6s forwards;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      border-top: 1px solid var(--gold);
+      color: var(--gold);
     }
   </style>
 </head>
 
-<body>
-  <!-- 🟩 Global Navigation -->
+<!-- IMPORTANT: tells app.js this is the MUSIC PAGE -->
+<body data-mbs-page="music">
+
+  <!-- GLOBAL SPINNER -->
+  <div id="spinner">
+    <div class="ring"></div>
+  </div>
+
+  <!-- NAV BAR -->
   <header>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="music.html" style="color: var(--white);">Music</a>
-      <a href="movies.html">Movies</a>
-      <a href="join.html">Join</a>
-      <a href="support.html">Support</a>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="music.html" class="nav-link active">Music</a>
+      <a href="movies.html" class="nav-link">Movies</a>
+      <a href="join.html" class="nav-link">Join</a>
+      <a href="support.html" class="nav-link">Support</a>
     </nav>
-    <h1>MyBox Studios — Music</h1>
   </header>
 
-  <!-- 🟦 Music Grid -->
-  <main class="grid" id="musicGrid"></main>
+  <h1>MyBox Studios — Music</h1>
 
-  <!-- 🟨 Footer -->
+  <!-- DYNAMIC MUSIC GRID -->
+  <main class="grid" id="contentArea"></main>
+
+  <!-- FOOTER -->
   <footer>© 2025 MyBox Studios — Listen, Support & Stream Worldwide</footer>
 
-  <!-- 🟣 Stripe Script -->
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    // ✅ Real publishable key
-    const stripe = Stripe("pk_live_PASTE_YOUR_REAL_PUBLISHABLE_KEY_HERE");
-
-    // 🟢 Smart-TV Detection
-    (function detectSmartTV() {
-      const screenWidth = window.innerWidth;
-      const dpi = window.devicePixelRatio;
-      if (screenWidth > 1400 && dpi <= 1.5) {
-        document.body.classList.add("tv-mode");
-        console.log("Smart-TV Mode activated for MyBox Studios Music");
-      }
-    })();
-
-    // 🟢 Load Music Tracks
-    async function loadMusic() {
-      const grid = document.getElementById('musicGrid');
-      const res = await fetch('data/music.json');
-      const tracks = await res.json();
-
-      tracks.forEach(t => {
-        const div = document.createElement('div');
-        div.className = 'track fade-in';
-        div.innerHTML = `
-          <img src="${t.thumbnail}" alt="${t.title}">
-          <h3>${t.title}</h3>
-          <p><em>${t.artist}</em></p>
-          <audio controls src="${t.preview}"></audio>
-          <button onclick="buy('${t.price}')">Buy Track – $1.99</button>
-        `;
-        grid.appendChild(div);
-      });
-    }
-
-    // 🟢 Stripe Checkout
-    function buy(priceId) {
-      stripe.redirectToCheckout({
-        lineItems: [{ price: priceId, quantity: 1 }],
-        mode: "payment",
-        successUrl: "https://phenomenal-muffin-960018.netlify.app/success.html",
-        cancelUrl: "https://phenomenal-muffin-960018.netlify.app/music.html"
-      });
-    }
-
-    loadMusic();
-  </script>
+  <!-- GLOBAL APP LOGIC -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 
