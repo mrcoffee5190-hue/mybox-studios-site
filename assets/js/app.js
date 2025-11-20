@@ -4,7 +4,16 @@
 // Safe for Google Play Deployment
 // =============================================================
 
-// RUN WHEN DOM IS READY
+// ---- STRIPE CONFIG (PUBLIC CLIENT-SIDE VALUES) -------------
+const STRIPE_PUBLISHABLE_KEY =
+  "pk_live_51SFln7ECGiskYMpTAV7zXmtcPFjQv8eLLgnqqsjFf1uMgJjSWd8p3erFIMpTGCD2AeuMJJ1sMGubMZMCX5mL1F0V00MTMKm5jR";
+
+const STRIPE_MEMBERSHIP_PRICE_ID = "price_1SRcbSECGiskYMpTyko4QSrg";
+
+// -------------------------------------------------------------
+// BOOTSTRAP
+// -------------------------------------------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
   initSpinnerOnLoad();
   initNavLinks();
@@ -12,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initPageSpecificFeatures();
 });
 
-// RUN WHEN ALL ASSETS ARE LOADED (IMAGES/FONTS)
 window.addEventListener("load", () => hideSpinner());
 
 // -------------------------------------------------------------
@@ -39,7 +47,7 @@ function initSpinnerOnLoad() {
 }
 
 // -------------------------------------------------------------
-// NAVIGATION HANDLER (TOP + BOTTOM + CTA)
+// NAVIGATION HANDLER (TOP + CTA)
 // -------------------------------------------------------------
 
 function initNavLinks() {
@@ -51,6 +59,7 @@ function initNavLinks() {
       const href = link.getAttribute("href") || "";
       const target = link.getAttribute("target") || "";
 
+      // Allow anchors and new-tab links
       if (!href || href.startsWith("#") || target === "_blank") return;
 
       event.preventDefault();
@@ -134,12 +143,14 @@ function initHomePage() {
 }
 
 // -------------------------------------------------------------
-// MUSIC PAGE - Load music.json
+// MUSIC PAGE - Load data/music.json
 // -------------------------------------------------------------
 
 async function initMusicPage() {
   const container =
-    document.getElementById("music-list") ||
+    document.getElementById("contentArea") ||      // current HTML
+    document.getElementById("musicGrid") ||       // older variant
+    document.getElementById("music-list") ||      // fallback
     document.querySelector("[data-mbs-music-list]");
 
   if (!container) {
@@ -159,20 +170,33 @@ async function initMusicPage() {
       const card = document.createElement("article");
       card.className = "media-card music-card";
 
+      const thumb =
+        item.thumbnail ||
+        item.image ||
+        "assets/img/music-placeholder.jpg";
+
+      const previewUrl = item.previewUrl || item.preview || "";
+      const description = item.description || "";
+      const artist = item.artist || "";
+      const title = item.title || "Untitled Track";
+
       card.innerHTML = `
         <div class="media-thumb">
-          <img src="${item.thumbnail || "assets/img/music-placeholder.jpg"}" />
+          <img src="${thumb}" alt="${title}">
         </div>
         <div class="media-info">
-          <h3>${item.title || "Untitled Track"}</h3>
-          <p class="media-meta">${item.artist || "Unknown Artist"}</p>
-          <p class="media-meta small">${item.genre || "Music"}</p>
-          ${
-            item.previewUrl
-              ? `<a href="watch.html?type=music&id=${encodeURIComponent(
-                  item.id)}" class="btn btn-gold">Preview</a>`
-              : ""
-          }
+          <h3>${title}</h3>
+          <p class="media-meta">${artist}</p>
+          ${description ? `<p class="media-meta small">${description}</p>` : ""}
+          <div class="media-actions">
+            ${
+              previewUrl
+                ? `<a href="watch.html?type=music&id=${encodeURIComponent(
+                    item.id
+                  )}" class="btn btn-gold">Preview</a>`
+                : ""
+            }
+          </div>
         </div>
       `;
 
@@ -187,12 +211,14 @@ async function initMusicPage() {
 }
 
 // -------------------------------------------------------------
-// MOVIES PAGE - Load movies.json
+// MOVIES PAGE - Load data/movies.json
 // -------------------------------------------------------------
 
 async function initMoviesPage() {
   const container =
-    document.getElementById("movies-list") ||
+    document.getElementById("contentArea") ||        // current HTML
+    document.getElementById("moviesGrid") ||        // older variant
+    document.getElementById("movies-list") ||       // fallback
     document.querySelector("[data-mbs-movies-list]");
 
   if (!container) {
@@ -212,20 +238,32 @@ async function initMoviesPage() {
       const card = document.createElement("article");
       card.className = "media-card movie-card";
 
-      card.innerinnerHTML = `
+      const thumb =
+        item.thumbnail ||
+        item.image ||
+        "assets/img/movie-placeholder.jpg";
+
+      const description = item.description || "";
+      const director = item.director || item.creator || "Independent Creator";
+      const title = item.title || "Untitled Movie";
+
+      card.innerHTML = `
         <div class="media-thumb">
-          <img src="${item.thumbnail || "assets/img/movie-placeholder.jpg"}" />
+          <img src="${thumb}" alt="${title}">
         </div>
         <div class="media-info">
-          <h3>${item.title || "Untitled Movie"}</h3>
-          <p class="media-meta">${item.director || "Independent Creator"}</p>
-          <p class="media-meta small">${item.genre || "Film"}</p>
-          ${
-            item.previewUrl
-              ? `<a href="watch.html?type=movie&id=${encodeURIComponent(
-                  item.id)}" class="btn btn-gold">Preview</a>`
-              : ""
-          }
+          <h3>${title}</h3>
+          <p class="media-meta">${director}</p>
+          ${description ? `<p class="media-meta small">${description}</p>` : ""}
+          <div class="media-actions">
+            ${
+              item.previewUrl || item.preview
+                ? `<a href="watch.html?type=movie&id=${encodeURIComponent(
+                    item.id
+                  )}" class="btn btn-gold">Preview</a>`
+                : ""
+            }
+          </div>
         </div>
       `;
 
@@ -281,13 +319,16 @@ async function initWatchPage() {
 
     if (item.embedHtml) {
       playerEl.innerHTML = item.embedHtml;
-    } else if (item.previewUrl) {
-      playerEl.innerHTML = `
-        <video controls style="width:100%;border-radius:12px;">
-          <source src="${item.previewUrl}" type="video/mp4" />
-        </video>`;
     } else {
-      playerEl.innerHTML = "<p>No preview available.</p>";
+      const previewUrl = item.previewUrl || item.preview;
+      if (previewUrl) {
+        playerEl.innerHTML = `
+          <video controls style="width:100%;border-radius:12px;">
+            <source src="${previewUrl}" type="video/mp4" />
+          </video>`;
+      } else {
+        playerEl.innerHTML = "<p>No preview available.</p>";
+      }
     }
 
   } catch (err) {
@@ -298,14 +339,53 @@ async function initWatchPage() {
 }
 
 // -------------------------------------------------------------
-// JOIN PAGE - Stripe Buttons
+// JOIN PAGE - Stripe Checkout for $100 Membership
 // -------------------------------------------------------------
 
 function initJoinPage() {
-  const buttons = document.querySelectorAll("[data-mbs-stripe-join]");
-  buttons.forEach(btn =>
-    btn.addEventListener("click", () => showSpinner())
-  );
+  const joinBtn = document.getElementById("joinButton");
+  if (!joinBtn) {
+    hideSpinner();
+    return;
+  }
+
+  hideSpinner(); // hide overlay once DOM is ready
+
+  joinBtn.addEventListener("click", async () => {
+    if (!window.Stripe) {
+      alert("Payment system is not ready. Please check your connection and try again.");
+      return;
+    }
+
+    const originalLabel = joinBtn.textContent || "Join MyBox Studios — $100";
+    joinBtn.disabled = true;
+    joinBtn.textContent = "Processing...";
+    showSpinner();
+
+    try {
+      const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+      const origin = window.location.origin;
+
+      const { error } = await stripe.redirectToCheckout({
+        lineItems: [{ price: STRIPE_MEMBERSHIP_PRICE_ID, quantity: 1 }],
+        mode: "payment",
+        successUrl: origin + "/success.html?success=true&session_id={CHECKOUT_SESSION_ID}",
+        cancelUrl: origin + "/join.html?canceled=true"
+      });
+
+      if (error) {
+        alert("Stripe error: " + error.message);
+        joinBtn.disabled = false;
+        joinBtn.textContent = originalLabel;
+        hideSpinner();
+      }
+    } catch (err) {
+      alert("Unexpected error: " + err.message);
+      joinBtn.disabled = false;
+      joinBtn.textContent = originalLabel;
+      hideSpinner();
+    }
+  });
 }
 
 // -------------------------------------------------------------
@@ -324,7 +404,10 @@ function initSuccessPage() {
     document.getElementById("checkout-status");
 
   if (sessionId || successFlag) {
-    try { localStorage.setItem("mbs_joined", "true"); } catch(e){}
+    try {
+      localStorage.setItem("mbs_joined", "true");
+    } catch (e) {}
+
     if (statusEl) {
       statusEl.textContent = "Payment confirmed. Welcome to MyBox Studio!";
     }
@@ -337,3 +420,4 @@ function initSuccessPage() {
 
   setTimeout(hideSpinner, 600);
 }
+
