@@ -1,62 +1,109 @@
-/* My Box Studios SW v1 */
-const CACHE_NAME = 'mbx-v1';
-const CORE = [
-  '/', '/index.html',
-  '/assets/css/styles.css',
-  '/assets/js/app.js',
-  '/offline.html'
+/* MyBox Studios Service Worker v2 */
+/* PWA + Offline Support + Google Play Safe */
+
+const CACHE_VERSION = "mbs-v2";
+const CORE_CACHE = [
+  "/index.html",
+  "/offline.html",
+  "/assets/css/styles.css",
+  "/assets/js/app.js"
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(CORE);
-    self.skipWaiting();
-  })());
+// -------------------------------
+// INSTALL – Cache Shell
+// -------------------------------
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_VERSION).then((cache) => {
+      return cache.addAll(CORE_CACHE);
+    })
+  );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil((async () => {
-    const keys = await caches.keys();
-    await Promise.all(keys.map(k => k === CACHE_NAME ? null : caches.delete(k)));
-    self.clients.claim();
-  })());
+// -------------------------------
+// ACTIVATE – Remove Old Caches
+// -------------------------------
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_VERSION) return caches.delete(key);
+        })
+      )
+    )
+  );
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', (e) => {
-  const { request } = e;
-  const url = new URL(request.url);
+// -------------------------------
+// FETCH HANDLER
+// -------------------------------
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
 
-  // HTML: network-first → offline fallback
-  if (request.destination === 'document' || request.headers.get('accept')?.includes('text/html')) {
-    e.respondWith((async () => {
-      try {
-        const fresh = await fetch(request);
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(request, fresh.clone());
-        return fresh;
-      } catch {
-        const cache = await caches.open(CACHE_NAME);
-        const cached = await cache.match(request);
-        return cached || cache.match('/offline.html');
-      }
-    })());
+  // ---------------------------
+  // HTML – ONLINE FIRST
+  // ---------------------------
+  if (req.mode === "navigate" || req.headers.get("accept")?.includes("text/html")) {
+    event.respondWith(
+      fetch(req)
+        .then((networkRes) => {
+          const copy = networkRes.clone();
+          caches.open(CACHE_VERSION).then((cache) => {
+            cache.put(req, copy);
+          });
+          return networkRes;
+        })
+        .catch(async () => {
+          const cache = await caches.open(CACHE_VERSION);
+          return (
+            (await cache.match(req)) ||
+            (await cache.match("/offline.html"))
+          );
+        })
+    );
     return;
   }
 
-  // Static assets: cache-first
-  if (['style', 'script', 'image', 'font'].includes(request.destination)) {
-    e.respondWith((async () => {
-      const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(request);
-      if (cached) return cached;
-      try {
-        const fresh = await fetch(request);
-        cache.put(request, fresh.clone());
-        return fresh;
-      } catch {
-        return new Response('', { status: 504 });
-      }
-    })());
+  // ---------------------------
+  // STATIC ASSETS – CACHE FIRST
+  // ---------------------------
+  if (["style", "script", "image", "font"].includes(req.destination)) {
+    event.respondWith(
+      caches.open(CACHE_VERSION).then(async (cache) => {
+        const cached = await cache.match(req);
+        if (cached) return cached;
+
+        try {
+          const fresh = await fetch(req);
+          cache.put(req, fresh.clone());
+          return fresh;
+        } catch {
+          return new Response("", { status: 504 });
+        }
+      })
+    );
+    return;
+  }
+
+  // ---------------------------
+  // MEDIA (audio/video) – NETWORK FIRST
+  // ---------------------------
+  if (["audio", "video"].includes(req.destination)) {
+    event.respondWith(
+      (async () => {
+        try {
+          return await fetch(req);
+        } catch {
+          return new Response(
+            "Media unavailable offline.",
+            { status: 503, statusText: "Offline Media Unavailable" }
+          );
+        }
+      })()
+    );
   }
 });
+
