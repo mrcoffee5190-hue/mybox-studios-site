@@ -39,7 +39,7 @@
     #spinner {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0,0,0,0.92);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -55,17 +55,17 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* NAVIGATION BAR */
+    /* NAVIGATION */
     header {
       width: 100%;
       background-color: #111;
       border-bottom: 1px solid var(--gold);
-      position: sticky;
-      top: 0;
-      z-index: 900;
       padding: 1rem 0;
       display: flex;
       justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
     }
 
     nav {
@@ -144,72 +144,80 @@
     <h1>Terms of Service</h1>
 
     <p>
-      These Terms of Service (“Terms”) govern your use of MyBox Studios, including our
-      website, app, and all services (“Service”). By using MyBox Studios, you agree to these Terms.
-      If you do not agree, please stop using the Service immediately.
+      These Terms of Service (“Terms”) govern your use of MyBox Studios, including the website,
+      mobile experience, and all related services (“Service”). By using MyBox Studios,
+      you agree to these Terms. If you do not agree, you must stop using the Service.
     </p>
 
     <h2>1. Who We Are</h2>
-    <p>MyBox Studios is a platform where creators can upload and sell films, music, and media worldwide.</p>
+    <p>
+      MyBox Studios is an independent digital marketplace where creators can upload and sell
+      films, music, and digital media worldwide.
+    </p>
 
     <h2>2. Eligibility</h2>
-    <p>You must be 18+ or the legal age in your region to create a studio or make purchases.</p>
+    <p>You must be 18 or older, or the legal age in your region, to use the platform.</p>
 
     <h2>3. Account Security</h2>
     <ul>
-      <li>You are responsible for your login details.</li>
-      <li>Notify support if you suspect unauthorized access.</li>
-      <li>You are responsible for all activity under your account.</li>
+      <li>You are responsible for keeping your login details secure.</li>
+      <li>Notify support immediately if you suspect unauthorized access.</li>
+      <li>You are responsible for all activity on your account.</li>
     </ul>
 
     <h2>4. Creator Membership & Fees</h2>
     <p>
-      Creators may pay a one-time membership fee to open a studio.  
-      All payments are securely processed by Stripe and are generally non-refundable unless required by law.
+      To open a Creator Studio, a one-time membership fee may be required.
+      All payments are processed through Stripe and are generally non-refundable unless required by law.
     </p>
 
     <h2>5. Content Ownership</h2>
     <ul>
-      <li>Creators keep ownership of their uploaded content.</li>
-      <li>Creators grant MyBox Studios a license to host, stream, and sell their content.</li>
-      <li>Creators must have rights to all uploaded materials.</li>
+      <li>Creators retain ownership of the content they upload.</li>
+      <li>Creators grant MyBox Studios a license to host, stream, and sell content through the platform.</li>
+      <li>Creators must have legal rights to all uploaded media.</li>
     </ul>
 
     <h2>6. Purchases & Access</h2>
     <ul>
-      <li>Stripe processes all payments securely.</li>
-      <li>MyBox Studios never sees full card numbers.</li>
-      <li>Access varies by product (streaming, downloads, etc.).</li>
+      <li>Stripe processes all user payments securely.</li>
+      <li>MyBox Studios never stores full credit card numbers.</li>
+      <li>Purchased content may include streaming or downloadable access depending on the item.</li>
     </ul>
 
     <h2>7. Prohibited Use</h2>
     <ul>
-      <li>Uploading illegal or harmful content</li>
-      <li>Violating copyrights or laws</li>
-      <li>Attempting to hack or disrupt the service</li>
+      <li>Uploading illegal, harmful, or infringing content</li>
+      <li>Hacking, tampering, or disrupting the platform</li>
+      <li>Misusing payment systems or bypassing purchases</li>
     </ul>
 
     <h2>8. Copyright</h2>
-    <p>If your copyrighted work is infringed, contact us at the email below.</p>
+    <p>
+      Copyright owners may contact us regarding infringement. Valid DMCA takedown
+      requests will be reviewed and processed promptly.
+    </p>
 
     <h2>9. No Earnings Guarantee</h2>
     <p>
-      MyBox Studios provides tools for sales, but earnings depend on your content and audience.
+      MyBox Studios gives creators tools to earn income, but results depend on your content,
+      marketing, and audience. We do not guarantee sales or income.
     </p>
 
     <h2>10. Service Changes</h2>
     <p>
-      We may update or change features without notice.
+      Features, pages, or functions may change, update, or be removed at any time.
     </p>
 
     <h2>11. Limitation of Liability</h2>
     <p>
-      To the fullest extent allowed by law, we are not liable for indirect or incidental damages.
+      MyBox Studios is not liable for indirect, incidental, or consequential damages
+      to the extent allowed by law.
     </p>
 
     <h2>12. Termination</h2>
     <p>
-      We may suspend or terminate your account for violating these Terms.
+      Accounts may be suspended or terminated for violating these Terms.
     </p>
 
     <h2>13. Governing Law</h2>
@@ -219,15 +227,16 @@
 
     <h2>14. Contact Information</h2>
     <p>
-      Email us at:  
-      <a href="mailto:support@myboxstudioapp.com" style="color: var(--gold); text-decoration: underline;">
-        support@myboxstudioapp.com
+      Contact us at:<br>
+      <a href="mailto:support@myboxstudioapp.com"
+         style="color: var(--gold); text-decoration: underline;">
+         support@myboxstudioapp.com
       </a>
     </p>
 
     <h2>15. Updates</h2>
     <p>
-      Terms may be updated; continued use means you accept updates.
+      These Terms may be updated periodically. Continued use of the Service means you accept updates.
     </p>
   </main>
 
@@ -237,5 +246,14 @@
 
   <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
+
+  <!-- SERVICE WORKER REGISTRATION -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+
 </body>
 </html>
