@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyBox Studios</title>
+
+  <title>MyBox Studios — Home</title>
+
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- ✅ PWA REQUIRED BLOCK -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
+
+  <!-- GLOBAL STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -49,7 +59,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* 🟩 NAVIGATION BAR */
+    /* NAVIGATION BAR */
     header {
       width: 100%;
       background-color: #111;
@@ -82,12 +92,11 @@
       color: var(--white);
     }
 
-    /* Highlight active page (Home) */
     nav a.active {
       color: var(--white);
     }
 
-    /* 🟨 HERO SECTION */
+    /* HERO SECTION */
     main {
       flex: 1;
       display: flex;
@@ -130,7 +139,7 @@
       color: var(--black);
     }
 
-    /* 🟦 FEATURED SECTION */
+    /* FEATURED SECTION */
     section {
       width: 100%;
       padding: 2rem 1rem;
@@ -186,14 +195,14 @@
   </style>
 </head>
 
-<!-- 🔑 IMPORTANT: data-mbs-page tells app.js this is the HOME page -->
 <body data-mbs-page="home">
-  <!-- GLOBAL SPINNER (controlled by app.js) -->
+
+  <!-- GLOBAL SPINNER -->
   <div id="spinner">
     <div class="ring"></div>
   </div>
 
-  <!-- 🟩 NAVIGATION -->
+  <!-- NAVIGATION -->
   <header>
     <nav>
       <a href="index.html" class="nav-link active" style="color: var(--white);">Home</a>
@@ -204,14 +213,14 @@
     </nav>
   </header>
 
-  <!-- 🟨 MAIN HERO -->
+  <!-- HERO SECTION -->
   <main>
     <h1>Welcome to MyBox Studios</h1>
     <p>Open your studio, upload your content, and earn 80% of every sale. Music, movies, and creativity all in one place.</p>
     <a href="join.html" class="cta-button nav-cta">Join Now for $100</a>
   </main>
 
-  <!-- 🟦 FEATURED CONTENT -->
+  <!-- FEATURED CONTENT -->
   <section id="featured">
     <h2>Featured Studios</h2>
     <div class="content-grid">
@@ -224,10 +233,11 @@
 
   <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
 
-  <!-- CONNECT TO GLOBAL APP BRAIN -->
+  <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 
