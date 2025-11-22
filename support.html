@@ -99,12 +99,12 @@
       margin: 0 auto;
       padding: 2.5rem 1rem 3rem;
       flex: 1;
+      text-align: center;
     }
 
     h1 {
       color: var(--gold);
       font-size: 2.4rem;
-      text-align: center;
       margin-bottom: 1rem;
     }
 
@@ -113,7 +113,6 @@
       line-height: 1.7;
       max-width: 650px;
       margin: 0.5rem auto 1.5rem;
-      text-align: center;
     }
 
     .support-card {
@@ -129,14 +128,12 @@
       color: var(--gold);
       font-size: 1.3rem;
       margin-bottom: 0.75rem;
-      text-align: center;
     }
 
     .support-item {
       margin: 0.5rem 0;
       font-size: 0.98rem;
       line-height: 1.5;
-      color: var(--white);
     }
 
     .support-item strong {
@@ -152,7 +149,6 @@
     .note {
       font-size: 0.85rem;
       color: #bbbbbb;
-      text-align: center;
       margin-top: 1.5rem;
     }
 
@@ -163,10 +159,6 @@
       color: var(--gold);
       font-size: 0.85rem;
       margin-top: auto;
-    }
-
-    @media (min-width: 1600px) {
-      h1 { font-size: 2.8rem; }
     }
   </style>
 </head>
@@ -185,7 +177,7 @@
       <a href="music.html" class="nav-link">Music</a>
       <a href="movies.html" class="nav-link">Movies</a>
       <a href="join.html" class="nav-link">Join</a>
-      <a href="support.html" class="nav-link active" style="color: var(--white);">Support</a>
+      <a href="support.html" class="nav-link active">Support</a>
     </nav>
   </header>
 
@@ -232,5 +224,14 @@
 
   <!-- GLOBAL APP LOGIC -->
   <script src="assets/js/app.js"></script>
+
+  <!-- SERVICE WORKER REGISTRATION -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+
 </body>
 </html>
