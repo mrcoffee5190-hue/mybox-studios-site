@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support | MyBox Studios</title>
 
-  <!-- Fonts -->
+  <title>MyBox Studios — Support</title>
+
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- ✅ PWA REQUIRED BLOCK -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
+
+  <!-- GLOBAL + PAGE STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -20,6 +28,10 @@
       background-color: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
@@ -47,7 +59,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* NAVIGATION */
+    /* NAVIGATION BAR */
     header {
       width: 100%;
       background-color: #111;
@@ -70,21 +82,28 @@
       color: var(--gold);
       text-decoration: none;
       font-weight: 700;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--white);
     }
 
     nav a.active {
       color: var(--white);
     }
 
+    /* PAGE CONTENT */
     main {
       max-width: 800px;
       margin: 0 auto;
       padding: 2.5rem 1rem 3rem;
+      flex: 1;
     }
 
     h1 {
       color: var(--gold);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       text-align: center;
       margin-bottom: 1rem;
     }
@@ -92,7 +111,7 @@
     p {
       font-size: 1rem;
       line-height: 1.7;
-      max-width: 640px;
+      max-width: 650px;
       margin: 0.5rem auto 1.5rem;
       text-align: center;
     }
@@ -102,7 +121,7 @@
       border: 1px solid var(--gold);
       border-radius: 14px;
       padding: 1.5rem 1.25rem;
-      max-width: 520px;
+      max-width: 540px;
       margin: 1.5rem auto;
     }
 
@@ -116,7 +135,8 @@
     .support-item {
       margin: 0.5rem 0;
       font-size: 0.98rem;
-      text-align: left;
+      line-height: 1.5;
+      color: var(--white);
     }
 
     .support-item strong {
@@ -142,15 +162,15 @@
       border-top: 1px solid var(--gold);
       color: var(--gold);
       font-size: 0.85rem;
+      margin-top: auto;
     }
 
     @media (min-width: 1600px) {
-      h1 { font-size: 2.6rem; }
+      h1 { font-size: 2.8rem; }
     }
   </style>
 </head>
 
-<!-- identifies this page to app.js -->
 <body data-mbs-page="support">
 
   <!-- GLOBAL SPINNER -->
@@ -165,7 +185,7 @@
       <a href="music.html" class="nav-link">Music</a>
       <a href="movies.html" class="nav-link">Movies</a>
       <a href="join.html" class="nav-link">Join</a>
-      <a href="support.html" class="nav-link active">Support</a>
+      <a href="support.html" class="nav-link active" style="color: var(--white);">Support</a>
     </nav>
   </header>
 
@@ -173,8 +193,8 @@
     <h1>Support & Help</h1>
 
     <p>
-      Need help with your account, payments, or your studio?  
-      Use the contact options below and we’ll get back to you as soon as possible.
+      Need help with your account, payments, or your studio?<br>
+      Use the contact options below and our team will assist you.
     </p>
 
     <section class="support-card">
@@ -189,20 +209,20 @@
 
       <div class="support-item">
         <strong>Response Time:</strong><br>
-        Most emails are answered within 1–2 business days.
+        Most inquiries are answered within 1–2 business days.
       </div>
 
       <div class="support-item">
         <strong>What to Include:</strong><br>
         • The email you used at checkout<br>
         • Your order or transaction ID (if available)<br>
-        • A short description of the issue
+        • A short description of your issue
       </div>
     </section>
 
     <p class="note">
-      For payment security, all transactions are processed by Stripe.  
-      MyBox Studios never sees or stores your full card details.
+      All payments are securely processed through Stripe.<br>
+      MyBox Studios never sees or stores your full payment details.
     </p>
   </main>
 
@@ -214,5 +234,3 @@
   <script src="assets/js/app.js"></script>
 </body>
 </html>
-
-
