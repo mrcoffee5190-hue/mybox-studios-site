@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy | MyBox Studios</title>
 
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- ✅ PWA BLOCK -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
 
   <style>
     :root {
@@ -19,6 +26,7 @@
       background-color: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
+      overflow-x: hidden;
     }
 
     /* GLOBAL SPINNER */
@@ -31,7 +39,6 @@
       justify-content: center;
       z-index: 9999;
     }
-
     #spinner .ring {
       width: 48px;
       height: 48px;
@@ -40,7 +47,6 @@
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* NAVIGATION */
@@ -67,27 +73,22 @@
       text-decoration: none;
       font-weight: 700;
     }
+    nav a:hover { color: var(--white); }
+    nav a.active { color: var(--white); }
 
-    nav a:hover {
-      color: var(--white);
-    }
-
-    nav a.active {
-      color: var(--white);
-    }
-
+    /* PAGE CONTENT */
     main {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem 1rem 3rem;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     h1 {
       color: var(--gold);
+      text-align: center;
       font-size: 2rem;
       margin-bottom: 1rem;
-      text-align: center;
     }
 
     h2 {
@@ -96,24 +97,16 @@
       margin-bottom: 0.5rem;
     }
 
-    p {
-      margin: 0.5rem 0 1rem;
-    }
-
-    ul {
-      margin: 0.5rem 0 1.5rem 1.2rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
+    ul { margin-left: 1.2rem; }
+    li { margin-bottom: .6rem; }
 
     footer {
-      text-align: center;
-      padding: 1rem;
       border-top: 1px solid var(--gold);
       color: var(--gold);
-      font-size: 0.85rem;
+      font-size: .85rem;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -134,83 +127,84 @@
       <a href="join.html">Join</a>
       <a href="support.html">Support</a>
       <a href="privacy.html" class="active">Privacy</a>
+      <a href="terms.html">Terms</a>
     </nav>
   </header>
 
-  <!-- PRIVACY CONTENT -->
+  <!-- PAGE CONTENT -->
   <main>
     <h1>Privacy Policy</h1>
 
     <p>
-      This Privacy Policy explains how MyBox Studios (“we”, “our”, or “us”) 
-      collects, uses, and protects your information when you access our website, app, 
-      or any services connected to MyBox Studios.
+      This Privacy Policy explains how MyBox Studios (“we”, “our”, or “us”)
+      collects, uses, and protects your information when you access our website,
+      mobile experience, or any services connected to MyBox Studios.
     </p>
 
     <h2>Information We Collect</h2>
-    <p>We may collect the following types of information:</p>
     <ul>
-      <li><strong>Account Information:</strong> Your name, email address, and other optional profile details.</li>
-      <li><strong>Payment Information:</strong> All payments are securely processed by Stripe.  
-          We never store or see your full credit card number.</li>
-      <li><strong>Usage Data:</strong> Pages visited, content browsed, device type, and interactions within the app.</li>
-      <li><strong>Uploaded Content:</strong> If you are a creator, we collect and store the content you upload (e.g., music or films).</li>
+      <li><strong>Account Information:</strong> Name, email, and optional profile details.</li>
+      <li><strong>Payment Information:</strong> Processed by Stripe.  
+          MyBox Studios never stores or sees your full credit card number.</li>
+      <li><strong>Usage Data:</strong> Pages visited, device type, and user activity.</li>
+      <li><strong>Creator Content:</strong> Films, music, and media uploaded by creators.</li>
     </ul>
 
     <h2>How We Use Your Information</h2>
-    <p>Your information may be used to:</p>
     <ul>
-      <li>Process payments through Stripe</li>
-      <li>Provide access to your purchased content</li>
-      <li>Manage creator accounts</li>
-      <li>Improve app performance and security</li>
+      <li>Process payments securely through Stripe</li>
+      <li>Provide access to purchased content</li>
+      <li>Manage creator accounts and studios</li>
+      <li>Improve performance, stability, and user experience</li>
       <li>Provide customer support</li>
     </ul>
 
     <h2>Stripe Payments</h2>
     <p>
-      All financial transactions are handled by Stripe.  
-      No payment information is processed directly by MyBox Studios.
+      Stripe handles all financial transactions.  
+      No payment processing is performed on MyBox Studios servers.
     </p>
 
     <h2>Cookies & Tracking</h2>
     <p>
-      We may use cookies or similar technologies to improve performance and personalize your experience.  
-      You may disable cookies in your browser if you prefer.
+      We may use cookies to improve performance and personalize your
+      browsing experience.  
+      You may disable cookies in your browser settings.
     </p>
 
     <h2>Data Protection</h2>
     <p>
-      We use industry-standard security measures to protect your data.  
-      However, no system is 100% secure, and we cannot guarantee absolute protection.
+      We use industry-standard practices to safeguard your data.  
+      However, no system is completely secure, and we cannot guarantee absolute protection.
     </p>
 
     <h2>Third-Party Services</h2>
     <p>
-      MyBox Studios may integrate third-party services such as Stripe, Netlify, and analytics tools.  
-      These third parties may collect additional information under their own privacy policies.
+      MyBox Studios integrates with platforms such as Stripe, Netlify,
+      hosting/CDN providers, and optional analytics tools.  
+      These services may collect additional information under their own policies.
     </p>
 
     <h2>Your Rights</h2>
     <ul>
       <li>Request access to your personal data</li>
-      <li>Request deletion of your data</li>
-      <li>Request correction of inaccurate data</li>
-      <li>Opt-out of promotional emails</li>
+      <li>Request the deletion of your data</li>
+      <li>Correct inaccuracies in your data</li>
+      <li>Opt out of non-essential emails</li>
     </ul>
 
     <h2>Contact Us</h2>
     <p>
-      For questions about this Privacy Policy, contact us at:<br>
-      <a href="mailto:support@myboxstudioapp.com" style="color: var(--gold); text-decoration: underline;">
+      For privacy-related questions, contact us at:<br>
+      <a href="mailto:support@myboxstudioapp.com" style="color:var(--gold);text-decoration:underline;">
         support@myboxstudioapp.com
       </a>
     </p>
 
-    <h2>Updates to This Policy</h2>
+    <h2>Policy Updates</h2>
     <p>
-      We may update this Privacy Policy as needed.  
-      The latest version will always be available on this page.
+      This Privacy Policy may change as needed.  
+      The latest version will always be posted on this page.
     </p>
 
   </main>
@@ -219,7 +213,16 @@
     © 2025 MyBox Studios — All Rights Reserved
   </footer>
 
+  <!-- APP JS -->
   <script src="assets/js/app.js"></script>
+
+  <!-- SERVICE WORKER REGISTRATION -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+
 </body>
 </html>
-
