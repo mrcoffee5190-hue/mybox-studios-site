@@ -2,17 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ Ensures perfect fit across mobile, tablet, laptop, and TV -->
+  <!-- Ensures perfect fit across mobile, tablet, desktop, and Smart TV -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>404 | MyBox Studios</title>
 
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- 🔥 REQUIRED FOR PWA + GOOGLE PLAY STORE APPROVAL -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
 
   <style>
     :root {
       --gold: #D4AF37;
-      --black: #000;
-      --white: #fff;
+      --black: #000000;
+      --white: #ffffff;
     }
 
     body {
@@ -22,37 +30,37 @@
       font-family: "Montserrat", sans-serif;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
+      align-items: center;
       text-align: center;
+      height: 100vh;
       padding: 1rem;
-      transition: all 0.3s ease;
     }
 
     h1 {
       color: var(--gold);
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.4rem;
+      margin-bottom: 0.4rem;
     }
 
     p {
-      color: var(--white);
-      font-size: 1rem;
-      margin: 0.5rem 0 1.5rem;
       max-width: 600px;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.4rem;
+      padding: 0 1rem;
     }
 
     button {
       background-color: var(--gold);
       color: var(--black);
-      border: none;
-      border-radius: 10px;
-      padding: 14px 28px;
-      cursor: pointer;
+      padding: 14px 32px;
       font-size: 1.1rem;
       font-weight: 700;
-      transition: 0.3s ease;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
@@ -63,65 +71,55 @@
     footer {
       position: absolute;
       bottom: 20px;
-      color: var(--gold);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--gold);
-      padding-top: 10px;
       width: 100%;
       text-align: center;
+      padding-top: 10px;
+      border-top: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.85rem;
     }
 
-    /* 🟢 Smart-TV and large screens */
+    /* SMART-TV & ULTRA-WIDE SCREENS */
     @media (min-width: 1600px) {
-      h1 {
-        font-size: 3rem;
-      }
-      p {
-        font-size: 1.5rem;
-      }
-      button {
-        font-size: 1.4rem;
-        padding: 18px 36px;
-      }
+      h1 { font-size: 3rem; }
+      p { font-size: 1.4rem; }
+      button { font-size: 1.3rem; padding: 18px 40px; }
     }
 
     @media (min-width: 2400px) {
-      h1 {
-        font-size: 3.5rem;
-      }
-      p {
-        font-size: 1.8rem;
-      }
-      footer {
-        font-size: 1rem;
-      }
+      h1 { font-size: 3.5rem; }
+      p { font-size: 1.7rem; }
+      footer { font-size: 1.1rem; }
     }
   </style>
 </head>
 
 <body>
+
   <h1>404 — Page Not Found</h1>
-  <p>It looks like you followed a link to a page that doesn’t exist or has been moved.</p>
-  <p>Return to the main MyBox Studios app to explore music, movies, and more.</p>
+  <p>It looks like this page is missing, moved, or not available offline.</p>
+  <p>You can return to the main MyBox Studios app below.</p>
 
-  <button onclick="window.location.href='browse.html'">Return to Browse</button>
+  <button onclick="window.location.href='index.html'">
+    Return to Home
+  </button>
 
-  <footer>© 2025 MyBox Studios — Explore, Support, and Stream Creators Worldwide</footer>
+  <footer>© 2025 MyBox Studios — Indie Music & Movies Worldwide</footer>
 
+  <!-- ⭐ Offline Detection -->
   <script>
-    // 🟢 Smart-TV detection for adaptive scaling
-    (function detectSmartTV() {
-      const screenWidth = window.innerWidth;
-      const dpi = window.devicePixelRatio;
-      const isTV = screenWidth > 1400 && dpi <= 1.5;
-      if (isTV) {
-        document.body.classList.add("tv-mode");
-        console.log("Smart-TV Mode activated for 404 Page");
-      }
-    })();
+    if (!navigator.onLine) {
+      console.log("Offline mode detected, loading offline-safe 404 page.");
+    }
   </script>
+
+  <!-- ⭐ PWA Service Worker Registration -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("Service Worker failed:", err));
+    }
+  </script>
+
 </body>
 </html>
-
-
-
