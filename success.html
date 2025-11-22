@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join MyBox Studios</title>
 
-  <!-- Fonts -->
+  <title>MyBox Studios — Payment Success</title>
+
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- ✅ PWA REQUIRED BLOCK -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
+
+  <!-- GLOBAL + PAGE STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -20,6 +28,10 @@
       background-color: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
@@ -33,7 +45,6 @@
       justify-content: center;
       z-index: 9999;
     }
-
     #spinner .ring {
       width: 48px;
       height: 48px;
@@ -42,12 +53,11 @@
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
-
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
-    /* NAVIGATION */
+    /* NAVIGATION BAR */
     header {
       width: 100%;
       background-color: #111;
@@ -70,63 +80,65 @@
       color: var(--gold);
       text-decoration: none;
       font-weight: 700;
+      transition: 0.3s;
     }
-
-    nav a.active {
+    nav a:hover {
       color: var(--white);
     }
 
+    /* PAGE CONTENT */
     main {
       max-width: 700px;
       margin: 0 auto;
       padding: 2.5rem 1rem 3rem;
       text-align: center;
+      flex: 1;
+    }
+
+    .icon-big {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
     }
 
     h1 {
       color: var(--gold);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-bottom: 1rem;
     }
 
     p {
       max-width: 580px;
-      margin: 0.5rem auto 1.5rem;
+      margin: 0.5rem auto 1.2rem;
       line-height: 1.6;
-      font-size: 1rem;
+      font-size: 1.02rem;
     }
 
-    ul.benefits {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      margin: 1.5rem auto;
-      max-width: 420px;
-      color: var(--gold);
-      font-size: 1rem;
-    }
-
-    ul.benefits li {
-      margin: 10px 0;
-      line-height: 1.6;
-    }
-
-    #joinButton {
+    .primary-button {
       background-color: var(--gold);
       color: var(--black);
       border: none;
       border-radius: 12px;
       padding: 14px 32px;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       cursor: pointer;
       transition: 0.3s ease;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    #joinButton:hover {
+    .primary-button:hover {
       background-color: var(--white);
       color: var(--black);
+    }
+
+    .secondary-link {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--gold);
+      text-decoration: underline;
     }
 
     footer {
@@ -135,17 +147,17 @@
       border-top: 1px solid var(--gold);
       color: var(--gold);
       font-size: 0.85rem;
+      margin-top: auto;
     }
 
     @media (min-width: 1600px) {
       h1 { font-size: 2.8rem; }
-      #joinButton { font-size: 1.4rem; padding: 18px 40px; }
+      .primary-button { font-size: 1.2rem; padding: 18px 40px; }
     }
   </style>
 </head>
 
-<!-- identifies this page to app.js -->
-<body data-mbs-page="join">
+<body data-mbs-page="success">
 
   <!-- GLOBAL SPINNER -->
   <div id="spinner">
@@ -158,43 +170,42 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="music.html" class="nav-link">Music</a>
       <a href="movies.html" class="nav-link">Movies</a>
-      <a href="join.html" class="nav-link active">Join</a>
+      <a href="join.html" class="nav-link">Join</a>
       <a href="support.html" class="nav-link">Support</a>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- SUCCESS CONTENT -->
   <main>
-    <h1>Join MyBox Studios</h1>
+    <div class="icon-big">✅</div>
+    <h1>Payment Successful</h1>
 
     <p>
-      Pay a one-time <strong style="color: var(--gold);">$100 membership fee</strong>  
-      to open your studio and start selling your music and movies worldwide.
+      Thank you for joining <strong>MyBox Studios</strong>!  
+      Your one-time <span style="color: var(--gold);">$100 membership fee</span> has been processed securely.
     </p>
 
-    <button id="joinButton">Join MyBox Studios — $100</button>
-
-    <ul class="benefits">
-      <li>🎬 Sell your films and music instantly worldwide</li>
-      <li>💸 Keep 80% of every sale automatically</li>
-      <li>🚀 Access your own personalized studio page</li>
-      <li>🔒 Secure Stripe payments</li>
-    </ul>
-
-    <p style="font-size: 0.9rem; margin-top: 1rem;">
-      Need help? <a href="support.html" style="color: var(--gold); text-decoration: underline;">Contact Support</a>
+    <p>
+      You’ll receive an email receipt from Stripe, and we’ll follow up with details on how to access
+      your creator studio and start uploading your music and movies.
     </p>
+
+    <a href="index.html" class="primary-button">Return to Home</a>
+
+    <a href="support.html" class="secondary-link">
+      Need help or didn’t receive your email? Contact Support
+    </a>
   </main>
 
   <footer>
     © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios
   </footer>
 
-  <!-- STRIPE + GLOBAL APP LOGIC -->
-  <script src="https://js.stripe.com/v3/"></script>
+  <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 
