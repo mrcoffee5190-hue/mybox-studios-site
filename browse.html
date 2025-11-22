@@ -3,129 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browse – MyBox Studio</title>
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Browse | MyBox Studios</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- ✅ PWA REQUIRED BLOCK -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
+
+  <!-- GLOBAL STYLES -->
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* GLOBAL SPINNER */
+    #spinner {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #spinner .ring {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--gold);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* NAVIGATION */
+    header {
+      width: 100%;
+      background-color: #111;
+      border-bottom: 1px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    nav a.active {
+      color: var(--white);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      flex: 1;
+    }
+
+    h1 {
+      color: var(--gold);
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    p.subtitle {
+      color: #bbb;
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .browse-card {
+      display: block;
+      padding: 16px 20px;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      background: #0d0d0d;
+      color: var(--gold);
+      font-size: 1.1rem;
+      text-decoration: none;
+      margin-bottom: 16px;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    .browse-card:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: scale(1.03);
+    }
+
+    footer {
+      border-top: 1px solid var(--gold);
+      color: var(--gold);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
-<body>
 
-<!-- ========================================================= -->
-<!-- Simple Global Spinner -->
-<!-- ========================================================= -->
-<div id="spinner" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-">
-  <div style="
-    width: 48px;
-    height: 48px;
-    border: 4px solid #D4AF37;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  "></div>
-</div>
+<body data-mbs-page="browse">
 
-<style>
-@keyframes spin { to { transform: rotate(360deg); } }
-</style>
-
-<!-- ========================================================= -->
-<!-- Top Navigation (matches your existing app) -->
-<!-- ========================================================= -->
-<header class="top-nav">
-  <div class="nav-left">
-    <a href="index.html" class="brand">
-      <span class="brand-main">MyBox Studio</span>
-      <span class="brand-sub">Indie Music & Movies</span>
-    </a>
+  <!-- GLOBAL SPINNER -->
+  <div id="spinner">
+    <div class="ring"></div>
   </div>
 
-  <nav class="nav-right">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="music.html" class="nav-link">Music</a>
-    <a href="movies.html" class="nav-link">Movies</a>
-    <a href="browse.html" class="nav-link active">Browse</a>
-    <a href="join.html" class="nav-link nav-cta">Join</a>
-  </nav>
-</header>
+  <!-- NAVIGATION -->
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="browse.html" class="active">Browse</a>
+      <a href="join.html">Join</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </header>
 
-<!-- ========================================================= -->
-<!-- Main Content -->
-<!-- ========================================================= -->
-<main style="max-width: 900px; margin: 0 auto; padding: 30px 20px; color: #fff;">
+  <!-- MAIN -->
+  <main>
+    <h1>Browse Categories</h1>
+    <p class="subtitle">Choose a section to explore inside MyBox Studios.</p>
 
-  <h1 style="font-size: 1.7rem; margin-bottom: 10px;">Browse</h1>
+    <a href="music.html" class="browse-card">🎵 Music</a>
+    <a href="movies.html" class="browse-card">🎬 Movies</a>
+    <a href="join.html" class="browse-card">🏆 Open a Studio (Join)</a>
+  </main>
 
-  <p style="font-size: 0.9rem; color: #bbb; margin-bottom: 20px;">
-    Browse all categories available on MyBox Studio.
-  </p>
+  <footer>
+    © 2025 MyBox Studios — Indie Music & Movies Worldwide
+  </footer>
 
-  <!-- REAL navigation links only -->
-  <div style="display: flex; flex-direction: column; gap: 14px;">
+  <!-- GLOBAL APP SCRIPT -->
+  <script src="assets/js/app.js"></script>
 
-    <a href="music.html" style="
-      display: block;
-      padding: 14px 18px;
-      border: 1px solid #222;
-      border-radius: 12px;
-      background: #0d0d0d;
-      color: #D4AF37;
-      font-size: 1rem;
-      text-decoration: none;
-    ">
-      🎵 Music
-    </a>
-
-    <a href="movies.html" style="
-      display: block;
-      padding: 14px 18px;
-      border: 1px solid #222;
-      border-radius: 12px;
-      background: #0d0d0d;
-      color: #D4AF37;
-      font-size: 1rem;
-      text-decoration: none;
-    ">
-      🎬 Movies
-    </a>
-
-    <a href="join.html" style="
-      display: block;
-      padding: 14px 18px;
-      border: 1px solid #222;
-      border-radius: 12px;
-      background: #0d0d0d;
-      color: #D4AF37;
-      font-size: 1rem;
-      text-decoration: none;
-    ">
-      🏆 Open a Studio (Join)
-    </a>
-
-  </div>
-
-</main>
-
-<!-- ========================================================= -->
-<!-- Spinner Script -->
-<!-- ========================================================= -->
-<script>
-  window.addEventListener("load", function () {
-    const spinner = document.getElementById("spinner");
-    if (spinner) spinner.style.display = "none";
-  });
-</script>
+  <!-- SERVICE WORKER -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW failed:", err));
+    }
+  </script>
 
 </body>
 </html>
-
