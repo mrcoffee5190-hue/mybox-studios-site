@@ -199,13 +199,14 @@
 
   <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
+
+  <!-- ⭐ SERVICE WORKER REGISTRATION -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
