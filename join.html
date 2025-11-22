@@ -122,6 +122,7 @@
       color: var(--gold);
       font-size: 1rem;
     }
+
     ul.benefits li {
       margin: 10px 0;
       line-height: 1.6;
@@ -210,5 +211,14 @@
   <!-- STRIPE + GLOBAL APP LOGIC -->
   <script src="https://js.stripe.com/v3/"></script>
   <script src="assets/js/app.js"></script>
+
+  <!-- ⭐ SERVICE WORKER REGISTRATION -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+
 </body>
 </html>
