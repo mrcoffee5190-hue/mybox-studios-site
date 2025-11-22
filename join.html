@@ -208,11 +208,49 @@
     © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios
   </footer>
 
-  <!-- STRIPE + GLOBAL APP LOGIC -->
+  <!-- STRIPE -->
   <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- ⭐ JOIN BUTTON CHECKOUT LOGIC -->
+  <script>
+    const stripe = Stripe("pk_live_xxxxxxxxxxxxxxxxxxxxxxxxx"); // <-- replace with YOUR LIVE PUBLISHABLE KEY
+
+    document.getElementById("joinButton").addEventListener("click", async () => {
+      try {
+        // Call Netlify Function to create checkout session
+        const response = await fetch("/.netlify/functions/join-create-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({})
+        });
+
+        const data = await response.json();
+
+        if (!data.sessionId) {
+          alert("Error: Could not create checkout session.");
+          return;
+        }
+
+        // Redirect to Stripe Checkout
+        const result = await stripe.redirectToCheckout({
+          sessionId: data.sessionId,
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+
+      } catch (err) {
+        console.error(err);
+        alert("Unexpected error occurred.");
+      }
+    });
+  </script>
+
+  <!-- GLOBAL APP LOGIC -->
   <script src="assets/js/app.js"></script>
 
-  <!-- ⭐ SERVICE WORKER REGISTRATION -->
+  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/service-worker.js")
