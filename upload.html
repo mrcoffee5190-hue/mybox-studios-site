@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Upload Content | MyBox Studios</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000;
+      --white: #fff;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-weight: 700;
+      display: block;
+      margin: 10px 0 5px;
+      color: var(--gold);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      background: #222;
+      color: var(--white);
+    }
+
+    button {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    #uploadStatus {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Upload to Your Studio</h1>
+
+<div class="card">
+
+  <label>Content Type</label>
+  <select id="contentType">
+    <option value="music">Music</option>
+    <option value="movie">Movie</option>
+  </select>
+
+  <label>Title</label>
+  <input id="title" type="text" placeholder="Enter title" />
+
+  <label>Artist / Creator Name</label>
+  <input id="creator" type="text" placeholder="Enter artist name" />
+
+  <label>Producer / Director</label>
+  <input id="producer" type="text" placeholder="Enter producer or director" />
+
+  <label>Genre</label>
+  <input id="genre" type="text" placeholder="Rap, Pop, Action, Drama..." />
+
+  <label>Price (USD)</label>
+  <input id="price" type="number" min="0" step="0.01" placeholder="1.99" />
+
+  <label>Cover Art / Poster</label>
+  <input id="cover" type="file" accept="image/*" />
+
+  <label>Upload File</label>
+  <input id="file" type="file" accept="audio/*,video/*" />
+
+  <button onclick="uploadContent()">Upload to Studio</button>
+
+  <div id="uploadStatus"></div>
+</div>
+
+<script>
+async function uploadContent() {
+
+  const formData = new FormData();
+  formData.append("contentType", document.getElementById("contentType").value);
+  formData.append("title", document.getElementById("title").value);
+  formData.append("creator", document.getElementById("creator").value);
+  formData.append("producer", document.getElementById("producer").value);
+  formData.append("genre", document.getElementById("genre").value);
+  formData.append("price", document.getElementById("price").value);
+  formData.append("cover", document.getElementById("cover").files[0]);
+  formData.append("file", document.getElementById("file").files[0]);
+
+  document.getElementById("uploadStatus").innerText = "Uploading...";
+
+  const response = await fetch("/.netlify/functions/studio-upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const result = await response.json();
+
+  if (result.success) {
+    document.getElementById("uploadStatus").innerText = "Upload complete ✔ Your studio has been updated!";
+  } else {
+    document.getElementById("uploadStatus").innerText = "Upload failed ❌ " + result.error;
+  }
+}
+</script>
+
+</body>
+</html>
