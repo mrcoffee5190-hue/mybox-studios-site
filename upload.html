@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload to Studio | MyBox Studios</title>
 
-  <title>Upload Content | MyBox Studios</title>
-
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
 
   <style>
     :root {
@@ -16,6 +21,7 @@
     }
 
     body {
+      margin: 0;
       background: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
@@ -23,35 +29,37 @@
     }
 
     h1 {
-      color: var(--gold);
       text-align: center;
+      color: var(--gold);
       margin-bottom: 20px;
+      font-size: 2rem;
     }
 
     .card {
+      max-width: 650px;
+      margin: 0 auto;
       background: #111;
       border: 1px solid var(--gold);
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 600px;
-      margin: 0 auto;
+      border-radius: 14px;
+      padding: 25px;
     }
 
     label {
       font-weight: 700;
-      display: block;
       margin: 10px 0 5px;
+      display: block;
       color: var(--gold);
     }
 
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 12px;
       border-radius: 8px;
       border: none;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       background: #222;
       color: var(--white);
+      font-size: 1rem;
     }
 
     button {
@@ -59,10 +67,12 @@
       background: var(--gold);
       color: var(--black);
       padding: 15px;
-      border-radius: 8px;
-      font-weight: 700;
+      border-radius: 10px;
       border: none;
+      font-weight: 700;
+      font-size: 1.1rem;
       cursor: pointer;
+      transition: 0.3s ease;
     }
 
     button:hover {
@@ -71,10 +81,16 @@
     }
 
     #uploadStatus {
-      margin-top: 15px;
       text-align: center;
-      font-size: 1rem;
+      margin-top: 18px;
       color: var(--gold);
+      font-size: 1rem;
+    }
+
+    @media (min-width:1600px) {
+      h1 { font-size: 2.5rem; }
+      label { font-size: 1.1rem; }
+      button { font-size: 1.3rem; padding: 18px; }
     }
   </style>
 </head>
@@ -85,42 +101,50 @@
 
 <div class="card">
 
+  <!-- Content Type -->
   <label>Content Type</label>
   <select id="contentType">
     <option value="music">Music</option>
     <option value="movie">Movie</option>
   </select>
 
+  <!-- Title -->
   <label>Title</label>
   <input id="title" type="text" placeholder="Enter title" />
 
-  <label>Artist / Creator Name</label>
-  <input id="creator" type="text" placeholder="Enter artist name" />
+  <!-- Creator -->
+  <label>Creator / Artist Name</label>
+  <input id="creator" type="text" placeholder="Enter creator or artist name" />
 
+  <!-- Producer -->
   <label>Producer / Director</label>
-  <input id="producer" type="text" placeholder="Enter producer or director" />
+  <input id="producer" type="text" placeholder="Producer or director" />
 
+  <!-- Genre -->
   <label>Genre</label>
   <input id="genre" type="text" placeholder="Rap, Pop, Action, Drama..." />
 
+  <!-- Price -->
   <label>Price (USD)</label>
   <input id="price" type="number" min="0" step="0.01" placeholder="1.99" />
 
+  <!-- Cover -->
   <label>Cover Art / Poster</label>
   <input id="cover" type="file" accept="image/*" />
 
+  <!-- File -->
   <label>Upload File</label>
   <input id="file" type="file" accept="audio/*,video/*" />
 
-  <button onclick="uploadContent()">Upload to Studio</button>
+  <button onclick="uploadContent()">Upload</button>
 
   <div id="uploadStatus"></div>
 </div>
 
 <script>
 async function uploadContent() {
-
   const formData = new FormData();
+
   formData.append("contentType", document.getElementById("contentType").value);
   formData.append("title", document.getElementById("title").value);
   formData.append("creator", document.getElementById("creator").value);
@@ -140,10 +164,20 @@ async function uploadContent() {
   const result = await response.json();
 
   if (result.success) {
-    document.getElementById("uploadStatus").innerText = "Upload complete ✔ Your studio has been updated!";
+    document.getElementById("uploadStatus").innerText =
+      "Upload complete ✔ Your studio has been updated!";
   } else {
-    document.getElementById("uploadStatus").innerText = "Upload failed ❌ " + result.error;
+    document.getElementById("uploadStatus").innerText =
+      "Upload failed ❌ " + result.error;
   }
+}
+</script>
+
+<!-- PWA Worker -->
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js")
+    .catch(err => console.error("SW error:", err));
 }
 </script>
 
