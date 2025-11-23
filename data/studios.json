@@ -1,0 +1,12 @@
+{
+  "studios": [
+    {
+      "id": "example-studio-123",
+      "owner_email": "demo@example.com",
+      "type": "music",
+      "slug": "demo-music-studio",
+      "display_name": "Demo Music Studio",
+      "created_at": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}
