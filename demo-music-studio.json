@@ -1,0 +1,20 @@
+{
+  "studio": "demo-music-studio",
+  "owner_email": "demo@example.com",
+  "display_name": "Demo Music Studio",
+  "created_at": "2025-01-01T00:00:00.000Z",
+  "items": [
+    {
+      "id": "item-123",
+      "type": "music",
+      "title": "My First Beat",
+      "creator": "Demo Artist",
+      "producer": "Demo Producer",
+      "genre": "Rap",
+      "price": "1.99",
+      "cover": "/uploads/demo-cover.jpg",
+      "file": "/uploads/demo-file.mp3",
+      "created_at": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}
