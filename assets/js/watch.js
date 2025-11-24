@@ -1,15 +1,12 @@
 /* ============================================================
    WATCH.JS — MyBox Studios Dynamic Watch Page Loader
-   Video-enabled version
+   VIDEO-ENABLED VERSION (FULL FILE)
    ============================================================ */
 
-// 1. Get the product ID from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 
-// 2. Select page elements
-const videoEl = document.getElementById("watchVideo");
-const videoSource = document.getElementById("videoSource");
+// PAGE ELEMENTS
 const titleEl = document.querySelector(".watch-title");
 const avatarEl = document.querySelector(".creator-avatar");
 const creatorNameEl = document.querySelector(".creator-name");
@@ -17,13 +14,16 @@ const descriptionTextEl = document.querySelector(".description-text");
 const descriptionRowEl = document.querySelector(".description-row");
 const buyBtn = document.querySelector(".btn-primary");
 
-// 3. Load product.json
+const videoEl = document.getElementById("watchVideo");
+const videoSourceEl = document.getElementById("videoSource");
+
+// LOAD PRODUCT
 async function loadProduct() {
   try {
-    const response = await fetch("data/products.json");
-    const products = await response.json();
+    const res = await fetch("data/products.json");
+    const products = await res.json();
 
-    const product = products.find((p) => p.id === productId);
+    const product = products.find(p => p.id === productId);
 
     if (!product) {
       titleEl.textContent = "Product Not Found";
@@ -33,70 +33,72 @@ async function loadProduct() {
     renderProduct(product);
     loadUpNext(products, product.id);
 
-  } catch (err) {
-    console.error("Failed to load products.json:", err);
-    titleEl.textContent = "Error loading product";
+  } catch (error) {
+    console.error("Error loading product:", error);
   }
 }
 
-// 4. Populate the page with product data
+// RENDER PRODUCT INTO PAGE
 function renderProduct(product) {
+
   // Title
   titleEl.textContent = product.title;
 
-  // Creator avatar initials
+  // Creator avatar
   avatarEl.textContent = product.title.charAt(0).toUpperCase();
   creatorNameEl.textContent = "MyBox Studio Creator";
 
   // Description
-  descriptionTextEl.textContent = product.description || "No description available.";
+  descriptionTextEl.textContent = product.description;
 
-  // Meta row
+  // Meta
   descriptionRowEl.innerHTML = `
     <span>Type: <strong>${product.type.toUpperCase()}</strong></span>
     <span>•</span>
     <span>Price: <strong>$${product.price}</strong></span>
   `;
 
-  // 🔥 Load PLAYABLE VIDEO or MP3
+  // VIDEO SOURCE
   if (product.preview) {
-    videoSource.src = product.preview;
+    videoSourceEl.src = product.preview;
     videoEl.load();
   }
 
-  // Thumbnail poster
+  // VIDEO POSTER
   if (product.image) {
     videoEl.setAttribute("poster", product.image);
   }
 
-  // BUY BUTTON → checkout
+  // BUY BUTTON → CHECKOUT
   buyBtn.onclick = () => {
     window.location.href = `checkout.html?id=${product.id}`;
   };
 }
 
-// 5. Load Up Next sidebar
-function loadUpNext(allProducts, currentId) {
-  const sidebarItems = document.querySelectorAll(".up-next-item");
+// UP NEXT SIDEBAR
+function loadUpNext(products, currentId) {
+  const items = document.querySelectorAll(".up-next-item");
 
-  const upNextList = allProducts.filter((p) => p.id !== currentId);
+  const upNextList = products.filter(p => p.id !== currentId);
 
-  sidebarItems.forEach((item, index) => {
-    const product = upNextList[index];
+  items.forEach((item, i) => {
+    const product = upNextList[i];
     if (!product) return;
 
     const thumb = item.querySelector(".up-next-thumb");
     const title = item.querySelector(".up-next-title");
     const meta = item.querySelector(".up-next-meta");
 
-    if (product.image) {
-      thumb.style.backgroundImage = `url('${product.image}')`;
-    }
+    // Thumbnail
+    thumb.style.backgroundImage = `url('${product.image}')`;
 
+    // Title
     title.textContent = product.title;
 
+    // Meta label
     meta.textContent = product.type === "movie" ? "HD • Film" : "Beat / Audio";
 
+    // Click redirect
     item.onclick = () => {
       window.location.href = `watch.html?id=${product.id}`;
     };
