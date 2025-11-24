@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to Checkout...</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .loading {
+      font-size: 18px;
+      color: #D4AF37;
+    }
+
+    .spinner {
+      margin-top: 10px;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top: 4px solid #D4AF37;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading">Preparing Secure Checkout...</div>
+  <div class="spinner"></div>
+
+  <script>
+    async function redirectToCheckout() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+
+      if (!productId) {
+        alert("Missing product ID!");
+        return;
+      }
+
+      const res = await fetch("data/products.json");
+      const products = await res.json();
+      const product = products.find(p => p.id === productId);
+
+      if (!product) {
+        alert("Product not found!");
+        return;
+      }
+
+      // STRIPE PRICE ID
+      const priceId = product.priceId;
+
+      // REDIRECT TO STRIPE CHECKOUT
+      const checkoutUrl = `https://checkout.stripe.com/pay/${priceId}`;
+      window.location.href = checkoutUrl;
+    }
+
+    redirectToCheckout();
+  </script>
+</body>
+</html>
