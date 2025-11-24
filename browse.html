@@ -105,24 +105,40 @@
       margin-bottom: 2rem;
     }
 
-    .browse-card {
+    .studio-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .studio-card {
       display: block;
       padding: 16px 20px;
       border: 1px solid var(--gold);
       border-radius: 12px;
       background: #0d0d0d;
       color: var(--gold);
-      font-size: 1.1rem;
       text-decoration: none;
-      margin-bottom: 16px;
-      font-weight: 700;
+      width: 260px;
       transition: 0.3s ease;
     }
 
-    .browse-card:hover {
+    .studio-card:hover {
       background: var(--gold);
       color: var(--black);
       transform: scale(1.03);
+    }
+
+    .studio-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .studio-meta {
+      font-size: 0.85rem;
+      color: #bbb;
     }
 
     footer {
@@ -156,12 +172,14 @@
 
   <!-- MAIN -->
   <main>
-    <h1>Browse Categories</h1>
-    <p class="subtitle">Choose a section to explore inside MyBox Studios.</p>
+    <h1>Browse Creator Studios</h1>
+    <p class="subtitle">
+      These are real studios created on MyBox Studios. Tap any studio to view their music or movies.
+    </p>
 
-    <a href="music.html" class="browse-card">🎵 Music</a>
-    <a href="movies.html" class="browse-card">🎬 Movies</a>
-    <a href="join.html" class="browse-card">🏆 Open a Studio (Join)</a>
+    <div id="studioList" class="studio-grid">
+      <!-- Studios from /data/studios.json will be injected here -->
+    </div>
   </main>
 
   <footer>
@@ -170,6 +188,46 @@
 
   <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
+
+  <!-- DYNAMIC STUDIO LIST LOGIC -->
+  <script>
+    async function loadStudios() {
+      try {
+        const res = await fetch("/data/studios.json");
+        const json = await res.json();
+
+        const container = document.getElementById("studioList");
+        container.innerHTML = "";
+
+        if (!json.studios || !json.studios.length) {
+          container.innerHTML = "<p>No studios have been created yet.</p>";
+          return;
+        }
+
+        json.studios.forEach(studio => {
+          const link = document.createElement("a");
+          link.className = "studio-card";
+          link.href = `studio.html?slug=${studio.slug}`;
+
+          link.innerHTML = `
+            <div class="studio-name">${studio.display_name}</div>
+            <div class="studio-meta">
+              Type: ${studio.type.toUpperCase()}<br/>
+              Owner: ${studio.owner_email}
+            </div>
+          `;
+
+          container.appendChild(link);
+        });
+      } catch (err) {
+        console.error("Failed to load studios:", err);
+        document.getElementById("studioList").innerHTML =
+          "<p>Unable to load studios right now.</p>";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadStudios);
+  </script>
 
   <!-- SERVICE WORKER -->
   <script>
