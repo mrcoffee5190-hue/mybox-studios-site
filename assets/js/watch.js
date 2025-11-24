@@ -1,14 +1,15 @@
 /* ============================================================
    WATCH.JS — MyBox Studios Dynamic Watch Page Loader
-   Loads the correct product based on ?id= in the URL
+   Video-enabled version
    ============================================================ */
 
 // 1. Get the product ID from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 
-// 2. Select all page elements we need to control
-const videoWrapper = document.querySelector(".video-wrapper");
+// 2. Select page elements
+const videoEl = document.getElementById("watchVideo");
+const videoSource = document.getElementById("videoSource");
 const titleEl = document.querySelector(".watch-title");
 const avatarEl = document.querySelector(".creator-avatar");
 const creatorNameEl = document.querySelector(".creator-name");
@@ -16,7 +17,7 @@ const descriptionTextEl = document.querySelector(".description-text");
 const descriptionRowEl = document.querySelector(".description-row");
 const buyBtn = document.querySelector(".btn-primary");
 
-// 3. Load product.json dynamically
+// 3. Load product.json
 async function loadProduct() {
   try {
     const response = await fetch("data/products.json");
@@ -38,43 +39,46 @@ async function loadProduct() {
   }
 }
 
-// 4. Render product into the page
+// 4. Populate the page with product data
 function renderProduct(product) {
   // Title
   titleEl.textContent = product.title;
 
-  // Background image for video area
-  if (product.image) {
-    videoWrapper.style.backgroundImage = `url('${product.image}')`;
-  }
-
-  // Creator initials
+  // Creator avatar initials
   avatarEl.textContent = product.title.charAt(0).toUpperCase();
-
-  // Creator name (temporary until studios are dynamic)
   creatorNameEl.textContent = "MyBox Studio Creator";
 
   // Description
   descriptionTextEl.textContent = product.description || "No description available.";
 
-  // Description row (movie or music meta)
+  // Meta row
   descriptionRowEl.innerHTML = `
     <span>Type: <strong>${product.type.toUpperCase()}</strong></span>
     <span>•</span>
     <span>Price: <strong>$${product.price}</strong></span>
   `;
 
-  // BUY BUTTON — sends product to checkout
+  // 🔥 Load PLAYABLE VIDEO or MP3
+  if (product.preview) {
+    videoSource.src = product.preview;
+    videoEl.load();
+  }
+
+  // Thumbnail poster
+  if (product.image) {
+    videoEl.setAttribute("poster", product.image);
+  }
+
+  // BUY BUTTON → checkout
   buyBtn.onclick = () => {
     window.location.href = `checkout.html?id=${product.id}`;
   };
 }
 
-// 5. Load UP NEXT sidebar
+// 5. Load Up Next sidebar
 function loadUpNext(allProducts, currentId) {
   const sidebarItems = document.querySelectorAll(".up-next-item");
 
-  // Remove current product from list
   const upNextList = allProducts.filter((p) => p.id !== currentId);
 
   sidebarItems.forEach((item, index) => {
@@ -85,23 +89,18 @@ function loadUpNext(allProducts, currentId) {
     const title = item.querySelector(".up-next-title");
     const meta = item.querySelector(".up-next-meta");
 
-    // Thumbnail
     if (product.image) {
       thumb.style.backgroundImage = `url('${product.image}')`;
     }
 
-    // Title
     title.textContent = product.title;
 
-    // Meta
     meta.textContent = product.type === "movie" ? "HD • Film" : "Beat / Audio";
 
-    // Click → load next product
     item.onclick = () => {
       window.location.href = `watch.html?id=${product.id}`;
     };
   });
 }
 
-// 6. Auto-load page on start
 loadProduct();
