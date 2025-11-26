@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Studio Setup | MyBox Studios</title>
+
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* DESKTOP NAV */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--black);
+      border-bottom: 1px solid var(--gold);
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-area img {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .logo-area span {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-center a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    @media (max-width: 750px) {
+      .top-nav { display: none; }
+    }
+
+    /* MOBILE NAV */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media (max-width: 750px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: var(--black);
+        padding: 12px 0;
+        border-top: 1px solid var(--gold);
+      }
+      .bottom-item {
+        text-align: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: .9rem;
+      }
+      .bottom-item span {
+        display: block;
+        margin-top: 3px;
+      }
+      .bottom-item:hover span {
+        color: var(--gold);
+      }
+    }
+
+    /* MAIN FORM AREA */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 5rem;
+      flex: 1;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--gold);
+      font-size: 2.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: .4rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      background: #0d0d0d;
+      color: var(--white);
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    #submitBtn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      margin-top: 1.5rem;
+      font-size: 1.15rem;
+      transition: .3s;
+    }
+
+    #submitBtn:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: var(--gold);
+      border-top: 1px solid var(--gold);
+      font-size: .85rem;
+      margin-bottom: 65px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- DESKTOP NAV -->
+  <header class="top-nav">
+    <div class="logo-area">
+      <img src="/assets/icons/mybox-192.png" alt="Logo">
+      <span>MY BOX STUDIOS</span>
+    </div>
+
+    <nav class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="join.html">Join</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <h1>Set Up Your Studio</h1>
+
+    <div class="form-group">
+      <label>Studio Name</label>
+      <input type="text" id="studioName" placeholder="Example: Golden Vision Films" />
+    </div>
+
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="creatorName" placeholder="John Doe" />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="creatorEmail" placeholder="you@email.com" />
+    </div>
+
+    <div class="form-group">
+      <label>Studio Type</label>
+      <select id="studioType">
+        <option value="music">Music</option>
+        <option value="movies">Movies</option>
+        <option value="both">Both</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Short Bio</label>
+      <textarea id="studioBio" placeholder="Tell your fans about your studio..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Logo URL (optional)</label>
+      <input type="text" id="logoUrl" placeholder="https://your-logo-link.png" />
+    </div>
+
+    <button id="submitBtn">Create My Studio</button>
+  </main>
+
+  <!-- MOBILE NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-item"><span>Home</span></a>
+    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
+    <a href="music.html" class="bottom-item"><span>Music</span></a>
+    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
+    <a href="join.html" class="bottom-item"><span>Join</span></a>
+  </nav>
+
+  <footer>
+    © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios
+  </footer>
+
+  <script>
+    function slugify(text) {
+      return text
+        .toString()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", async () => {
+      const studioName = document.getElementById("studioName").value.trim();
+      const creatorName = document.getElementById("creatorName").value.trim();
+      const creatorEmail = document.getElementById("creatorEmail").value.trim();
+      const studioType = document.getElementById("studioType").value;
+      const studioBio = document.getElementById("studioBio").value.trim();
+      const logoUrl = document.getElementById("logoUrl").value.trim();
+
+      if (!studioName || !creatorName || !creatorEmail) {
+        alert("Please fill out the required fields.");
+        return;
+      }
+
+      const slug = slugify(studioName);
+
+      const payload = {
+        slug,
+        display_name: studioName,
+        creator_name: creatorName,
+        owner_email: creatorEmail,
+        type: studioType,
+        bio: studioBio,
+        logo: logoUrl || "/assets/icons/mybox-192.png"
+      };
+
+      try {
+        const res = await fetch("/.netlify/functions/create-studio", {
+          method: "POST",
+          headers: { "Content-Type": "application
