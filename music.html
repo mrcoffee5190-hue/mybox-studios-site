@@ -9,13 +9,13 @@
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- ✅ PWA REQUIRED BLOCK -->
+  <!-- PWA REQUIRED BLOCK -->
   <link rel="manifest" href="/manifest.webmanifest?v=3">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
   <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
   <meta name="theme-color" content="#000000" />
 
-  <!-- GLOBAL & PAGE STYLES -->
+  <!-- GLOBAL + PAGE STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -32,7 +32,6 @@
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
     /* GLOBAL SPINNER */
@@ -53,45 +52,120 @@
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* NAVIGATION BAR */
-    header {
-      width: 100%;
-      background-color: #111;
-      border-bottom: 1px solid var(--gold);
+    /* =======================
+       DESKTOP/TABLET TOP NAV
+    ======================= */
+    .top-nav {
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 1rem 0;
+      justify-content: space-between;
+      background-color: var(--black);
+      border-bottom: 1px solid var(--gold);
+      padding: 12px 20px;
       position: sticky;
       top: 0;
-      z-index: 500;
+      z-index: 999;
     }
 
-    nav {
+    .logo-area {
       display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: center;
+      gap: 10px;
     }
 
-    nav a {
+    .logo-area img {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .logo-area span {
+      font-size: 1.3rem;
       color: var(--gold);
-      text-decoration: none;
       font-weight: 700;
-      transition: 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-center a {
+      color: var(--white);
+      text-decoration: none;
       font-size: 1rem;
+      font-weight: 600;
+      transition: 0.2s;
     }
 
-    nav a:hover {
-      color: var(--white);
+    .nav-center a:hover {
+      color: var(--gold);
     }
 
-    nav a.active {
-      color: var(--white);
+    .nav-center a.active {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .join-btn {
+      background-color: var(--gold);
+      color: var(--black);
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .join-btn:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 750px) {
+      .top-nav {
+        display: none;
+      }
+    }
+
+    /* =======================
+       MOBILE BOTTOM NAV
+    ======================= */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media (max-width: 750px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--black);
+        padding: 12px 0;
+        border-top: 1px solid var(--gold);
+      }
+
+      .bottom-item {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex: 1;
+      }
+
+      .bottom-item span {
+        display: block;
+        margin-top: 3px;
+      }
+
+      .bottom-item:hover span {
+        color: var(--gold);
+      }
     }
 
     /* PAGE HEADER */
@@ -120,7 +194,6 @@
       justify-content: center;
       gap: 1.5rem;
       padding: 1rem;
-      width: 100%;
     }
 
     .music-card {
@@ -151,12 +224,7 @@
       text-align: center;
       padding: 1rem;
       font-size: 0.85rem;
-      margin-top: auto;
-    }
-
-    @media (min-width: 1600px) {
-      .page-header h1 { font-size: 3rem; }
-      .page-header p { font-size: 1.3rem; }
+      margin-bottom: 60px; 
     }
   </style>
 </head>
@@ -168,15 +236,21 @@
     <div class="ring"></div>
   </div>
 
-  <!-- NAVIGATION -->
-  <header>
-    <nav>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="music.html" class="nav-link active" style="color: var(--white);">Music</a>
-      <a href="movies.html" class="nav-link">Movies</a>
-      <a href="join.html" class="nav-link nav-cta">Join</a>
-      <a href="support.html" class="nav-link">Support</a>
-    </nav>
+  <!-- DESKTOP/TABLET NAVIGATION -->
+  <header class="top-nav">
+    <div class="logo-area">
+      <img src="/assets/icons/mybox-192.png" alt="MyBox Logo">
+      <span>MY BOX STUDIOS</span>
+    </div>
+
+    <div class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="music.html" class="active">Music</a>
+      <a href="movies.html">Movies</a>
+    </div>
+
+    <a href="join.html" class="join-btn">Join</a>
   </header>
 
   <!-- PAGE HEADER -->
@@ -195,16 +269,27 @@
     <div class="music-card">🎷 Track Six</div>
   </div>
 
-  <footer>© 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios</footer>
+  <footer>
+    © 2025 MyBox Studios — Support • Terms • Privacy
+  </footer>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-item"><span>Home</span></a>
+    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
+    <a href="music.html" class="bottom-item"><span>Music</span></a>
+    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
+    <a href="join.html" class="bottom-item"><span>Join</span></a>
+  </nav>
 
   <!-- GLOBAL APP SCRIPT -->
   <script src="assets/js/app.js"></script>
 
-  <!-- ⭐ SERVICE WORKER REGISTRATION -->
+  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/service-worker.js")
-        .catch(err => console.error("SW registration failed:", err));
+        .catch(err => console.error("SW failed:", err));
     }
   </script>
 
