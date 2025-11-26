@@ -9,13 +9,12 @@
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- ✅ PWA REQUIRED BLOCK -->
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest?v=3">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
   <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
   <meta name="theme-color" content="#000000" />
 
-  <!-- GLOBAL + PAGE STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -25,17 +24,16 @@
 
     body {
       margin: 0;
-      background-color: var(--black);
+      background: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    /* GLOBAL SPINNER */
+    /* SPINNER */
     #spinner {
       position: fixed;
       inset: 0;
@@ -51,63 +49,136 @@
       border: 4px solid var(--gold);
       border-top-color: transparent;
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      animation: spin .8s linear infinite;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* NAVIGATION BAR */
-    header {
-      width: 100%;
-      background-color: #111;
+    /* =====================
+         DESKTOP NAVIGATION
+       ===================== */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--black);
       border-bottom: 1px solid var(--gold);
+      padding: 12px 20px;
       position: sticky;
       top: 0;
-      z-index: 900;
-      padding: 1rem 0;
-      display: flex;
-      justify-content: center;
+      z-index: 999;
     }
 
-    nav {
+    .logo-area {
       display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
 
-    nav a {
-      color: var(--gold);
-      text-decoration: none;
+    .logo-area img {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .logo-area span {
+      font-size: 1.3rem;
       font-weight: 700;
-      transition: 0.3s;
+      color: var(--gold);
+      letter-spacing: 1px;
     }
 
-    nav a:hover {
-      color: var(--white);
+    .nav-center {
+      display: flex;
+      gap: 25px;
     }
 
-    nav a.active {
+    .nav-center a {
       color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    .nav-center a.active {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .join-btn {
+      background: var(--gold);
+      color: var(--black);
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .join-btn:hover {
+      opacity: .85;
+    }
+
+    @media(max-width: 750px) {
+      .top-nav { display: none; }
+    }
+
+    /* =====================
+         MOBILE NAVIGATION
+       ===================== */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media(max-width: 750px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 12px 0;
+        background: var(--black);
+        border-top: 1px solid var(--gold);
+        z-index: 9999;
+      }
+
+      .bottom-item {
+        color: var(--white);
+        text-decoration: none;
+        font-size: .9rem;
+        text-align: center;
+        flex: 1;
+      }
+
+      .bottom-item span {
+        display: block;
+        margin-top: 3px;
+      }
+
+      .bottom-item:hover span {
+        color: var(--gold);
+      }
     }
 
     /* PAGE HEADER */
     h1 {
       color: var(--gold);
+      font-size: 2.6rem;
       text-align: center;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      font-size: 2.4rem;
+      margin: 2.5rem 0 1rem;
     }
 
     /* MOVIE GRID */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
-      padding: 2rem;
-      width: 100%;
-      box-sizing: border-box;
+      padding: 1.5rem;
     }
 
     .movie-card {
@@ -120,63 +191,79 @@
       transition: 0.3s ease;
     }
 
-    .movie-card:hover {
-      transform: scale(1.05);
-      background-color: var(--gold);
-      color: var(--black);
-    }
-
     .movie-card img {
       width: 100%;
       border-radius: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
+    .movie-card:hover {
+      background: var(--gold);
+      transform: scale(1.04);
+      color: var(--black);
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 1rem;
       color: var(--gold);
       border-top: 1px solid var(--gold);
       margin-top: auto;
+      margin-bottom: 60px;
     }
   </style>
 </head>
 
 <body data-mbs-page="movies">
 
-  <!-- GLOBAL SPINNER -->
-  <div id="spinner">
-    <div class="ring"></div>
-  </div>
+  <!-- SPINNER -->
+  <div id="spinner"><div class="ring"></div></div>
 
-  <!-- NAVIGATION -->
-  <header>
-    <nav>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="music.html" class="nav-link">Music</a>
-      <a href="movies.html" class="nav-link active" style="color: var(--white);">Movies</a>
-      <a href="join.html" class="nav-link">Join</a>
-      <a href="support.html" class="nav-link">Support</a>
+  <!-- DESKTOP NAV -->
+  <header class="top-nav">
+    <div class="logo-area">
+      <img src="/assets/icons/mybox-192.png" alt="MyBox Logo">
+      <span>MY BOX STUDIOS</span>
+    </div>
+
+    <nav class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html" class="active">Movies</a>
     </nav>
+
+    <a href="join.html" class="join-btn">Join</a>
   </header>
 
   <h1>Movies</h1>
 
-  <!-- DYNAMIC MOVIE CONTENT (populated by app.js) -->
+  <!-- MOVIE GRID -->
   <main class="grid" id="contentArea"></main>
 
+  <!-- FOOTER -->
   <footer>
-    © 2025 MyBox Studios — Indie Films • Worldwide Creators
+    © 2025 MyBox Studios — Support • Terms • Privacy
   </footer>
 
-  <!-- GLOBAL APP SCRIPT -->
+  <!-- MOBILE NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-item"><span>Home</span></a>
+    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
+    <a href="music.html" class="bottom-item"><span>Music</span></a>
+    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
+    <a href="join.html" class="bottom-item"><span>Join</span></a>
+  </nav>
+
+  <!-- APP SCRIPT -->
   <script src="assets/js/app.js"></script>
 
-  <!-- ⭐ SERVICE WORKER REGISTRATION -->
+  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/service-worker.js")
-        .catch(err => console.error("SW registration failed:", err));
+        .catch(err => console.error("SW failed:", err));
     }
   </script>
 
