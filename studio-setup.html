@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Fits phones, tablets, laptops, and TVs -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Studio Setup | MyBox Studios</title>
@@ -258,6 +259,7 @@
     © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios
   </footer>
 
+  <!-- FULL WORKING SCRIPT -->
   <script>
     function slugify(text) {
       return text
@@ -298,4 +300,26 @@
       try {
         const res = await fetch("/.netlify/functions/create-studio", {
           method: "POST",
-          headers: { "Content-Type": "application
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+          alert("Error: " + (data.error || "Unable to create studio."));
+          return;
+        }
+
+        // SUCCESS → REDIRECT TO THEIR STUDIO PAGE
+        window.location.href = `/studio.html?slug=${slug}`;
+
+      } catch (err) {
+        console.error(err);
+        alert("Unexpected error occurred.");
+      }
+    });
+  </script>
+
+</body>
+</html>
