@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>MyBox Studios — Payment Success</title>
+  <title>MyBox Studios — Payment Successful</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- ✅ PWA REQUIRED BLOCK -->
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest?v=3">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
   <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
   <meta name="theme-color" content="#000000" />
 
-  <!-- GLOBAL + PAGE STYLES -->
+  <!-- STYLE -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -28,70 +28,100 @@
       background-color: var(--black);
       color: var(--white);
       font-family: "Montserrat", sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    /* GLOBAL SPINNER */
-    #spinner {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.92);
+    /* DESKTOP NAV */
+    .top-nav {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    #spinner .ring {
-      width: 48px;
-      height: 48px;
-      border: 4px solid var(--gold);
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* NAVIGATION BAR */
-    header {
-      width: 100%;
-      background-color: #111;
+      background: var(--black);
       border-bottom: 1px solid var(--gold);
+      padding: 12px 20px;
       position: sticky;
       top: 0;
-      z-index: 900;
-      padding: 1rem 0;
-      display: flex;
-      justify-content: center;
+      z-index: 999;
     }
 
-    nav {
+    .logo-area {
       display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
 
-    nav a {
+    .logo-area img {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .logo-area span {
       color: var(--gold);
-      text-decoration: none;
       font-weight: 700;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: var(--white);
+      font-size: 1.3rem;
     }
 
-    /* PAGE CONTENT */
+    .nav-center {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-center a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    @media(max-width: 750px) {
+      .top-nav { display: none; }
+    }
+
+    /* MOBILE NAV */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media(max-width: 750px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: var(--black);
+        padding: 12px 0;
+        border-top: 1px solid var(--gold);
+      }
+      .bottom-item {
+        text-align: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: .9rem;
+      }
+      .bottom-item span {
+        display: block;
+        margin-top: 3px;
+      }
+      .bottom-item:hover span {
+        color: var(--gold);
+      }
+    }
+
+    /* MAIN CONTENT */
     main {
       max-width: 700px;
       margin: 0 auto;
-      padding: 2.5rem 1rem 3rem;
       text-align: center;
+      padding: 3rem 1rem 4rem;
       flex: 1;
     }
 
@@ -108,35 +138,32 @@
 
     p {
       max-width: 580px;
-      margin: 0.5rem auto 1.2rem;
+      margin: .5rem auto 1.2rem;
+      font-size: 1.05rem;
       line-height: 1.6;
-      font-size: 1.02rem;
+      color: var(--white);
     }
 
     .primary-button {
-      background-color: var(--gold);
+      background: var(--gold);
       color: var(--black);
-      border: none;
-      border-radius: 12px;
       padding: 14px 32px;
-      font-size: 1.05rem;
+      border-radius: 12px;
       font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s ease;
-      margin-top: 1.2rem;
       text-decoration: none;
       display: inline-block;
+      margin-top: 1.5rem;
+      transition: .3s;
+      font-size: 1.1rem;
     }
-
     .primary-button:hover {
-      background-color: var(--white);
+      background: var(--white);
       color: var(--black);
     }
 
     .secondary-link {
-      display: block;
       margin-top: 1rem;
-      font-size: 0.95rem;
+      display: block;
       color: var(--gold);
       text-decoration: underline;
     }
@@ -144,73 +171,68 @@
     footer {
       text-align: center;
       padding: 1rem;
-      border-top: 1px solid var(--gold);
       color: var(--gold);
-      font-size: 0.85rem;
-      margin-top: auto;
-    }
-
-    @media (min-width: 1600px) {
-      h1 { font-size: 2.8rem; }
-      .primary-button { font-size: 1.2rem; padding: 18px 40px; }
+      border-top: 1px solid var(--gold);
+      font-size: .85rem;
+      margin-bottom: 65px;
     }
   </style>
 </head>
 
-<body data-mbs-page="success">
+<body>
 
-  <!-- GLOBAL SPINNER -->
-  <div id="spinner">
-    <div class="ring"></div>
-  </div>
+  <!-- DESKTOP NAV -->
+  <header class="top-nav">
+    <div class="logo-area">
+      <img src="/assets/icons/mybox-192.png" alt="Logo">
+      <span>MY BOX STUDIOS</span>
+    </div>
 
-  <!-- NAVIGATION -->
-  <header>
-    <nav>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="music.html" class="nav-link">Music</a>
-      <a href="movies.html" class="nav-link">Movies</a>
-      <a href="join.html" class="nav-link">Join</a>
-      <a href="support.html" class="nav-link">Support</a>
+    <nav class="nav-center">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="join.html">Join</a>
     </nav>
   </header>
 
-  <!-- SUCCESS CONTENT -->
+  <!-- MAIN CONTENT -->
   <main>
     <div class="icon-big">✅</div>
+
     <h1>Payment Successful</h1>
 
     <p>
-      Thank you for joining <strong>MyBox Studios</strong>!  
-      Your one-time <span style="color: var(--gold);">$100 membership fee</span> has been processed securely.
+      Welcome to <strong>MyBox Studios</strong>!  
+      Your one-time <span style="color: var(--gold);">$100 membership fee</span> was processed successfully.
     </p>
 
     <p>
-      You’ll receive an email receipt from Stripe, and we’ll follow up with details on how to access
-      your creator studio and start uploading your music and movies.
+      Your creator account is now active.  
+      Tap the button below to finish setting up your personal studio.
     </p>
 
-    <a href="index.html" class="primary-button">Return to Home</a>
+    <!-- ✔ BUTTON TO THE NEW PAGE -->
+    <a href="studio-setup.html" class="primary-button">Continue to Studio Setup</a>
 
     <a href="support.html" class="secondary-link">
-      Need help or didn’t receive your email? Contact Support
+      Need help? Contact Support
     </a>
   </main>
+
+  <!-- MOBILE NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-item"><span>Home</span></a>
+    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
+    <a href="music.html" class="bottom-item"><span>Music</span></a>
+    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
+    <a href="join.html" class="bottom-item"><span>Join</span></a>
+  </nav>
 
   <footer>
     © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios
   </footer>
 
-  <!-- GLOBAL APP SCRIPT -->
-  <script src="assets/js/app.js"></script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
