@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Watch | MyBox Studios</title>
 
-  <!-- GLOBAL STYLESHEET -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
+  <meta name="theme-color" content="#000000" />
 
   <style>
     :root {
@@ -22,157 +27,264 @@
 
     body {
       margin: 0;
-      background-color: var(--black);
+      background: var(--black);
       color: var(--white);
-      font-family: 'Montserrat', system-ui, sans-serif;
+      font-family: "Montserrat", sans-serif;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    /* HEADER */
-    .mb-header {
+    /* ========================
+       DESKTOP TOP NAVIGATION
+       ======================== */
+    .top-nav {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-      background: #000;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--black);
+      border-bottom: 1px solid var(--gold);
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 999;
     }
 
-    .mb-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-    .mb-logo-mark {
-      width: 28px; height: 28px; border-radius: 7px;
-      border: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700;
-    }
-    .mb-nav { display: flex; gap: 12px; }
-    .mb-nav a { padding: 6px 10px; border-radius: 999px; }
-    .mb-nav a.active {
-      background: var(--gold); color: var(--black);
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* PAGE LAYOUT */
+    .logo-area img {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .logo-area span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-center a {
+      color: var(--white);
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    .nav-center .active {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .join-btn {
+      background: var(--gold);
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: var(--black);
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .join-btn:hover {
+      opacity: .85;
+    }
+
+    @media(max-width: 750px) {
+      .top-nav { display: none; }
+    }
+
+    /* ========================
+       MOBILE BOTTOM NAVIGATION
+       ======================== */
+    .bottom-nav {
+      display: none;
+    }
+
+    @media(max-width: 750px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: var(--black);
+        border-top: 1px solid var(--gold);
+        padding: 12px 0;
+        z-index: 9999;
+      }
+
+      .bottom-item {
+        color: var(--white);
+        text-align: center;
+        font-size: .9rem;
+        flex: 1;
+      }
+
+      .bottom-item span {
+        display: block;
+        margin-top: 3px;
+      }
+
+      .bottom-item:hover span {
+        color: var(--gold);
+      }
+    }
+
+    /* ========================
+       PAGE LAYOUT
+       ======================== */
     .watch-layout {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 18px;
       display: flex;
-      gap: 22px;
+      gap: 24px;
     }
 
-    .watch-main { flex: 2.1; }
+    .watch-main { flex: 2; }
     .watch-sidebar { flex: 1; }
 
-    /* VIDEO PLAYER */
-    .video-frame { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
-    video { width: 100%; border-radius: 16px; }
+    /* ========================
+       VIDEO PLAYER
+       ======================== */
+    .video-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
 
-    .video-progress-bar { height: 4px; background: #111; }
+    video {
+      width: 100%;
+      border-radius: 16px;
+      background: #000;
+    }
+
+    .video-progress-bar {
+      height: 4px;
+      background: #111;
+    }
+
     .video-progress-fill {
-      height: 100%; width: 32%; background: linear-gradient(to right, var(--gold), #fff);
+      height: 100%;
+      width: 30%;
+      background: linear-gradient(to right, var(--gold), #fff);
     }
 
-    /* TITLE */
     .watch-title {
-      font-size: 20px; font-weight: 700; margin: 14px 0 8px;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 14px 0 8px;
+      color: var(--gold);
     }
 
-    /* META ROW */
     .watch-meta-row {
-      display: flex; justify-content: space-between; flex-wrap: wrap;
-      gap: 12px; font-size: 12px; color: var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 12px;
+      margin-bottom: 14px;
     }
 
     .meta-pill {
-      padding: 4px 9px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      font-size: 11px; text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .meta-pill.gold { color: var(--gold); border-color: var(--gold); }
 
-    /* BUTTONS */
-    .btn {
-      border-radius: 999px; padding: 7px 14px;
-      font-size: 11px; text-transform: uppercase;
-      cursor: pointer; display: inline-flex; align-items: center;
+    .meta-pill.gold {
+      color: var(--gold);
+      border-color: var(--gold);
     }
+
     .btn-primary {
-      background: var(--gold); color: var(--black); font-weight: 700;
-    }
-    .btn-outline {
-      border: 1px solid rgba(255,255,255,0.25);
-    }
-
-    /* CREATOR STRIP */
-    .creator-strip {
-      margin-top: 16px; padding: 12px;
-      border-radius: 16px; background: #050505;
-      display: flex; justify-content: space-between; flex-wrap: wrap;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .creator-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      border: 2px solid var(--gold); display: flex; justify-content: center; align-items: center;
-      font-size: 15px; font-weight: 700;
-    }
-
-    /* DESCRIPTION */
-    .description-card {
-      margin-top: 16px; padding: 12px;
-      border-radius: 16px; background: #050505;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* SIDEBAR */
-    .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .up-next-item {
-      display: flex; gap: 8px; margin-bottom: 10px;
-      padding: 6px; background: #050505;
-      border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: bold;
       cursor: pointer;
     }
-    .up-next-thumb {
-      width: 120px; aspect-ratio: 16/9;
-      border-radius: 8px; background-size: cover;
+
+    /* ========================
+       SIDEBAR
+       ======================== */
+    .sidebar-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 700;
     }
 
-    /* FOOTER */
-    .mb-footer {
-      max-width: 1280px; margin: 0 auto;
-      padding: 16px; text-align: center;
-      font-size: 11px; color: var(--light-gray);
+    .up-next-item {
+      display: flex;
+      gap: 10px;
+      background: #050505;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .up-next-thumb {
+      width: 120px;
+      aspect-ratio: 16/9;
+      background-size: cover;
+      border-radius: 8px;
+    }
+
+    /* ========================
+       FOOTER
+       ======================== */
+    footer {
+      text-align: center;
+      color: var(--gold);
+      border-top: 1px solid var(--gold);
+      margin-top: 40px;
+      padding: 16px 0;
+      font-size: 12px;
+      margin-bottom: 60px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="mb-header">
-    <div class="mb-logo">
-      <div class="mb-logo-mark">MB</div>
-      <div>MyBox Studios</div>
+  <!-- DESKTOP NAV -->
+  <header class="top-nav">
+    <div class="logo-area">
+      <img src="/assets/icons/mybox-192.png" alt="Logo">
+      <span>MY BOX STUDIOS</span>
     </div>
 
-    <nav class="mb-nav">
+    <nav class="nav-center">
       <a href="index.html">Home</a>
-      <a href="movies.html">Movies</a>
+      <a href="browse.html">Browse</a>
       <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
       <a href="watch.html" class="active">Watch</a>
-      <a href="join.html">Join</a>
     </nav>
+
+    <a href="join.html" class="join-btn">Join</a>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN LAYOUT -->
   <div class="watch-layout">
 
     <main class="watch-main">
 
-      <!-- REAL VIDEO PLAYER -->
       <section class="video-frame">
         <video id="watchVideo" controls playsinline poster="">
           <source id="videoSource" src="" type="video/mp4" />
@@ -185,19 +297,11 @@
       <h1 class="watch-title">Loading…</h1>
 
       <div class="watch-meta-row">
-        <div class="meta-pill gold">Official Studio Upload</div>
-        <button class="btn btn-primary">★ Buy / Download</button>
+        <div class="meta-pill gold">Official Upload</div>
+        <button class="btn-primary">Buy / Download</button>
       </div>
 
-      <section class="creator-strip">
-        <div class="creator-left">
-          <div class="creator-avatar">MB</div>
-          <div class="creator-name">Studio</div>
-        </div>
-      </section>
-
-      <section class="description-card">
-        <div class="description-row"></div>
+      <section class="description-card" style="border:1px solid rgba(255,255,255,0.1); padding:14px; border-radius:14px;">
         <div class="description-text">Loading description…</div>
       </section>
 
@@ -211,7 +315,6 @@
         <div class="up-next-thumb"></div>
         <div>
           <div class="up-next-title">Loading…</div>
-          <div class="up-next-meta"></div>
         </div>
       </div>
 
@@ -219,7 +322,6 @@
         <div class="up-next-thumb"></div>
         <div>
           <div class="up-next-title">Loading…</div>
-          <div class="up-next-meta"></div>
         </div>
       </div>
 
@@ -227,17 +329,27 @@
         <div class="up-next-thumb"></div>
         <div>
           <div class="up-next-title">Loading…</div>
-          <div class="up-next-meta"></div>
         </div>
       </div>
 
     </aside>
   </div>
 
-  <footer class="mb-footer">
-    © 2025 MyBox Studios · Worldwide
+  <footer>
+    © 2025 MyBox Studios — Support • Terms • Privacy
   </footer>
 
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-item"><span>Home</span></a>
+    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
+    <a href="music.html" class="bottom-item"><span>Music</span></a>
+    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
+    <a href="join.html" class="bottom-item"><span>Join</span></a>
+  </nav>
+
+  <!-- JS -->
   <script src="assets/js/watch.js"></script>
+
 </body>
 </html>
