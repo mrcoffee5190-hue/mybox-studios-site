@@ -38,8 +38,9 @@ exports.handler = async (event, context) => {
     try {
       // Call create-studio.js Netlify function
       const fetch = (await import("node-fetch")).default;
+
       await fetch(
-        process.env.URL + "/.netlify/functions/create-studio",
+        process.env.SITE_URL + "/.netlify/functions/create-studio",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -47,7 +48,7 @@ exports.handler = async (event, context) => {
         }
       );
 
-      console.log("🎉 Studio creation triggered!");
+      console.log("🎉 Studio creation triggered via webhook!");
     } catch (err) {
       console.error("❌ ERROR calling create-studio.js:", err);
     }
