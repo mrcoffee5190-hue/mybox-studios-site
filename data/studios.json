@@ -6,7 +6,9 @@
       "type": "music",
       "slug": "demo-music-studio",
       "display_name": "Demo Music Studio",
-      "created_at": "2025-01-01T00:00:00.000Z"
+      "created_at": "2025-01-01T00:00:00.000Z",
+      "logo": "/assets/icons/mybox-192.png",
+      "items_count": 0
     }
   ]
 }
