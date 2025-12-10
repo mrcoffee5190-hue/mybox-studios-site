@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>MyBox Studios — Join</title>
+  <title>Join MyBox Studios</title>
 
   <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
 
   <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest?v=3">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
   <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000"/>
 
   <style>
     :root {
@@ -24,25 +23,24 @@
 
     body {
       margin: 0;
+      font-family: "Montserrat", sans-serif;
       background: var(--black);
       color: var(--white);
-      font-family: "Montserrat", sans-serif;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* ===========================
-         DESKTOP NAVIGATION
-       =========================== */
-    .top-nav {
+    /* ======================
+       DESKTOP NAVIGATION
+    ====================== */
+    header.top-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: var(--black);
-      border-bottom: 1px solid var(--gold);
       padding: 12px 20px;
+      border-bottom: 1px solid var(--gold);
       position: sticky;
       top: 0;
       z-index: 999;
@@ -57,7 +55,7 @@
     .logo-area img {
       width: 40px;
       height: 40px;
-      border-radius: 6px;
+      border-radius: 8px;
     }
 
     .logo-area span {
@@ -66,25 +64,20 @@
       color: var(--gold);
     }
 
-    .nav-center {
+    nav.nav-center {
       display: flex;
       gap: 25px;
     }
 
-    .nav-center a {
-      color: var(--white);
+    nav.nav-center a {
       text-decoration: none;
+      color: var(--white);
       font-weight: 600;
-      transition: .2s;
     }
 
-    .nav-center a:hover {
+    nav.nav-center a:hover,
+    nav.nav-center .active {
       color: var(--gold);
-    }
-
-    .nav-center .active {
-      color: var(--gold);
-      font-weight: 700;
     }
 
     .join-btn {
@@ -94,33 +87,30 @@
       border-radius: 6px;
       font-weight: bold;
       text-decoration: none;
-      transition: .2s;
     }
 
-    .join-btn:hover { opacity: .85; }
-
-    @media(max-width: 750px) {
-      .top-nav { display: none; }
+    @media(max-width: 750px){
+      header.top-nav { display: none; }
     }
 
-    /* ===========================
-         MOBILE NAVIGATION
-       =========================== */
-    .bottom-nav {
+    /* ======================
+       MOBILE NAVIGATION
+    ====================== */
+    nav.bottom-nav {
       display: none;
     }
 
-    @media(max-width: 750px) {
-      .bottom-nav {
+    @media(max-width: 750px){
+      nav.bottom-nav {
         display: flex;
         justify-content: space-around;
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        padding: 12px 0;
         background: var(--black);
         border-top: 1px solid var(--gold);
+        padding: 12px 0;
         z-index: 9999;
       }
 
@@ -132,65 +122,57 @@
         text-decoration: none;
       }
 
-      .bottom-item span {
-        display: block;
-        margin-top: 3px;
-      }
-
-      .bottom-item:hover span {
-        color: var(--gold);
-      }
+      .bottom-item:hover { color: var(--gold); }
     }
 
-    /* ===========================
-         MAIN CONTENT
-       =========================== */
+    /* ======================
+           MAIN CONTENT
+    ====================== */
     main {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 2.5rem 1rem 4rem;
+      padding: 2.5rem 1rem 5rem;
       text-align: center;
     }
 
     h1 {
+      font-size: 2.4rem;
       color: var(--gold);
-      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
     p {
-      max-width: 580px;
-      margin: .5rem auto 1.5rem;
       font-size: 1.1rem;
       line-height: 1.6;
+      max-width: 600px;
+      margin: 0.5rem auto 1.5rem;
     }
 
     .benefits {
       list-style: none;
       padding: 0;
       text-align: left;
-      max-width: 450px;
+      max-width: 460px;
       margin: 2rem auto;
-      color: var(--gold);
       font-size: 1rem;
+      color: var(--gold);
     }
 
     .benefits li {
       margin: 10px 0;
-      line-height: 1.6;
     }
 
     #joinButton {
       background: var(--gold);
       color: var(--black);
+      padding: 14px 35px;
       border: none;
       border-radius: 12px;
-      padding: 14px 32px;
       font-size: 1.2rem;
       font-weight: bold;
       cursor: pointer;
-      transition: .3s;
       margin-top: 1.5rem;
+      transition: 0.3s;
     }
 
     #joinButton:hover {
@@ -201,12 +183,19 @@
     footer {
       text-align: center;
       padding: 1rem;
+      font-size: .9rem;
       color: var(--gold);
       border-top: 1px solid var(--gold);
-      font-size: .85rem;
       margin-top: auto;
-      margin-bottom: 60px;
+      margin-bottom: 65px;
     }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 
@@ -215,7 +204,7 @@
   <!-- DESKTOP NAV -->
   <header class="top-nav">
     <div class="logo-area">
-      <img src="/assets/icons/mybox-192.png" alt="Logo">
+      <img src="/assets/icons/mybox-192.png" alt="Logo"/>
       <span>MY BOX STUDIOS</span>
     </div>
 
@@ -227,7 +216,7 @@
       <a href="join.html" class="active">Join</a>
     </nav>
 
-    <a href="join.html" class="join-btn">Join</a>
+    <a class="join-btn" href="join.html">Join</a>
   </header>
 
   <!-- MAIN CONTENT -->
@@ -236,36 +225,55 @@
 
     <p>
       Pay a one-time <strong style="color: var(--gold);">$100 membership fee</strong><br>
-      and unlock your personal studio to sell music & films worldwide.
+      and unlock your personal studio to sell movies & music worldwide.
     </p>
 
+    <!-- TERMS AGREEMENT CHECKBOX -->
+    <div style="margin-top: 1.5rem; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
+      <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; line-height: 1.4;">
+        <input id="agreeTerms" type="checkbox" style="margin-top: 4px; transform: scale(1.3);" />
+        <span style="font-size: .9rem;">
+          I agree to the 
+          <a href="terms.html" target="_blank" style="color: var(--gold); text-decoration: underline;">
+            MyBox Studios Terms of Service
+          </a>.
+        </span>
+      </label>
+    </div>
+
+    <!-- JOIN BUTTON -->
     <button id="joinButton">Join MyBox Studios — $100</button>
 
+    <!-- BENEFITS -->
     <ul class="benefits">
       <li>🎬 Sell your films and music instantly</li>
       <li>💸 Keep 80% of all sales automatically</li>
-      <li>🌎 Worldwide distribution with no delays</li>
-      <li>🚀 Personalized studio page included</li>
+      <li>🌎 Worldwide distribution</li>
+      <li>🚀 Your own studio page included</li>
       <li>🔒 Secure Stripe-powered checkout</li>
     </ul>
 
     <p style="font-size: .9rem;">
       Need help?  
-      <a href="support.html" style="color: var(--gold); text-decoration: underline;">Contact Support</a>
+      <a href="support.html" style="color: var(--gold);">Contact Support</a>
     </p>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    © 2025 MyBox Studios — Support • Terms • Privacy
+    © 2025 MyBox Studios — 
+    <a href="support.html">Support</a> • 
+    <a href="terms.html">Terms</a> • 
+    <a href="privacy.html">Privacy</a>
   </footer>
 
   <!-- MOBILE NAV -->
   <nav class="bottom-nav">
-    <a href="index.html" class="bottom-item"><span>Home</span></a>
-    <a href="browse.html" class="bottom-item"><span>Browse</span></a>
-    <a href="music.html" class="bottom-item"><span>Music</span></a>
-    <a href="movies.html" class="bottom-item"><span>Movies</span></a>
-    <a href="join.html" class="bottom-item"><span>Join</span></a>
+    <a href="index.html" class="bottom-item">Home</a>
+    <a href="browse.html" class="bottom-item">Browse</a>
+    <a href="music.html" class="bottom-item">Music</a>
+    <a href="movies.html" class="bottom-item">Movies</a>
+    <a href="join.html" class="bottom-item">Join</a>
   </nav>
 
   <!-- STRIPE -->
@@ -273,15 +281,21 @@
 
   <!-- CHECKOUT LOGIC -->
   <script>
-    const stripe = Stripe("pk_live_51SFln7ECGiskYMpTAV7zXmtcPFjQv8eLLgnqqsjFf1uMgJjSWd8p3erFIMpTGCD2AeuMJJ1sMGubMZMCX5mL1F0V00MTMKm5jR"); 
-    // Replace above with your real pk_live_xxx
+    const stripe = Stripe("pk_live_51SFln7ECGiskYMpTAV7zXmtcPFjQv8eLLgnqqsjFf1uMgJjSWd8p3erFIMpTGCD2AeuMJJ1sMGubMZMCX5mL1F0V00MTMKm5jR");
 
     document.getElementById("joinButton").addEventListener("click", async () => {
+
+      // REQUIRE TERMS AGREEMENT
+      const agreed = document.getElementById("agreeTerms").checked;
+      if (!agreed) {
+        alert("Please agree to the Terms of Service before joining.");
+        return;
+      }
+
       try {
         const response = await fetch("/.netlify/functions/join-create-session", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({})
+          headers: { "Content-Type": "application/json" }
         });
 
         const data = await response.json();
@@ -295,7 +309,9 @@
           sessionId: data.sessionId,
         });
 
-        if (result.error) alert(result.error.message);
+        if (result.error) {
+          alert(result.error.message);
+        }
 
       } catch (err) {
         console.error(err);
@@ -307,8 +323,7 @@
   <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/service-worker.js")
-        .catch(err => console.error("SW failed:", err));
+      navigator.serviceWorker.register("/service-worker.js");
     }
   </script>
 
