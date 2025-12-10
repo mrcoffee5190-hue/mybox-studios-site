@@ -3,19 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | MyBox Studios</title>
 
-  <title>MyBox Studios — Terms of Service</title>
+  <!-- FONT (optional, matches rest of app if you already use Montserrat) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- ✅ PWA REQUIRED BLOCK -->
-  <link rel="manifest" href="/manifest.webmanifest?v=3">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
-  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
-  <meta name="theme-color" content="#000000" />
-
-  <!-- GLOBAL + PAGE STYLES -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -23,237 +15,401 @@
       --white: #ffffff;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      padding: 0;
       background-color: var(--black);
       color: var(--white);
-      font-family: "Montserrat", sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
     }
 
-    /* GLOBAL SPINNER */
-    #spinner {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    #spinner .ring {
-      width: 48px;
-      height: 48px;
-      border: 4px solid var(--gold);
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* NAVIGATION */
-    header {
-      width: 100%;
-      background-color: #111;
-      border-bottom: 1px solid var(--gold);
-      padding: 1rem 0;
-      display: flex;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 900;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: var(--gold);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    nav a:hover { color: var(--white); }
-    nav a.active { color: var(--white); }
-
-    /* PAGE CONTENT */
-    main {
-      max-width: 800px;
+    .page-wrapper {
+      max-width: 960px;
       margin: 0 auto;
-      padding: 2rem 1rem 3rem;
-      line-height: 1.65;
-      flex: 1;
+      padding: 2rem 1.25rem 4rem;
     }
 
-    h1 {
-      color: var(--gold);
-      font-size: 2.2rem;
+    header {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      color: #cccccc;
     }
 
     h2 {
-      color: var(--gold);
       margin-top: 2rem;
-      margin-bottom: .5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.2rem;
+      color: var(--gold);
     }
 
-    p { margin: 0.5rem 0 1rem; }
+    h3 {
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #f0f0f0;
+    }
 
-    ul { margin: 0.5rem 0 1.5rem 1.2rem; }
-    li { margin-bottom: .5rem; }
+    p {
+      margin: 0.4rem 0 0.8rem;
+      font-size: 0.95rem;
+    }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      border-top: 1px solid var(--gold);
+    ul {
+      margin: 0.35rem 0 0.9rem 1.25rem;
+      padding: 0;
+      font-size: 0.95rem;
+    }
+
+    a {
       color: var(--gold);
-      font-size: .85rem;
-      margin-top: auto;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+      margin: 2rem 0 1.5rem;
+    }
+
+    .muted {
+      color: #aaaaaa;
+      font-size: 0.85rem;
+    }
+
+    .boxed-note {
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 768px) {
+      header h1 {
+        font-size: 2.1rem;
+      }
+      p, ul {
+        font-size: 0.98rem;
+      }
     }
   </style>
 </head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>MyBox Studios – Terms of Service</h1>
+      <p>Last updated: <span id="last-updated">January 2025</span></p>
+      <p class="muted">
+        This single page acts as the Terms of Service, Creator Agreement, Content Policy, and basic Privacy Notice for MyBox Studios.
+      </p>
+    </header>
 
-<body data-mbs-page="terms">
+    <section id="acceptance">
+      <h2>1. Acceptance of these Terms</h2>
+      <p>
+        MyBox Studios (“MyBox Studios”, “we”, “our”, “us”) operates a digital platform where creators can open a studio, upload and sell
+        movies, music, and other content, and earn revenue from their sales. By accessing or using
+        <strong>myboxstudioslive.com</strong>, creating a studio, or purchasing content, you (“you”, “user”, “creator”, or “customer”)
+        agree to be bound by these Terms of Service (“Terms”).
+      </p>
+      <p>
+        If you do not agree with these Terms, do not use the platform, do not open a studio, and do not purchase content.
+      </p>
+      <div class="boxed-note">
+        <strong>Creators:</strong> By clicking any “Join”, “Open Studio”, or similar button, and/or by checking an “I agree” box, you are
+        also agreeing to the Creator and Revenue terms in Section 6 and the Studio Suspension &amp; Termination rules in Section 7.
+      </div>
+    </section>
 
-  <!-- GLOBAL SPINNER -->
-  <div id="spinner"><div class="ring"></div></div>
+    <hr class="section-divider" />
 
-  <!-- NAVIGATION -->
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="music.html">Music</a>
-      <a href="movies.html">Movies</a>
-      <a href="join.html">Join</a>
-      <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html" class="active">Terms</a>
-    </nav>
-  </header>
+    <section id="definitions">
+      <h2>2. Key Definitions</h2>
+      <ul>
+        <li><strong>Platform:</strong> The MyBox Studios website, app, and related services.</li>
+        <li><strong>Creator / Studio Owner:</strong> A person or entity who opens a studio and uploads or sells content.</li>
+        <li><strong>Studio:</strong> A dedicated area or page on MyBox Studios where a creator’s content is displayed, promoted, and sold.</li>
+        <li><strong>Customer:</strong> Any person who visits the platform or purchases content.</li>
+        <li><strong>Content:</strong> Movies, music, artwork, text, images, audio, video, and any other material uploaded to the platform.</li>
+        <li><strong>Membership Fee:</strong> The one-time fee (currently $100) charged to open a studio, subject to change at our discretion.</li>
+        <li><strong>Revenue Split:</strong> The default payment arrangement in which creators receive 80% of qualifying net sales and MyBox Studios receives 20%, unless otherwise stated in writing.</li>
+      </ul>
+    </section>
 
-  <!-- TERMS CONTENT -->
-  <main>
-    <h1>Terms of Service</h1>
+    <hr class="section-divider" />
 
-    <p>
-      These Terms of Service (“Terms”) govern your use of MyBox Studios, including the website,
-      mobile experience, and all related services (“Service”). By using MyBox Studios,
-      you agree to these Terms. If you do not agree, you must stop using the Service.
-    </p>
+    <section id="eligibility">
+      <h2>3. Eligibility &amp; Use of the Platform</h2>
+      <p>
+        You must be at least 18 years old, or the age of majority in your jurisdiction, to open a studio or receive payouts. By using the
+        platform, you represent that:
+      </p>
+      <ul>
+        <li>You have the legal right and authority to agree to these Terms.</li>
+        <li>You will only upload content you have the rights or licenses to use and sell.</li>
+        <li>You will not use MyBox Studios for illegal or fraudulent purposes.</li>
+      </ul>
+    </section>
 
-    <h2>1. Who We Are</h2>
-    <p>
-      MyBox Studios is an independent digital marketplace where creators can upload and sell
-      films, music, and digital media worldwide.
-    </p>
+    <hr class="section-divider" />
 
-    <h2>2. Eligibility</h2>
-    <p>You must be 18 or older, or the legal age in your region, to use the platform.</p>
+    <section id="accounts">
+      <h2>4. Accounts, Studios &amp; Security</h2>
+      <p>
+        To open a studio or make purchases, you may be required to create an account and provide accurate, up-to-date information, including
+        your legal name, email address, payment details, and where applicable, tax information.
+      </p>
+      <ul>
+        <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+        <li>You are responsible for all activity that occurs under your account or studio.</li>
+        <li>You agree to notify us promptly if you suspect unauthorized use of your account.</li>
+      </ul>
+    </section>
 
-    <h2>3. Account Security</h2>
-    <ul>
-      <li>You are responsible for keeping your login details secure.</li>
-      <li>Notify support immediately if you suspect unauthorized access.</li>
-      <li>You are responsible for all activity on your account.</li>
-    </ul>
+    <hr class="section-divider" />
 
-    <h2>4. Creator Membership & Fees</h2>
-    <p>
-      To open a Creator Studio, a one-time membership fee may be required.
-      All payments are processed through Stripe and are generally non-refundable unless required by law.
-    </p>
+    <section id="content-policy">
+      <h2>5. Content Rules &amp; Community Standards</h2>
+      <p>
+        MyBox Studios is a curated platform. We reserve the right to decide, at our sole discretion, what content fits our brand, our
+        community, and our legal obligations.
+      </p>
+      <h3>5.1 Prohibited Content</h3>
+      <p>You agree not to upload, sell, or promote content that:</p>
+      <ul>
+        <li>Is illegal, fraudulent, or promotes criminal activity.</li>
+        <li>Contains threats of violence, harassment, or targeted hate against any person or group.</li>
+        <li>Displays explicit sexual content, or content that is exploitative or abusive.</li>
+        <li>Glorifies extreme violence, self-harm, or serious abuse.</li>
+        <li>Infringes any copyright, trademark, or other intellectual property rights.</li>
+        <li>Contains malware, spyware, or attempts to damage another person’s device or data.</li>
+        <li>Is obviously misleading, scam-like, or designed to trick buyers.</li>
+      </ul>
 
-    <h2>5. Content Ownership</h2>
-    <ul>
-      <li>Creators retain ownership of the content they upload.</li>
-      <li>Creators grant MyBox Studios a license to host, stream, and sell content through the platform.</li>
-      <li>Creators must have legal rights to all uploaded media.</li>
-    </ul>
+      <h3>5.2 Complaints &amp; Reports</h3>
+      <p>
+        We may receive reports from customers, copyright owners, or other users about specific content or studios. We reserve the right to
+        review, hide, limit, or remove content and/or studios at any time based on those reports and our internal review.
+      </p>
+    </section>
 
-    <h2>6. Purchases & Access</h2>
-    <ul>
-      <li>Stripe processes all user payments securely.</li>
-      <li>MyBox Studios never stores full credit card numbers.</li>
-      <li>Purchased content may include streaming or downloadable access depending on the item.</li>
-    </ul>
+    <hr class="section-divider" />
 
-    <h2>7. Prohibited Use</h2>
-    <ul>
-      <li>Uploading illegal, harmful, or infringing content</li>
-      <li>Hacking, tampering, or disrupting the platform</li>
-      <li>Misusing payment systems or bypassing purchases</li>
-    </ul>
+    <section id="creator-terms">
+      <h2>6. Creator Terms, Membership Fee &amp; Revenue Split</h2>
 
-    <h2>8. Copyright</h2>
-    <p>
-      Copyright owners may contact us regarding infringement. Valid DMCA takedown
-      requests will be reviewed and processed promptly.
-    </p>
+      <h3>6.1 Studio Membership Fee</h3>
+      <p>
+        To open a studio on MyBox Studios, we may charge a one-time Membership Fee (currently $100, subject to change). This fee grants you
+        access to studio tools and the ability to list your content for sale on the platform.
+      </p>
+      <p>
+        <strong>Unless otherwise required by law, the Membership Fee is non-refundable, including if your studio is later suspended or
+        terminated for violating these Terms.</strong>
+      </p>
 
-    <h2>9. No Earnings Guarantee</h2>
-    <p>
-      MyBox Studios gives creators tools to earn income, but results depend on your content,
-      marketing, and audience. We do not guarantee sales or income.
-    </p>
+      <h3>6.2 Revenue Split &amp; Payments</h3>
+      <p>
+        Unless a different arrangement is agreed to in writing, the default revenue split is:
+      </p>
+      <ul>
+        <li><strong>80%</strong> of qualifying net sales to the creator; and</li>
+        <li><strong>20%</strong> of qualifying net sales to MyBox Studios.</li>
+      </ul>
+      <p>
+        “Net sales” generally means the amount received from the customer after payment processing fees, chargebacks, refunds, taxes, and
+        similar costs are deducted. Payment timelines, minimum payout thresholds, and supported payout methods may change over time and will
+        be communicated in your creator dashboard or support materials.
+      </p>
 
-    <h2>10. Service Changes</h2>
-    <p>
-      Features, pages, or functions may change, update, or be removed at any time.
-    </p>
+      <h3>6.3 Your Responsibilities as a Creator</h3>
+      <p>By opening a studio or selling content on MyBox Studios, you agree that:</p>
+      <ul>
+        <li>You own or have valid licenses to all content you upload and sell.</li>
+        <li>You are responsible for the accuracy of descriptions, pricing, and any promises made to customers.</li>
+        <li>You will comply with applicable tax laws in your jurisdiction.</li>
+        <li>You will cooperate with us in resolving customer support issues related to your studio.</li>
+      </ul>
+    </section>
 
-    <h2>11. Limitation of Liability</h2>
-    <p>
-      MyBox Studios is not liable for indirect, incidental, or consequential damages
-      to the extent allowed by law.
-    </p>
+    <hr class="section-divider" />
 
-    <h2>12. Termination</h2>
-    <p>
-      Accounts may be suspended or terminated for violating these Terms.
-    </p>
+    <section id="suspension-termination">
+      <h2>7. Studio Suspension &amp; Termination</h2>
+      <p>
+        MyBox Studios is a private platform, and access to our tools, storefronts, and studio pages is a privilege – not a right. To
+        protect our community, our brand partners, and our visitors, we reserve the right, in our sole discretion, to suspend or permanently
+        terminate any studio, page, or account at any time and for any reason, including but not limited to:
+      </p>
+      <ul>
+        <li>Uploading or distributing content that is illegal, fraudulent, or promotes criminal activity.</li>
+        <li>Content that is hateful, harassing, or targets protected groups with threats, slurs, or abuse.</li>
+        <li>Sexually explicit, extremely graphic, or otherwise inappropriate content not allowed under our content standards.</li>
+        <li>Repeated copyright violations, DMCA complaints, or intellectual property infringement.</li>
+        <li>Content that is misleading, scam-like, or designed to trick or exploit visitors.</li>
+        <li>Repeated negative reports or complaints from customers or users that we determine, in our discretion, to be valid.</li>
+        <li>Any other behavior that we believe harms MyBox Studios, our users, or our reputation.</li>
+      </ul>
 
-    <h2>13. Governing Law</h2>
-    <p>
-      These Terms follow the laws of the region where MyBox Studios operates.
-    </p>
+      <h3>7.1 Our Process (When Possible)</h3>
+      <p>In many cases, we will first:</p>
+      <ul>
+        <li>Pause or hide specific pieces of content; and/or</li>
+        <li>Send a warning to the email address on file explaining what needs to be fixed and by what date.</li>
+      </ul>
+      <p>
+        However, <strong>we may remove content or shut down a studio without prior notice</strong> in urgent situations, including but not
+        limited to serious legal risk, threats, or obvious abuse of the platform.
+      </p>
 
-    <h2>14. Contact Information</h2>
-    <p>
-      Contact us at:<br>
-      <a href="mailto:support@myboxstudioapp.com"
-         style="color: var(--gold); text-decoration: underline;">
-         support@myboxstudioapp.com
-      </a>
-    </p>
+      <h3>7.2 Effect of Termination</h3>
+      <p>If your studio or account is suspended or terminated:</p>
+      <ul>
+        <li>Your pages and content may be taken offline or hidden from public view.</li>
+        <li>We may restrict your ability to create new content or access creator tools.</li>
+        <li>
+          Any pending payouts may be delayed, withheld, or reversed if we reasonably believe fraud, chargebacks, or violations of law
+          or these Terms are involved.
+        </li>
+        <li>
+          <strong>Membership or access fees paid to MyBox Studios are generally non-refundable when termination is due to a violation of our
+          rules or applicable law.</strong>
+        </li>
+      </ul>
+      <p>You may contact support if you believe a suspension or termination was made in error. While we review reasonable appeals, decisions regarding platform access are ultimately made at our discretion.</p>
+    </section>
 
-    <h2>15. Updates</h2>
-    <p>
-      These Terms may be updated periodically. Continued use of the Service means you accept updates.
-    </p>
-  </main>
+    <hr class="section-divider" />
 
-  <footer>
-    © 2025 MyBox Studios — All Rights Reserved
-  </footer>
+    <section id="purchases-refunds">
+      <h2>8. Customer Purchases, Refunds &amp; Chargebacks</h2>
+      <p>
+        When you purchase content on MyBox Studios, you are buying access to digital goods. Because of the nature of digital content, all
+        sales are generally considered final unless otherwise stated at checkout or required by law.
+      </p>
+      <p>
+        We reserve the right, but are not obligated, to issue refunds or credits in special circumstances, such as defective files or clear
+        technical errors. Chargebacks and payment disputes may result in your access to purchased content being revoked and, where relevant,
+        studios being investigated or restricted.
+      </p>
+    </section>
 
-  <!-- GLOBAL APP SCRIPT -->
-  <script src="assets/js/app.js"></script>
+    <hr class="section-divider" />
 
-  <!-- SERVICE WORKER REGISTRATION -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/service-worker.js")
-        .catch(err => console.error("SW registration failed:", err));
-    }
-  </script>
+    <section id="dmca">
+      <h2>9. Copyright, Ownership &amp; DMCA</h2>
+      <p>
+        Creators retain ownership of their original content but grant MyBox Studios a limited license to host, display, market, and process
+        sales of that content on the platform.
+      </p>
+      <p>
+        If you believe that content on MyBox Studios infringes your copyright, you may submit a notice to our designated contact:
+      </p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:support@myboxstudioslive.com">support@myboxstudioslive.com</a>
+      </p>
+      <p>
+        Your notice should include sufficient detail to identify the work allegedly infringed, the material in question, and your contact
+        information. We may remove or disable access to allegedly infringing content and may, in appropriate circumstances, suspend or
+        terminate repeat infringers.
+      </p>
+    </section>
 
+    <hr class="section-divider" />
+
+    <section id="privacy">
+      <h2>10. Basic Privacy &amp; Data Use</h2>
+      <p>
+        We collect certain information that you provide directly (such as your name, email, and payment details) as well as technical data
+        (such as IP address, device information, and usage patterns) to operate and improve the platform.
+      </p>
+      <p>We may use this information to:</p>
+      <ul>
+        <li>Operate and secure MyBox Studios.</li>
+        <li>Process transactions and payouts through third-party payment processors (such as Stripe).</li>
+        <li>Provide customer and creator support.</li>
+        <li>Comply with legal obligations, including anti-fraud and tax rules.</li>
+      </ul>
+      <p>
+        We do not sell your personal information as a standalone product. We may share limited information with service providers who help
+        us operate the platform (for example, payment processing, analytics, or email delivery). A more detailed standalone Privacy Policy
+        may be added or updated in the future, and when that happens, that policy will work together with this section.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="disclaimers">
+      <h2>11. Disclaimers &amp; Limitation of Liability</h2>
+      <p>
+        MyBox Studios is provided on an “as-is” and “as-available” basis. To the fullest extent permitted by law, we disclaim all warranties,
+        express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement.
+      </p>
+      <p>
+        To the fullest extent permitted by law, MyBox Studios and its owners, officers, employees, and partners will not be liable for any
+        indirect, incidental, special, consequential, or punitive damages, or for any loss of profits or revenues, whether incurred directly
+        or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from your use of or inability to use the
+        platform.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="changes-law">
+      <h2>12. Changes to These Terms</h2>
+      <p>
+        We may update these Terms from time to time. When we make material changes, we will update the “Last updated” date at the top of
+        this page and may provide additional notice where appropriate (for example, via email or in-app notice).
+      </p>
+      <p>
+        Your continued use of the platform after changes become effective means you accept the revised Terms. If you do not agree, you must
+        stop using the platform and, if applicable, close your studio.
+      </p>
+
+      <h2>13. Governing Law</h2>
+      <p>
+        These Terms are governed by and construed in accordance with the laws of the State of Illinois, without regard to its conflicts of
+        laws principles. Any disputes arising out of or relating to these Terms or the platform will be brought exclusively in the state or
+        federal courts located in Illinois, and you consent to the jurisdiction of those courts.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section id="contact">
+      <h2>14. Contact</h2>
+      <p>
+        If you have questions about these Terms or about MyBox Studios, you may contact:
+      </p>
+      <p>
+        <strong>MyBox Studios Support</strong><br />
+        Email: <a href="mailto:support@myboxstudioslive.com">support@myboxstudioslive.com</a>
+      </p>
+    </section>
+  </div>
 </body>
 </html>
