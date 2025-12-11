@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Fits phones, tablets, laptops, and TVs -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <!-- Responsive across all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Studio | MyBox Studios</title>
 
-  <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- ✅ PWA / PLAY STORE BLOCK -->
+  <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.webmanifest?v=3">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
-  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
-  <meta name="theme-color" content="#000000" />
 
+  <!-- Correct New Icon Files -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-logo-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-logo-180.png">
+
+  <!-- System & App UI Colors -->
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GLOBAL BRAND COLORS -->
   <style>
     :root {
       --gold: #D4AF37;
@@ -23,10 +30,11 @@
       --white: #ffffff;
       --muted: #bbbbbb;
     }
+  </style>
 
-    * {
-      box-sizing: border-box;
-    }
+  <!-- PAGE STYLES -->
+  <style>
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -60,7 +68,7 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* NAVIGATION BAR (matches rest of app) */
+    /* NAVIGATION */
     header {
       width: 100%;
       background-color: #111;
@@ -96,7 +104,7 @@
       flex: 1;
     }
 
-    /* STUDIO HEADER SECTION */
+    /* STUDIO HEADER */
     .studio-header {
       display: flex;
       flex-direction: column;
@@ -182,7 +190,7 @@
       min-width: 140px;
     }
 
-    /* GRID OF CONTENT ITEMS */
+    /* GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -265,61 +273,24 @@
       flex-wrap: wrap;
     }
 
-    .btn-primary,
-    .btn-secondary {
+    .btn-primary {
       border-radius: 999px;
       border: none;
       padding: 6px 14px;
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
+      background: var(--gold);
+      color: var(--black);
       transition: 0.25s;
       white-space: nowrap;
     }
-
-    .btn-primary {
-      background: var(--gold);
-      color: var(--black);
-    }
-
     .btn-primary:hover {
       background: var(--white);
       color: var(--black);
     }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-    }
-
-    .btn-secondary:hover {
-      background: var(--white);
-      color: var(--black);
-    }
-
-    .empty-state {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 2rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--gold);
-      color: var(--gold);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.85rem;
-      margin-top: auto;
-    }
-
-    @media (min-width: 1600px) {
-      .studio-title { font-size: 2.7rem; }
-      .studio-meta { font-size: 1rem; }
-      .item-title { font-size: 1.05rem; }
-    }
   </style>
+
 </head>
 
 <body data-mbs-page="studio">
@@ -330,24 +301,20 @@
   <!-- NAVIGATION -->
   <header>
     <nav>
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="music.html" class="nav-link">Music</a>
-      <a href="movies.html" class="nav-link">Movies</a>
-      <a href="join.html" class="nav-link">Join</a>
-      <a href="support.html" class="nav-link">Support</a>
+      <a href="index.html">Home</a>
+      <a href="music.html">Music</a>
+      <a href="movies.html">Movies</a>
+      <a href="join.html">Join</a>
+      <a href="support.html">Support</a>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main>
     <section class="studio-header">
       <h1 class="studio-title" id="studioName">Loading Studio...</h1>
-      <div class="studio-meta" id="studioMeta">
-        <!-- Filled by JS: Creator / Type / Created date -->
-      </div>
-      <div class="studio-badge-row" id="studioBadges">
-        <!-- Badges (Music / Movies / Mixed) filled by JS -->
-      </div>
+      <div class="studio-meta" id="studioMeta"></div>
+      <div class="studio-badge-row" id="studioBadges"></div>
     </section>
 
     <!-- FILTERS -->
@@ -357,16 +324,11 @@
         <button class="pill" data-filter="music">Music</button>
         <button class="pill" data-filter="movie">Movies</button>
       </div>
-      <div class="filter-meta" id="itemCountLabel">
-        <!-- "6 items • All content" etc. -->
-      </div>
+      <div class="filter-meta" id="itemCountLabel"></div>
     </section>
 
     <!-- GRID -->
-    <section id="studioGrid" class="grid">
-      <!-- Item cards injected by JS -->
-    </section>
-
+    <section id="studioGrid" class="grid"></section>
     <div class="empty-state" id="emptyState" style="display:none;">
       No items found for this filter yet.
     </div>
@@ -376,18 +338,15 @@
     © 2025 MyBox Studios — Indie Music & Movies Worldwide
   </footer>
 
-  <!-- GLOBAL APP SCRIPT (if you already use it) -->
+  <!-- GLOBAL APP JS -->
   <script src="assets/js/app.js"></script>
 
-  <!-- PAGE LOGIC: Load studio from /data/studios/{slug}.json -->
+  <!-- PAGE LOGIC -->
   <script>
     (function() {
       const spinner = document.getElementById("spinner");
-      function hideSpinner() {
-        if (spinner) spinner.style.display = "none";
-      }
+      const hideSpinner = () => spinner && (spinner.style.display = "none");
 
-      // Get ?slug= from URL
       const params = new URLSearchParams(window.location.search);
       const studioSlug = params.get("slug");
 
@@ -399,17 +358,15 @@
       const itemCountLabelEl = document.getElementById("itemCountLabel");
 
       const filterButtons = document.querySelectorAll(".pill");
-
       let fullItems = [];
 
       if (!studioSlug) {
         studioNameEl.textContent = "Studio not found";
-        studioMetaEl.textContent = "No studio slug provided in the URL.";
+        studioMetaEl.textContent = "No studio slug provided.";
         hideSpinner();
         return;
       }
 
-      // Load JSON for this studio
       const jsonUrl = "/data/studios/" + encodeURIComponent(studioSlug) + ".json";
 
       fetch(jsonUrl + "?v=" + Date.now())
@@ -420,48 +377,30 @@
         .then(data => {
           fullItems = Array.isArray(data.items) ? data.items : [];
 
-          const displayName = data.display_name || studioSlug.replace(/-/g, " ");
-          const ownerEmail = data.owner_email || "creator@myboxstudioapp.com";
-          const createdAt = data.created_at || null;
-
-          studioNameEl.textContent = displayName;
-
-          let metaParts = [];
-          metaParts.push("Owner: ");
-          metaParts.push("<span>" + ownerEmail + "</span>");
-
-          if (createdAt) {
-            const d = new Date(createdAt);
-            metaParts.push(" • Joined: " + d.toLocaleDateString());
+          studioNameEl.textContent = data.display_name || studioSlug.replace(/-/g, " ");
+          
+          let meta = [];
+          meta.push("Owner: <span>" + (data.owner_email || "Unknown") + "</span>");
+          if (data.created_at) {
+            const d = new Date(data.created_at);
+            meta.push(" • Joined: " + d.toLocaleDateString());
           }
+          studioMetaEl.innerHTML = meta.join("");
 
-          studioMetaEl.innerHTML = metaParts.join("");
-
-          // Badges: type / mixed
-          studioBadgesEl.innerHTML = "";
           const hasMusic = fullItems.some(i => i.type === "music");
           const hasMovies = fullItems.some(i => i.type === "movie");
 
-          if (hasMusic && hasMovies) {
-            studioBadgesEl.innerHTML =
-              '<div class="badge">Music & Movies</div>';
-          } else if (hasMusic) {
-            studioBadgesEl.innerHTML =
-              '<div class="badge">Music Studio</div>';
-          } else if (hasMovies) {
-            studioBadgesEl.innerHTML =
-              '<div class="badge">Movie Studio</div>';
-          } else {
-            studioBadgesEl.innerHTML =
-              '<div class="badge">New Studio</div>';
-          }
+          if (hasMusic && hasMovies) studioBadgesEl.innerHTML = '<div class="badge">Music & Movies</div>';
+          else if (hasMusic) studioBadgesEl.innerHTML = '<div class="badge">Music Studio</div>';
+          else if (hasMovies) studioBadgesEl.innerHTML = '<div class="badge">Movie Studio</div>';
+          else studioBadgesEl.innerHTML = '<div class="badge">New Studio</div>';
 
           renderItems("all");
         })
         .catch(err => {
-          console.error("Studio load error:", err);
+          console.error(err);
           studioNameEl.textContent = "Studio not found";
-          studioMetaEl.textContent = "We couldn't load this studio. It may be new or unavailable.";
+          studioMetaEl.textContent = "This studio may be new or unavailable.";
           gridEl.innerHTML = "";
         })
         .finally(hideSpinner);
@@ -469,12 +408,10 @@
       function renderItems(filterType) {
         gridEl.innerHTML = "";
 
-        const filtered = fullItems.filter(item => {
-          if (filterType === "all") return true;
-          return (item.type || "").toLowerCase() === filterType;
-        });
+        const filtered = fullItems.filter(i =>
+          filterType === "all" ? true : (i.type || "").toLowerCase() === filterType
+        );
 
-        // Update count label
         const count = filtered.length;
         let label = count + (count === 1 ? " item" : " items");
         if (filterType === "music") label += " • Music";
@@ -485,9 +422,8 @@
         if (!count) {
           emptyStateEl.style.display = "block";
           return;
-        } else {
-          emptyStateEl.style.display = "none";
         }
+        emptyStateEl.style.display = "none";
 
         filtered.forEach(item => {
           const card = document.createElement("article");
@@ -502,7 +438,6 @@
             img.alt = item.title || "Cover";
             coverDiv.appendChild(img);
           } else {
-            // simple icon fallback
             coverDiv.textContent = item.type === "music" ? "🎧" : "🎬";
           }
 
@@ -516,41 +451,37 @@
 
           const metaLine = document.createElement("div");
           metaLine.className = "item-meta-line";
-          const creatorName = item.creator || "Unknown Creator";
-          const producerName = item.producer || "";
           metaLine.innerHTML =
-            "<span>" + creatorName + "</span>" +
-            (producerName ? " • " + producerName : "");
+            "<span>" + (item.creator || "Unknown") + "</span>" +
+            (item.producer ? " • " + item.producer : "");
 
           const footer = document.createElement("div");
           footer.className = "item-footer";
 
           const priceTag = document.createElement("div");
           priceTag.className = "price-tag";
-          if (item.price && Number(item.price) > 0) {
-            priceTag.textContent = "$" + Number(item.price).toFixed(2);
-          } else {
-            priceTag.textContent = "Free / Preview";
-          }
+          priceTag.textContent =
+            item.price && Number(item.price) > 0
+              ? "$" + Number(item.price).toFixed(2)
+              : "Free / Preview";
 
           const btnRow = document.createElement("div");
           btnRow.className = "btn-row";
 
-          // PLAY / WATCH button – goes to watch.html
           const playBtn = document.createElement("button");
           playBtn.className = "btn-primary";
           playBtn.textContent = item.type === "music" ? "Play Track" : "Play Film";
           playBtn.addEventListener("click", () => {
-            const typeParam = item.type === "music" ? "music" : "movie";
-            const url = "watch.html?type=" + encodeURIComponent(typeParam) +
-                        "&id=" + encodeURIComponent(item.id) +
-                        "&studio=" + encodeURIComponent(studioSlug);
-            window.location.href = url;
+            window.location.href =
+              "watch.html?type=" +
+              encodeURIComponent(item.type) +
+              "&id=" +
+              encodeURIComponent(item.id) +
+              "&studio=" +
+              encodeURIComponent(studioSlug);
           });
-          btnRow.appendChild(playBtn);
 
-          // NOTE: No fake purchase button shown – avoids non-functional billing UI
-          // When Stripe / Google Play billing per-item is ready, we can safely add a real BUY button here.
+          btnRow.appendChild(playBtn);
 
           footer.appendChild(priceTag);
           footer.appendChild(btnRow);
@@ -565,13 +496,11 @@
         });
       }
 
-      // Filter button click handling
       filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
           filterButtons.forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
-          const filter = btn.getAttribute("data-filter");
-          renderItems(filter);
+          renderItems(btn.getAttribute("data-filter"));
         });
       });
     })();
