@@ -2,19 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device=device-width, initial-scale=1.0" />
   <title>Offline | MyBox Studios</title>
 
-  <!-- Fonts -->
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+
+  <!-- Icons for PWA + Apple -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-logo-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-logo-180.png">
+
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Montserrat Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- Brand Colors -->
   <style>
     :root {
       --gold: #D4AF37;
       --black: #000000;
       --white: #ffffff;
     }
+  </style>
 
+  <!-- Page Styles -->
+  <style>
     body {
       margin: 0;
       padding: 0;
@@ -27,6 +43,8 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -74,6 +92,7 @@
       .retry-btn { font-size: 1.3rem; padding: 18px 40px; }
     }
   </style>
+
 </head>
 
 <body>
