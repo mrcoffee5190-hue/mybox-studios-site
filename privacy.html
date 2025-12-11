@@ -5,22 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy | MyBox Studios</title>
 
-  <!-- GOOGLE FONTS -->
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.webmanifest?v=3">
+
+  <!-- Icons for PWA & iOS -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-logo-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/mybox-logo-180.png">
+
+  <!-- Theme & App Behavior -->
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- ✅ PWA BLOCK -->
-  <link rel="manifest" href="/manifest.webmanifest?v=3">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/mybox-192.png">
-  <link rel="apple-touch-icon" href="/assets/icons/mybox-192.png">
-  <meta name="theme-color" content="#000000" />
-
+  <!-- GLOBAL COLORS -->
   <style>
     :root {
       --gold: #D4AF37;
       --black: #000000;
       --white: #ffffff;
     }
+  </style>
 
+  <!-- PAGE + UI STYLES -->
+  <style>
     body {
       margin: 0;
       background-color: var(--black);
@@ -47,7 +57,9 @@
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
     /* NAVIGATION */
     header {
@@ -98,17 +110,18 @@
     }
 
     ul { margin-left: 1.2rem; }
-    li { margin-bottom: .6rem; }
+    li { margin-bottom: 0.6rem; }
 
     footer {
       border-top: 1px solid var(--gold);
       color: var(--gold);
-      font-size: .85rem;
+      font-size: 0.85rem;
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
     }
   </style>
+
 </head>
 
 <body data-mbs-page="privacy">
@@ -144,8 +157,7 @@
     <h2>Information We Collect</h2>
     <ul>
       <li><strong>Account Information:</strong> Name, email, and optional profile details.</li>
-      <li><strong>Payment Information:</strong> Processed by Stripe.  
-          MyBox Studios never stores or sees your full credit card number.</li>
+      <li><strong>Payment Information:</strong> Processed by Stripe. MyBox Studios never stores or sees your full credit card number.</li>
       <li><strong>Usage Data:</strong> Pages visited, device type, and user activity.</li>
       <li><strong>Creator Content:</strong> Films, music, and media uploaded by creators.</li>
     </ul>
@@ -161,36 +173,32 @@
 
     <h2>Stripe Payments</h2>
     <p>
-      Stripe handles all financial transactions.  
-      No payment processing is performed on MyBox Studios servers.
+      Stripe handles all financial transactions. No payment processing is performed on MyBox Studios servers.
     </p>
 
     <h2>Cookies & Tracking</h2>
     <p>
-      We may use cookies to improve performance and personalize your
-      browsing experience.  
+      We may use cookies to improve performance and personalize your browsing experience.
       You may disable cookies in your browser settings.
     </p>
 
     <h2>Data Protection</h2>
     <p>
-      We use industry-standard practices to safeguard your data.  
-      However, no system is completely secure, and we cannot guarantee absolute protection.
+      We use industry-standard practices to safeguard your data. However, no system is completely secure.
     </p>
 
     <h2>Third-Party Services</h2>
     <p>
-      MyBox Studios integrates with platforms such as Stripe, Netlify,
-      hosting/CDN providers, and optional analytics tools.  
+      MyBox Studios may connect with third-party platforms such as Stripe, Netlify, hosting/CDN providers, and optional analytics tools.
       These services may collect additional information under their own policies.
     </p>
 
     <h2>Your Rights</h2>
     <ul>
       <li>Request access to your personal data</li>
-      <li>Request the deletion of your data</li>
+      <li>Request deletion of your data</li>
       <li>Correct inaccuracies in your data</li>
-      <li>Opt out of non-essential emails</li>
+      <li>Opt out of non-essential communication</li>
     </ul>
 
     <h2>Contact Us</h2>
@@ -203,8 +211,7 @@
 
     <h2>Policy Updates</h2>
     <p>
-      This Privacy Policy may change as needed.  
-      The latest version will always be posted on this page.
+      This Privacy Policy may change from time to time. The latest version will always be posted here.
     </p>
 
   </main>
@@ -213,7 +220,7 @@
     © 2025 MyBox Studios — All Rights Reserved
   </footer>
 
-  <!-- APP JS -->
+  <!-- GLOBAL APP JS -->
   <script src="assets/js/app.js"></script>
 
   <!-- SERVICE WORKER REGISTRATION -->
