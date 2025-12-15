@@ -1,0 +1,13 @@
+{
+  "name": "mybox-studios-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MyBox Studios — Netlify + Stripe",
+  "scripts": {
+    "build": "echo \"No build step required\""
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "node-fetch": "^2.6.9"
+  }
+}
