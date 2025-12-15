@@ -31,9 +31,6 @@
       min-height: 100vh;
     }
 
-    /* ======================
-       DESKTOP NAVIGATION
-    ====================== */
     header.top-nav {
       display: flex;
       justify-content: space-between;
@@ -93,9 +90,6 @@
       header.top-nav { display: none; }
     }
 
-    /* ======================
-       MOBILE NAVIGATION
-    ====================== */
     nav.bottom-nav {
       display: none;
     }
@@ -125,9 +119,6 @@
       .bottom-item:hover { color: var(--gold); }
     }
 
-    /* ======================
-           MAIN CONTENT
-    ====================== */
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -201,7 +192,6 @@
 
 <body data-mbs-page="join">
 
-  <!-- DESKTOP NAV -->
   <header class="top-nav">
     <div class="logo-area">
       <img src="/assets/icons/mybox-192.png" alt="Logo"/>
@@ -219,7 +209,6 @@
     <a class="join-btn" href="join.html">Join</a>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main>
     <h1>Join MyBox Studios</h1>
 
@@ -228,7 +217,6 @@
       and unlock your personal studio to sell movies & music worldwide.
     </p>
 
-    <!-- TERMS AGREEMENT CHECKBOX -->
     <div style="margin-top: 1.5rem; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
       <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; line-height: 1.4;">
         <input id="agreeTerms" type="checkbox" style="margin-top: 4px; transform: scale(1.3);" />
@@ -241,10 +229,8 @@
       </label>
     </div>
 
-    <!-- JOIN BUTTON -->
     <button id="joinButton">Join MyBox Studios — $100</button>
 
-    <!-- BENEFITS -->
     <ul class="benefits">
       <li>🎬 Sell your films and music instantly</li>
       <li>💸 Keep 80% of all sales automatically</li>
@@ -259,15 +245,17 @@
     </p>
   </main>
 
-  <!-- FOOTER -->
+  <!-- UPDATED FOOTER -->
   <footer>
-    © 2025 MyBox Studios — 
-    <a href="support.html">Support</a> • 
+    © 2025 MyBox Studios — 80% to Creators, 20% to MyBox Studios<br>
+    Support: 
+    <a href="mailto:myboxstudiosupport@myboxstudioslive.com">
+      myboxstudiosupport@myboxstudioslive.com
+    </a><br>
     <a href="terms.html">Terms</a> • 
     <a href="privacy.html">Privacy</a>
   </footer>
 
-  <!-- MOBILE NAV -->
   <nav class="bottom-nav">
     <a href="index.html" class="bottom-item">Home</a>
     <a href="browse.html" class="bottom-item">Browse</a>
@@ -276,16 +264,12 @@
     <a href="join.html" class="bottom-item">Join</a>
   </nav>
 
-  <!-- STRIPE -->
   <script src="https://js.stripe.com/v3/"></script>
 
-  <!-- CHECKOUT LOGIC -->
   <script>
     const stripe = Stripe("pk_live_51SFln7ECGiskYMpTAV7zXmtcPFjQv8eLLgnqqsjFf1uMgJjSWd8p3erFIMpTGCD2AeuMJJ1sMGubMZMCX5mL1F0V00MTMKm5jR");
 
     document.getElementById("joinButton").addEventListener("click", async () => {
-
-      // REQUIRE TERMS AGREEMENT
       const agreed = document.getElementById("agreeTerms").checked;
       if (!agreed) {
         alert("Please agree to the Terms of Service before joining.");
@@ -320,7 +304,6 @@
     });
   </script>
 
-  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/service-worker.js");
